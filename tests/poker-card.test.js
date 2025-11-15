@@ -14,4 +14,12 @@ describe('poker-card', () => {
     
     expect(sut.getAttribute('rank')).toBe('A')
   })
+
+  it('Suite cannot be changed after being set', async () => {
+    const sut = document.createElement('poker-card')
+    sut.setAttribute('suite', 'hearts')
+    sut.setAttribute('suite', 'spades')
+    
+    expect(sut.getAttribute('suite')).toBe('hearts')
+  })
 })

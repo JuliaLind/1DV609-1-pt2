@@ -7,7 +7,6 @@ export default defineConfig({
         testTimeout: 1500, // try each test for max 1.5 second
         hookTimeout: 1500,  // try before/after hooks for max 1.5 second
         teardownTimeout: 1000,  // try global teardowns for max 1 second
-        bail: 1,
         coverage: {
             provider: 'v8',
             reporter: ['text'], // show coverage report only in the terminal
