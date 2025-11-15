@@ -1,6 +1,15 @@
-export class ThreeOfAKind {
+import { SameOfAKind } from './SameOfAKind.js'
+
+export class ThreeOfAKind extends SameOfAKind {
   #value = 10
   #name = 'Three of a Kind'
+
+  
+  constructor() {
+    const rankCount = 3
+
+    super(rankCount)
+  }
 
   getValue() {
     return this.#value
@@ -11,17 +20,6 @@ export class ThreeOfAKind {
   }
 
   test(cards) {
-    const ranks = {}
-
-    for (const card of cards) {
-      const rank = card.getAttribute('rank')
-
-      ranks[rank] = (ranks[rank] || 0) + 1
-
-      if (ranks[rank] === 3) {
-        return true
-      }
-    }
-    return false
+    return super._test(cards)
   }
 }

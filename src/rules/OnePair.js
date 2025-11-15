@@ -1,6 +1,14 @@
-export class OnePair {
+import { SameOfAKind } from './SameOfAKind.js'
+
+export class OnePair extends SameOfAKind {
   #value = 2
   #name = 'One Pair'
+
+  constructor() {
+    const rankCount = 2
+
+    super(rankCount)
+  }
 
   getValue() {
     return this.#value
@@ -11,16 +19,6 @@ export class OnePair {
   }
 
   test(cards) {
-    const ranks = []
-
-    for (const card of cards) {
-      const rank = card.getAttribute('rank')
-      if (ranks.includes(rank)) {
-        return true
-      }
-      ranks.push(rank)
-    }
-
-    return false
+    return super._test(cards)
   }
 }
