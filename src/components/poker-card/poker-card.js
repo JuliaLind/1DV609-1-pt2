@@ -37,6 +37,10 @@ export class PokerCard extends HTMLElement {
       .append(template.content.cloneNode(true))
   }
 
+  getValue() {
+    return this.constructor.RANKS[this.#rank]
+  }
+
   static get observedAttributes() {
     return ['suite', 'rank']
   }
