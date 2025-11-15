@@ -1,18 +1,11 @@
 {
-  "dependencies": {
-    "vite": "^7.2.2"
-  },
-  "devDependencies": {
-    "@vitest/coverage-v8": "^4.0.9",
-    "jsdom": "^27.2.0",
-    "vitest": "^4.0.9"
-  },
   "name": "1dv609-1-pt2",
+  "type": "module",
   "version": "1.0.0",
   "description": "This repo is the first assignment (part 2) in the course 1DV609 Mjukvarukvalitet and contains an implementation of the game Poker Squares.",
   "main": "src/app.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest run --reporter=verbose"
   },
   "repository": {
     "type": "git",
@@ -23,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/JuliaLind/1DV609-1-pt2/issues"
   },
-  "homepage": "https://github.com/JuliaLind/1DV609-1-pt2#readme"
+  "homepage": "https://github.com/JuliaLind/1DV609-1-pt2#readme",
+  "dependencies": {
+    "vite": "^7.2.2"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.9",
+    "jsdom": "^27.2.0",
+    "vitest": "^4.0.9"
+  }
 }
