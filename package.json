@@ -4,6 +4,7 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.9",
+    "jsdom": "^27.2.0",
     "vitest": "^4.0.9"
   },
   "name": "1dv609-1-pt2",
