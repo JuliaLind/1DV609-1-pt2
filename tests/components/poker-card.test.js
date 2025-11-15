@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import '../src/components/poker-card'
+import '../../src/components/poker-card'
 
 
 describe('poker-card', () => {
