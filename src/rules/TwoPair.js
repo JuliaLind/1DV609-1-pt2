@@ -1,6 +1,9 @@
 import { Rule } from './Rule.js'
 
 export class TwoPair extends Rule {
+  #ranks
+  #pairCount
+
   constructor() {
     const value = 5
     const name = 'Two Pair'
@@ -9,25 +12,31 @@ export class TwoPair extends Rule {
   }
 
   test(cards) {
-    let pairCount = 0
-  
-    const ranks = []
+    this.#reset()
 
     for (const card of cards) {
-      const rank = card.getAttribute('rank')
+      this.#processRank(card.getAttribute('rank'))
 
-      if (ranks.includes(rank)) {
-        pairCount++
-        ranks.splice(ranks.indexOf(rank), 1)
-      } else {
-        ranks.push(rank)
-      }
-
-      if (pairCount === 2) {
+      if (this.#pairCount === 2) {
         return true
       } 
     }
 
     return false
+  }
+
+  #processRank(rank) {
+    if (this.#ranks.includes(rank)) {
+        this.#pairCount++
+        this.#ranks.splice(this.#ranks.indexOf(rank), 1)
+      } else {
+        this.#ranks.push(rank)
+      }
+  }
+    
+
+  #reset() {
+    this.#pairCount = 0
+    this.#ranks = []
   }
 }
