@@ -8,6 +8,22 @@ template.innerHTML = `
 export class PokerCard extends HTMLElement {
   static SUITES = Object.freeze(['hearts', 'diamonds', 'clubs', 'spades'])
 
+  static RANKS = Object.freeze({
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+    '10': 10,
+    'J': 11,
+    'Q': 12,
+    'K': 13,
+    'A': 14
+  })
+
   #suite = ''
   #rank = ''
 
@@ -48,18 +64,25 @@ export class PokerCard extends HTMLElement {
   }
 
   #handleRankChange(newValue) {
-    if (!this.#rank) {
+    try {
       this.#setRank(newValue)
-    } else {
+    } catch {
       this.setAttribute('rank', this.#rank)
     }
   }
 
   #setRank(value) {
-    // @TODO add validation of rank value
-
-    this.#rank = value
+    if (!this.#rank && this.#isValidRank(value)) {
+      this.#rank = value
+    } else {
+      throw new Error(`Illegal rank value change attempted: ${value}`)
+    }
   }
+
+  #isValidRank(value) {
+    return Object.keys(this.constructor.RANKS).includes(value)
+  }
+
 
   #handleSuiteChange(newValue) {
     try {
