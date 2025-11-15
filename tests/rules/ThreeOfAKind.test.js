@@ -52,7 +52,7 @@ describe('OnePair', () => {
       }
 
 
-      expect(sut.test([card1, card2, card3, card4])).toBe(false)
+      expect(sut.test([card1, card2, card3, card4])).toBe(true)
     })
   })
 })

@@ -1,12 +1,13 @@
 export class TwoPair {
   #value = 5
+  #name = 'Two Pair'
 
   getValue() {
     return this.#value
   }
 
   toString() {
-    return 'Two Pair'
+    return this.#name
   }
 
   test(cards) {

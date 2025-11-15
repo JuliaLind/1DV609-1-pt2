@@ -1,6 +1,6 @@
-export class OnePair {
-  #value = 2
-  #name = 'One Pair'
+export class ThreeOfAKind {
+  #value = 10
+  #name = 'Three of a Kind'
 
   getValue() {
     return this.#value
@@ -11,16 +11,17 @@ export class OnePair {
   }
 
   test(cards) {
-    const ranks = []
+    const ranks = {}
 
     for (const card of cards) {
       const rank = card.getAttribute('rank')
-      if (ranks.includes(rank)) {
+
+      ranks[rank] = (ranks[rank] || 0) + 1
+
+      if (ranks[rank] === 3) {
         return true
       }
-      ranks.push(rank)
     }
-
     return false
   }
 }
