@@ -38,4 +38,20 @@ describe('poker-card', () => {
 
     expect(sut.getAttribute('rank')).toBe('')
   })
+
+  it('get value of a card with rank 10', async () => {
+    const sut = document.createElement('poker-card')
+
+    sut.setAttribute('rank', '10')
+
+    expect(sut.getValue()).toBe(10)
+  })
+
+  it('get value of a card with rank A', async () => {
+    const sut = document.createElement('poker-card')
+
+    sut.setAttribute('rank', 'A')
+
+    expect(sut.getValue()).toBe(14)
+  })
 })
