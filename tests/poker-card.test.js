@@ -22,4 +22,10 @@ describe('poker-card', () => {
     
     expect(sut.getAttribute('suite')).toBe('hearts')
   })
+
+  it('Cannot set invalid suite', async () => {
+    const sut = document.createElement('poker-card')
+
+    expect (() => sut.setAttribute('suite', 'invalid')).toThrow(Error)
+  })
 })
