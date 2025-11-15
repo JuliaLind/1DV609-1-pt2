@@ -9,7 +9,8 @@ export default defineConfig({
         teardownTimeout: 1000,  // try global teardowns for max 1 second
         coverage: {
             provider: 'v8',
-            reporter: ['text'], // show coverage report only in the terminal
+            reporter: ['text', 'html'],
+            reportsDirectory: './coverage',
             all: true, // to include files with 0 coverage in the coverage report
             include: ['src/**/*.js'],
             exclude: [

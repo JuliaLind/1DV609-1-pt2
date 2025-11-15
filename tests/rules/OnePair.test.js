@@ -14,7 +14,7 @@ describe('OnePair', () => {
   })
 
   describe('test method', () => {
-    it('test should return true for a hand with one pair', () => {
+    it('test should return true for ranks [2, 3, 2]', () => {
       const card1 = {
         getAttribute: getAttributeMock('2')
       }
@@ -30,7 +30,7 @@ describe('OnePair', () => {
       expect(sut.test([card1, card2, card3])).toBe(true)
     })
 
-    it('test should return false for a hand with no pairs', () => {
+    it('test should return false for ranks [2, 3, A]', () => {
       const card1 = {
         getAttribute: getAttributeMock('2')
       }
