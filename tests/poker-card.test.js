@@ -11,7 +11,7 @@ describe('poker-card', () => {
     const sut = document.createElement('poker-card')
     sut.setAttribute('rank', 'A')
     sut.setAttribute('rank', '5')
-    
+
     expect(sut.getAttribute('rank')).toBe('A')
   })
 
@@ -19,7 +19,7 @@ describe('poker-card', () => {
     const sut = document.createElement('poker-card')
     sut.setAttribute('suite', 'hearts')
     sut.setAttribute('suite', 'spades')
-    
+
     expect(sut.getAttribute('suite')).toBe('hearts')
   })
 
@@ -29,5 +29,13 @@ describe('poker-card', () => {
     sut.setAttribute('suite', 'invalid')
 
     expect(sut.getAttribute('suite')).toBe('')
+  })
+
+  it('Cannot set invalid rank', async () => {
+    const sut = document.createElement('poker-card')
+
+    sut.setAttribute('rank', '1')
+
+    expect(sut.getAttribute('rank')).toBe('')
   })
 })
