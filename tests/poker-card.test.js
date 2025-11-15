@@ -6,12 +6,12 @@ describe('poker-card', () => {
   it('poker-card should be defined as a custom element', () => {
     expect(customElements.get('poker-card')).toBeDefined()
   })
-  // it('Create a poker card OK', async () => {
-  //   const sut = document.createElement('poker-card')
-    // sut.setAttribute('rank', 'A')
-    // sut.setAttribute('suit', 'hearts')
+
+  it('Rank cannot be changed after being set', async () => {
+    const sut = document.createElement('poker-card')
+    sut.setAttribute('rank', 'A')
+    sut.setAttribute('rank', '5')
     
-    // expect(sut.getAttribute('rank')).toBe('A')
-    // expect(sut.getAttribute('suit')).toBe('hearts')
-  // })
+    expect(sut.getAttribute('rank')).toBe('A')
+  })
 })

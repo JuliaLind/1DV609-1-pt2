@@ -5,7 +5,7 @@
   "description": "This repo is the first assignment (part 2) in the course 1DV609 Mjukvarukvalitet and contains an implementation of the game Poker Squares.",
   "main": "src/app.js",
   "scripts": {
-    "test": "vitest run --reporter=verbose"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,14 @@
     "@vitest/coverage-v8": "^4.0.9",
     "jsdom": "^27.2.0",
     "vitest": "^4.0.9"
+  },
+  "c8": {
+    "all": true,
+    "include": [
+      "src/**/*.js"
+    ],
+    "reporter": [
+      "text"
+    ]
   }
 }
