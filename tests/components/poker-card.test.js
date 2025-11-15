@@ -39,7 +39,7 @@ describe('poker-card', () => {
     expect(sut.getAttribute('rank')).toBe('')
   })
 
-  it('get value of a card with rank 10', async () => {
+  it('Value of card with rank \'10\' should be 10', async () => {
     const sut = document.createElement('poker-card')
 
     sut.setAttribute('rank', '10')
@@ -47,7 +47,7 @@ describe('poker-card', () => {
     expect(sut.getValue()).toBe(10)
   })
 
-  it('get value of a card with rank A', async () => {
+  it('Value of card with rank \'A\' should be 14', async () => {
     const sut = document.createElement('poker-card')
 
     sut.setAttribute('rank', 'A')

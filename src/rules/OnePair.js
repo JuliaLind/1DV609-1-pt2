@@ -2,11 +2,11 @@ import { SameOfAKind } from './SameOfAKind.js'
 
 export class OnePair extends SameOfAKind {
   constructor() {
-    const points = 2
+    const value = 2
     const name = 'One Pair'
     const rankCount = 2
 
-    super(points, name, rankCount)
+    super(value, name, rankCount)
   }
 
   test(cards) {

@@ -3,12 +3,12 @@ import { Rule } from './Rule.js'
 export class SameOfAKind extends Rule {
   #rankCount
 
-  constructor(points, name, rankCount) {
+  constructor(value, name, rankCount) {
     if (new.target === SameOfAKind) {
       throw new Error('SameOfAKind is an abstract class')
     }
 
-    super(points, name)
+    super(value, name)
     this.#rankCount = rankCount
   }
 

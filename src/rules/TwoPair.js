@@ -2,10 +2,10 @@ import { Rule } from './Rule.js'
 
 export class TwoPair extends Rule {
   constructor() {
-    const points = 5
+    const value = 5
     const name = 'Two Pair'
 
-    super(points, name)
+    super(value, name)
   }
 
   test(cards) {
