@@ -26,6 +26,8 @@ describe('poker-card', () => {
   it('Cannot set invalid suite', async () => {
     const sut = document.createElement('poker-card')
 
-    expect (() => sut.setAttribute('suite', 'invalid')).toThrow(Error)
+    sut.setAttribute('suite', 'invalid')
+
+    expect(sut.getAttribute('suite')).toBe('')
   })
 })

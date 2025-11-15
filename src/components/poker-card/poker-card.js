@@ -6,8 +6,10 @@ template.innerHTML = `
 `
 
 export class PokerCard extends HTMLElement {
-  #suite
-  #rank
+  static SUITES = Object.freeze(['hearts', 'diamonds', 'clubs', 'spades'])
+
+  #suite = ''
+  #rank = ''
 
   /**
    * Creates an instance of poker-card.
@@ -55,20 +57,28 @@ export class PokerCard extends HTMLElement {
 
   #setRank(value) {
     // @TODO add validation of rank value
+
     this.#rank = value
   }
 
   #handleSuiteChange(newValue) {
-    if (!this.#suite) {
+    try {
       this.#setSuite(newValue)
-    } else {
+    } catch {
       this.setAttribute('suite', this.#suite)
     }
   }
 
   #setSuite(value) {
-    // @TODO add validation of suite value
-    this.#suite = value
+    if (!this.#suite && this.#isValidSuite(value)) {
+      this.#suite = value
+    }
+
+    throw new Error(`Illegal suite value change attempted: ${value}`)
+  }
+
+  #isValidSuite(value) {
+    return this.constructor.SUITES.includes(value)
   }
 }
 
