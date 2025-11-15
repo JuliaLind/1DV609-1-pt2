@@ -1,22 +1,12 @@
 import { SameOfAKind } from './SameOfAKind.js'
 
-export class ThreeOfAKind extends SameOfAKind {
-  #value = 10
-  #name = 'Three of a Kind'
-
-  
+export class ThreeOfAKind extends SameOfAKind {  
   constructor() {
+    const points = 10
+    const name = 'Three of a Kind'
     const rankCount = 3
 
-    super(rankCount)
-  }
-
-  getValue() {
-    return this.#value
-  }
-
-  toString() {
-    return this.#name
+    super(points, name, rankCount)
   }
 
   test(cards) {

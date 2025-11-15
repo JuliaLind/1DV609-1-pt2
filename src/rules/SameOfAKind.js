@@ -1,7 +1,14 @@
-export class SameOfAKind {
+import { Rule } from './Rule.js'
+
+export class SameOfAKind extends Rule {
   #rankCount
 
-  constructor(rankCount) {
+  constructor(points, name, rankCount) {
+    if (new.target === SameOfAKind) {
+      throw new Error('SameOfAKind is an abstract class')
+    }
+
+    super(points, name)
     this.#rankCount = rankCount
   }
 

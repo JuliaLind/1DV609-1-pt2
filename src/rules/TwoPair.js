@@ -1,13 +1,11 @@
-export class TwoPair {
-  #value = 5
-  #name = 'Two Pair'
+import { Rule } from './Rule.js'
 
-  getValue() {
-    return this.#value
-  }
+export class TwoPair extends Rule {
+  constructor() {
+    const points = 5
+    const name = 'Two Pair'
 
-  toString() {
-    return this.#name
+    super(points, name)
   }
 
   test(cards) {
