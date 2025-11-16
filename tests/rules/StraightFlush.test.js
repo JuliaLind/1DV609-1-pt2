@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { StraightFlush } from '../../src/rules/StraightFlush.js'
-import { getAttributeMock } from './lib/helpers.js'
+import { getAttributeMock } from '../lib/helpers.js'
 
 describe('Straight Flush', () => {
   const sut = new StraightFlush()

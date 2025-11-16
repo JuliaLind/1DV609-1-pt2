@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { OnePair } from '../../src/rules/OnePair.js'
-import { getAttributeMock } from './lib/helpers.js'
+import { getAttributeMock } from '../lib/helpers.js'
 
 
 describe('OnePair', () => {

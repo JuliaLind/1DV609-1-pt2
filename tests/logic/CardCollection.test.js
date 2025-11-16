@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { CardCollection } from '../../src/rules/CardCollection.js'
-import { getAttributeMock } from './lib/helpers.js'
+import { CardCollection } from '../../src/logic/CardCollection.js'
+import { getAttributeMock } from '../lib/helpers.js'
 
 describe('CardCollection', () => {
   const jackHearts = Object.freeze({
