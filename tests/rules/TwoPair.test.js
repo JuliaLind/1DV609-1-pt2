@@ -13,7 +13,7 @@ describe('OnePair', () => {
     expect(sut.toString()).toBe('Two Pair')
   })
 
-  describe('test method', () => {
+  describe('test()', () => {
     const twoHearts = Object.freeze({
       getAttribute: getAttributeMock({ 'rank': '2' })
     })
@@ -34,14 +34,14 @@ describe('OnePair', () => {
       getAttribute: getAttributeMock({ 'rank': '3' })
     })
 
-    it('test should return true for ranks [2, 3, 2, 3]', () => {
-      const actual = sut.test([twoHearts, threeClubs, twoSpades, threeSpades])
+    it('should return true for ranks [2, 3, 2, 3]', () => {
+      const actual = sut.test([twoHearts, threeClubs, undefined, twoSpades, threeSpades])
 
       expect(actual).toBe(true)
     })
 
-    it('test should return false for ranks [2, 3, 3, 3]', () => {
-      const actual = sut.test([twoHearts, threeHearts, threeSpades, threeClubs])
+    it('should return false for ranks [2, 3, 3, 3]', () => {
+      const actual = sut.test([twoHearts, threeHearts, threeSpades, threeClubs, undefined])
 
       expect(actual).toBe(false)
     })

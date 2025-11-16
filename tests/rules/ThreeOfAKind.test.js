@@ -36,13 +36,13 @@ describe('ThreeOfAKind', () => {
     })
 
     it('should return false for ranks [2, 3, 2, 3]', () => {
-      const actual = sut.test([twoHearts, threeHearts, twoSpades, threeSpades])
+      const actual = sut.test([twoHearts, threeHearts, undefined, twoSpades, threeSpades])
 
       expect(actual).toBe(false)
     })
 
     it('should return true for ranks [2, 3, 3, 3]', () => {
-      const actual = sut.test([twoHearts, threeHearts, threeSpades, threeClubs])
+      const actual = sut.test([twoHearts, threeHearts, threeSpades, undefined, threeClubs])
 
       expect(actual).toBe(true)
     })
