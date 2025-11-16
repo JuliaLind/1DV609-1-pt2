@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { CardCollection } from '../../src/logic/CardCollection.js'
 import { getAttributeMock } from '../lib/helpers.js'
 

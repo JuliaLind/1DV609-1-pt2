@@ -20,4 +20,8 @@ export class CardCollection {
   hasEmptySlots() {
     return this.#cards.includes(undefined)
   }
+
+  hasRank(rank) {
+    return this.#cards.some(card => card?.getAttribute('rank') === rank)
+  }
 }
