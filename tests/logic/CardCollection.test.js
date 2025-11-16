@@ -32,6 +32,25 @@ describe('CardCollection', () => {
 
       expect(() => sut.addCard(eightHearts, 2)).toThrowError('Slot is not empty')
     })
+
+    // boundary values 0 and 4 + adjacent values -1, 1, 3, 5
+    const validSlots = [0, 1, 3, 4] 
+    const invalidSlots = [-1, 5]
+
+    validSlots.forEach((slot) => {
+      it(`should add a card at valid slot ${slot}`, () => {
+        const sut = new CardCollection(5)
+        sut.addCard(eightHearts, slot)
+        expect(sut.getCard(slot)).toBe(eightHearts)
+      })
+    })
+
+    invalidSlots.forEach((slot) => {
+      it(`should throw an error when adding a card at invalid slot ${slot}`, () => {
+        const sut = new CardCollection(5)
+        expect(() => sut.addCard(eightHearts, slot)).toThrowError('Slot index out of bounds')
+      })
+    })
   })
 
   describe('CardCollection with  [,,J♥,,]', () => {
