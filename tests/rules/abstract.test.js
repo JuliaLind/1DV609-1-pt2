@@ -11,10 +11,10 @@ describe('Abstract classes should not be instantiable', () => {
   })
 
   it ('Instantiating Rule should throw an error', () => {
-    expect(() => new Rule(2)).toThrowError(Error)
+    expect(() => new Rule(2, 'One Pair')).toThrowError(Error)
   })
 
   it ('Instantiating Sequential should throw an error', () => {
-    expect(() => new Sequential('Straight', 15)).toThrowError(Error)
+    expect(() => new Sequential(15, 'Straight')).toThrowError(Error)
   })
 })

@@ -1,6 +1,6 @@
-import { Rule } from './Rule.js'
+import { Sequential } from './Sequential.js'
 
-export class Straight extends Rule {
+export class Straight extends Sequential {
   constructor() {
     const value = 15
     const name = 'Straight'
@@ -8,21 +8,6 @@ export class Straight extends Rule {
   }
 
   test(cards) {
-    if (cards.includes(undefined)) {
-      return false
-    }
-
-    return this.#areSequential(cards)
-  }
-
-  #areSequential(cards) {
-    const sortedCards = this.#sortLowestToHighest(cards)
-    const lastIndex = sortedCards.length - 1
-
-    return sortedCards[lastIndex].getValue() - sortedCards[0].getValue() === 4
-  }
-
-  #sortLowestToHighest(cards) {
-    return [...cards].sort((a, b) => a.getValue() - b.getValue())
+    return super._test(cards)
   }
 }
