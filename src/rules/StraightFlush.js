@@ -1,14 +1,12 @@
-import { Sequential } from './Sequential.js'
+import { Straight } from './Straight.js'
 
-export class StraightFlush extends Sequential {
-  constructor() {
-    const value = 75
-    const name = 'Straight Flush'
+export class StraightFlush extends Straight {
+  constructor(value=75, name='Straight Flush') {
     super(value, name)
   }
 
   test (cards) {
-    if(!super._test(cards)) {
+    if(!super.test(cards)) {
       return false
     }
 
