@@ -25,6 +25,13 @@ describe('CardCollection', () => {
 
       expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, undefined, undefined])
     })
+
+    it('addCard() should throw an error if the slot is already occupied', () => {
+      const sut = new CardCollection(5)
+      sut.addCard(jackHearts, 2)
+
+      expect(() => sut.addCard(eightHearts, 2)).toThrowError('Slot is not empty')
+    })
   })
 
   describe('CardCollection with  [,,J♥,,]', () => {
