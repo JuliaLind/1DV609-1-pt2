@@ -16,37 +16,37 @@ describe('Royal Flush', () => {
   describe('test()', () => {
     const nineClubs= Object.freeze({
       getValue: () => 9,
-      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
+      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': '9' }),
     })
 
     const tenClubs = Object.freeze({
       getValue: () => 10,
-      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
+      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': '10' }),
     })
 
     const jackClubs = Object.freeze({
       getValue: () => 11,
-      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
+      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'J' }),
     })
 
     const queenClubs = Object.freeze({
       getValue: () => 12,
-      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
+      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'Q' }),
     })
 
     const queenHearts = Object.freeze({
       getValue: () => 12,
-      getAttribute: getAttributeMock({ 'suit': 'hearts' }),
+      getAttribute: getAttributeMock({ 'suit': 'hearts', 'rank': 'Q' }),
     })
 
     const kingClubs = Object.freeze({
       getValue: () => 13,
-      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
+      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'K' }),
     })
 
     const aceClubs = Object.freeze({
       getValue: () => 14,
-      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
+      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'A' }),
     })
 
     it ('should return true for cards [A♣, 10♣, K♣, J♣, Q♣]', () => {
