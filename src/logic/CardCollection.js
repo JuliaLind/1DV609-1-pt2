@@ -6,6 +6,8 @@ export class CardCollection {
   }
 
   addCard(card, position) {
+    this.#validateSlotIndex(position)
+
     if (!this.#isSlotEmpty(position) && this.getCard(position) !== card) {
       throw new Error('Slot is not empty')
     }
@@ -15,6 +17,12 @@ export class CardCollection {
 
   #isSlotEmpty(position) {
     return this.#cards[position] === undefined
+  }
+
+  #validateSlotIndex(position) {
+    if (position < 0 || position >= this.#cards.length) {
+      throw new Error('Slot index out of bounds')
+    }
   }
 
   getCards() {
