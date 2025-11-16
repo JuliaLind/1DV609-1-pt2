@@ -11,4 +11,56 @@ describe('Straight Flush', () => {
   it('toString should return "Straight Flush"', () => {
     expect(sut.toString()).toBe('Straight Flush')
   })
+
+  describe('test()', () => {
+    const eightClubs = Object.freeze({
+      getValue: () => 8,
+      getSuite: () => 'clubs'
+    })
+
+    const eightHearts = Object.freeze({
+      getValue: () => 8,
+      getSuite: () => 'hearts'
+    })
+
+    const nineClubs= Object.freeze({
+      getValue: () => 9,
+      getSuite: () => 'clubs'
+    })
+
+    const tenClubs = Object.freeze({
+      getValue: () => 10,
+      getSuite: () => 'clubs'
+    })
+
+    const jackClubs = Object.freeze({
+      getValue: () => 11,
+      getSuite: () => 'clubs'
+    })
+
+    const queenClubs = Object.freeze({
+      getValue: () => 12,
+      getSuite: () => 'clubs'
+    })
+
+    it('should return true for cards [Q♣, 10♣, J♣, 8♣, 9♣]', () => {
+      const actual = sut.test([queenClubs, tenClubs, jackClubs, eightClubs, nineClubs])
+      expect(actual).toBe(true)
+    })
+
+    it('should return false for cards [Q♣, 10♣, J♣, 8♥, 9♣]', () => {
+      const actual = sut.test([queenClubs, tenClubs, jackClubs, eightHearts, nineClubs])
+      expect(actual).toBe(false)
+    })
+
+    it('should return false for cards [Q♣, 10♣, J♣, 8♣, undefined]', () => {
+      const actual = sut.test([queenClubs, tenClubs, jackClubs, eightClubs, undefined])
+      expect(actual).toBe(false)
+    })
+
+    it('should return false for cards [Q♣, 10♣, J♣, 9♣, undefined]', () => {
+      const actual = sut.test([queenClubs, tenClubs, jackClubs, nineClubs, undefined])
+      expect(actual).toBe(false)
+    })
+  })
 })
