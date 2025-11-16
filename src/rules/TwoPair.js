@@ -15,6 +15,10 @@ export class TwoPair extends Rule {
     this.#reset()
 
     for (const card of cards) {
+      if (!card) {
+        continue
+      }
+
       this.#processRank(card.getAttribute('rank'))
 
       if (this.#pairCount === 2) {

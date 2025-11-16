@@ -16,6 +16,10 @@ export class SameOfAKind extends Rule {
     const ranks = {}
 
     for (const card of cards) {
+      if (!card) {
+        continue
+      }
+
       const rank = card.getAttribute('rank')
 
       ranks[rank] = (ranks[rank] || 0) + 1
