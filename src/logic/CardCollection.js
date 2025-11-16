@@ -6,7 +6,15 @@ export class CardCollection {
   }
 
   addCard(card, position) {
+    if (!this.#isSlotEmpty(position) && this.getCard(position) !== card) {
+      throw new Error('Slot is not empty')
+    }
+  
     this.#cards[position] = card
+  }
+
+  #isSlotEmpty(position) {
+    return this.#cards[position] === undefined
   }
 
   getCards() {
