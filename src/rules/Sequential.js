@@ -14,17 +14,50 @@ export class Sequential extends Rule {
       return false
     }
 
-    return this.#areSequential(cards)
+    return this.#formsStraight(cards)
   }
 
-  #areSequential(cards) {
-    const sortedCards = this.#sortLowestToHighest(cards)
-    const lastIndex = sortedCards.length - 1
+  #formsStraight(cards) {
+    const values = this.#collectValues(cards)
 
-    return sortedCards[lastIndex].getValue() - sortedCards[0].getValue() === 4
+    if (this.#hasDuplicateRanks(values)) {
+      return false
+    }
+
+    const sorted = this.#sortLowestToHighest(values)
+
+    return this.#areSequential(sorted)
   }
 
-  #sortLowestToHighest(cards) {
-    return [...cards].sort((a, b) => a.getValue() - b.getValue())
+  #collectValues(cards) {
+    const values = []
+  
+    for (const card of cards) {
+      const value = card.getValue()
+
+      if (!values.includes(value)) {
+        values.push(value)
+      }
+    }
+
+    return values
+  }
+
+  #hasDuplicateRanks(values) {
+    return values.length < 5
+  }
+
+  #sortLowestToHighest(values) {
+    return [...values].sort((a, b) => a - b)
+  }
+
+  /**
+   * Checks if the given values are sequential.
+   *
+   * @param {number[]} values 
+   * @returns {boolean} true if the values form a straight
+   */
+  #areSequential(values) {
+    return values[values.length - 1] - values[0] === values.length - 1
   }
 }

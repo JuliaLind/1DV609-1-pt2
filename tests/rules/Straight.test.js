@@ -19,8 +19,11 @@ describe('Straight', () => {
       getValue: () => 3
     })
 
-
     const eightClubs = Object.freeze({
+      getValue: () => 8
+    })
+
+    const eightHearts = Object.freeze({
       getValue: () => 8
     })
 
@@ -41,18 +44,23 @@ describe('Straight', () => {
     })
 
     it('should return true for ranks [Q, 10, J, 8, 9]', () => {
-        const actual = sut.test([queenClubs, tenSpades, jackHearts, eightClubs, nineDiamonds])
-        expect(actual).toBe(true)
+      const actual = sut.test([queenClubs, tenSpades, jackHearts, eightClubs, nineDiamonds])
+      expect(actual).toBe(true)
     })
 
     it('should return false for ranks [3, 10, J, 8, 9]', () => {
-        const actual = sut.test([threeHearts, tenSpades, jackHearts, eightClubs, nineDiamonds])
-        expect(actual).toBe(false)
+      const actual = sut.test([threeHearts, tenSpades, jackHearts, eightClubs, nineDiamonds])
+      expect(actual).toBe(false)
     })
 
     it('should return false for ranks [Q, 10, J, 9]', () => {
-        const actual = sut.test([queenClubs, tenSpades, jackHearts, nineDiamonds, undefined])
-        expect(actual).toBe(false)
+      const actual = sut.test([queenClubs, tenSpades, jackHearts, nineDiamonds, undefined])
+      expect(actual).toBe(false)
+    })
+
+    it('should return false for ranks [Q, 10, 8, J, 8]', () => {
+      const actual = sut.test([queenClubs, tenSpades, eightClubs, jackHearts, eightHearts])
+      expect(actual).toBe(false)
     })
   })
 })
