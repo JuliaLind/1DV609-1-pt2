@@ -7,4 +7,16 @@ export class RoyalFlush extends StraightFlush {
 
     super(value, name)
   }
+
+  test(cards) {
+    if (!super.test(cards)) {
+      return false
+    }
+
+    return this.#hasRank(cards, 'A') && this.#hasRank(cards, '10')
+  }
+
+  #hasRank(cards, rank) {
+    return cards.some(card => card.getAttribute('rank') === rank)
+  }
 }
