@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { OnePair } from '../../src/rules/OnePair.js'
-import { getAttributeMock } from './lib.js'
+import { getAttributeMock } from './lib/helpers.js'
 
 
 describe('OnePair', () => {
   const sut = new OnePair()
+
   it('getValue should return 2', () => {
     expect(sut.getValue()).toBe(2)
   })
@@ -14,36 +15,32 @@ describe('OnePair', () => {
   })
 
   describe('test method', () => {
+    const twoHearts = Object.freeze({
+      getAttribute: getAttributeMock({ 'rank': '2' })
+    })
+
+    const twoSpades = Object.freeze({
+      getAttribute: getAttributeMock({ 'rank': '2' })
+    })
+
+    const threeHearts = Object.freeze({
+      getAttribute: getAttributeMock({ 'rank': '3' })
+    })
+
+    const aceHearts = Object.freeze({
+      getAttribute: getAttributeMock({ 'rank': 'A' })
+    })
+
     it('test should return true for ranks [2, 3, 2]', () => {
-      const card1 = {
-        getAttribute: getAttributeMock('2')
-      }
+      const actual = sut.test([twoHearts, threeHearts, twoSpades])
 
-      const card2 = {
-        getAttribute: getAttributeMock('3')
-      }
-
-      const card3 = {
-        getAttribute: getAttributeMock('2')
-      }
-
-      expect(sut.test([card1, card2, card3])).toBe(true)
+      expect(actual).toBe(true)
     })
 
     it('test should return false for ranks [2, 3, A]', () => {
-      const card1 = {
-        getAttribute: getAttributeMock('2')
-      }
+      const actual = sut.test([twoHearts, threeHearts, aceHearts])
 
-      const card2 = {
-        getAttribute: getAttributeMock('3')
-      }
-
-      const card3 = {
-        getAttribute: getAttributeMock('A')
-      }
-
-      expect(sut.test([card1, card2, card3])).toBe(false)
+      expect(actual).toBe(false)
     })
   })
 })
