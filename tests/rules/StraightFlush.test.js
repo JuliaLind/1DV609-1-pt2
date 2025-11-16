@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { StraightFlush } from '../../src/rules/StraightFlush.js'
+import { getAttributeMock } from './lib/helpers.js'
 
 describe('Straight Flush', () => {
   const sut = new StraightFlush()
@@ -15,32 +16,32 @@ describe('Straight Flush', () => {
   describe('test()', () => {
     const eightClubs = Object.freeze({
       getValue: () => 8,
-      getSuite: () => 'clubs'
+      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
     })
 
     const eightHearts = Object.freeze({
       getValue: () => 8,
-      getSuite: () => 'hearts'
+      getAttribute: getAttributeMock({ 'suit': 'hearts' }),
     })
 
     const nineClubs= Object.freeze({
       getValue: () => 9,
-      getSuite: () => 'clubs'
+      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
     })
 
     const tenClubs = Object.freeze({
       getValue: () => 10,
-      getSuite: () => 'clubs'
+      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
     })
 
     const jackClubs = Object.freeze({
       getValue: () => 11,
-      getSuite: () => 'clubs'
+      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
     })
 
     const queenClubs = Object.freeze({
       getValue: () => 12,
-      getSuite: () => 'clubs'
+      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
     })
 
     it('should return true for cards [Q♣, 10♣, J♣, 8♣, 9♣]', () => {
