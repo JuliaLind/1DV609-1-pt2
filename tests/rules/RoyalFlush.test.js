@@ -14,11 +14,6 @@ describe('Royal Flush', () => {
   })
 
   describe('test()', () => {
-    const eightClubs = Object.freeze({
-      getValue: () => 8,
-      getAttribute: getAttributeMock({ 'suit': 'clubs' }),
-    })
-
     const nineClubs= Object.freeze({
       getValue: () => 9,
       getAttribute: getAttributeMock({ 'suit': 'clubs' }),
@@ -64,8 +59,8 @@ describe('Royal Flush', () => {
       expect(actual).toBe(false)
     })
 
-    it('should return false for cards [Q♣, 10♣, J♣, 8♣, 9♣]', () => {
-      const actual = sut.test([queenClubs, tenClubs, jackClubs, eightClubs, nineClubs])
+    it('should return false for cards [10♣, K♣, J♣, Q♣, 9♣]', () => {
+      const actual = sut.test([tenClubs, kingClubs, jackClubs, queenClubs, nineClubs])
       expect(actual).toBe(false)
     })
 
