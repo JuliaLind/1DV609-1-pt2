@@ -8,8 +8,8 @@ export class FullHouse extends Rule {
     super(value, name)
   }
 
-  test(cards) {
-    const ranks = cards.getRanks()
+  test(line) {
+    const ranks = line.getRanks()
     const rankCounts = Object.values(ranks)
 
     return this.#hasThreeOfAKind(rankCounts) && this.#hasPair(rankCounts)

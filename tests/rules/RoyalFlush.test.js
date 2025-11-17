@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { RoyalFlush } from '../../src/rules/RoyalFlush.js'
-import { getAttributeMock } from '../lib/helpers.js'
 
 describe('Royal Flush', () => {
   const sut = new RoyalFlush()

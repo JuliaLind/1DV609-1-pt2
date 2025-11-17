@@ -8,8 +8,4 @@ export class FourOfAKind extends SameOfAKind {
 
     super(value, name, rankCount)
   }
-
-  test(cards) {
-    return super._test(cards)
-  }
 }

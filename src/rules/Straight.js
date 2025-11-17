@@ -1,5 +1,5 @@
 import { Rule } from './Rule.js'
-import { CardCollection } from '../logic/CardLine.js'
+import { GridLine } from '../logic/GridLine.js'
 
 export class Straight extends Rule {
   constructor(value=15, name='Straight') {
@@ -8,20 +8,19 @@ export class Straight extends Rule {
 
   /**
    * 
-   * @param {CardCollection} cards - a collection of cards to test
-   * @returns 
+   * @param {GridLine} line - the gridline to test
+   * @returns { boolean } true if the cards form a straight
    */
-  test(cards) {
-    if (cards.hasEmptySlots()) {
+  test(line) {
+    if (line.hasEmptySlots()) {
       return false
     }
 
-    return this.#formsStraight(cards)
+    return this.#formsStraight(line)
   }
 
-  #formsStraight(cards) {
-    const values = cards.getDistinctValues()
-
+  #formsStraight(line) {
+    const values = line.getDistinctValues()
     if (this.#hasDuplicateRanks(values)) {
       return false
     }

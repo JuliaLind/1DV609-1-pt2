@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { FourOfAKind } from '../../src/rules/FourOfAKind.js'
 
-
-
 describe('FourOfAKind', () => {
   const sut = new FourOfAKind()
 

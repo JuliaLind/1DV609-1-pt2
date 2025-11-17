@@ -1,5 +1,5 @@
 import { Straight } from './Straight.js'
-import { CardCollection } from '../logic/CardLine.js' 
+import { GridLine } from '../logic/GridLine.js' 
 
 export class StraightFlush extends Straight {
   constructor(value=75, name='Straight Flush') {
@@ -7,16 +7,16 @@ export class StraightFlush extends Straight {
   }
 
   /**
-   * Tests if the given cards form a straight flush.
+   * Tests if the given line form a straight flush.
    *
-   * @param {CardCollection} cards - the cards to test
+   * @param {GridLine} line - the gridline to test
    * @returns { boolean } true if the cards form a straight flush
    */
-  test (cards) {
-    if(!super.test(cards)) {
+  test (line) {
+    if(!super.test(line)) {
       return false
     }
 
-    return cards.isSameSuite()
+    return line.isSameSuite()
   }
 }

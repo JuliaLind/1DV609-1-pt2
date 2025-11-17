@@ -1,8 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { Straight } from '../../src/rules/Straight.js'
-import { CardCollection } from '../../src/logic/CardCollection.js'
-
-
 
 describe('Straight', () => {
   const sut = new Straight()

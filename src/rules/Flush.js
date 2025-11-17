@@ -8,11 +8,11 @@ export class Flush extends Rule {
     super(value, name)
   }
 
-  test(cards) {
-    if (cards.hasEmptySlots()) {
+  test(line) {
+    if (line.hasEmptySlots()) {
       return false
     }
 
-    return cards.isSameSuite()
+    return line.isSameSuite()
   }
 }

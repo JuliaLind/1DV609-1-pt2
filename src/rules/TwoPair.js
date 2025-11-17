@@ -1,10 +1,7 @@
 import { Rule } from './Rule.js'
-import { CardCollection } from '../logic/CardCollection.js'
+
 
 export class TwoPair extends Rule {
-  #ranks
-  #pairCount
-
   constructor() {
     const value = 5
     const name = 'Two Pair'
@@ -12,9 +9,9 @@ export class TwoPair extends Rule {
     super(value, name)
   }
 
-  test(cards) {
+  test(line) {
     let pairCount = 0
-    const ranks = cards.getRanks()
+    const ranks = line.getRanks()
 
     for (const count of Object.values(ranks)) {
       if (count >= 2) {

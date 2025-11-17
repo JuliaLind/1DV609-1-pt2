@@ -1,5 +1,5 @@
 import { StraightFlush } from './StraightFlush.js'
-import { CardCollection } from '../logic/CardCollection.js'
+import { GridLine } from '../logic/GridLine.js'
 
 export class RoyalFlush extends StraightFlush {
   constructor() {
@@ -10,16 +10,16 @@ export class RoyalFlush extends StraightFlush {
   }
 
   /**
-   * Tests if the given cards form a royal flush.
+   * Tests if the given line form a royal flush.
    *
-   * @param {CardCollection} cards - the colleciton of cards to test
+   * @param {GridLine} line - the grid line to test
    * @returns {boolean} true if the cards form a royal flush
    */
-  test(cards) {
-    if (!super.test(cards)) {
+  test(line) {
+    if (!super.test(line)) {
       return false
     }
 
-    return cards.hasRank('A') && cards.hasRank('10')
+    return line.hasRank('A') && line.hasRank('10')
   }
 }

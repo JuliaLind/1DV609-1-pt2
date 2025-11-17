@@ -1,4 +1,4 @@
-export class CardCollection {
+export class GridLine {
   #cards
 
   constructor(cards = new Array(5)) {
@@ -8,7 +8,7 @@ export class CardCollection {
 
   #validateLength(length) {
     if (length !== 5) {
-      throw new Error('CardCollection must have exactly 5 slots')
+      throw new Error('GridLine must have exactly 5 slots')
     }
   }
 
