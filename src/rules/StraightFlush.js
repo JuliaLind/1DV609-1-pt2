@@ -1,5 +1,5 @@
 import { Straight } from './Straight.js'
-import { CardCollection } from '../logic/CardCollection.js' 
+import { CardCollection } from '../logic/CardLine.js' 
 
 export class StraightFlush extends Straight {
   constructor(value=75, name='Straight Flush') {

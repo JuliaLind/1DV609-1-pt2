@@ -1,5 +1,5 @@
 import { Rule } from './Rule.js'
-import { CardCollection } from '../logic/CardCollection.js'
+import { CardCollection } from '../logic/CardLine.js'
 
 export class SameOfAKind extends Rule {
   #rankCount

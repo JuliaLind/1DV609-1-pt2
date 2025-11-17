@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { CardLine } from '../../src/logic/CardLine.js'
+import { GridLine } from '../../src/logic/GridLine.js'
 import { getAttributeMock } from '../lib/helpers.js'
 
-describe('CardLine', () => {
+describe('GridLine', () => {
   const eightHearts = Object.freeze({
     getAttribute: getAttributeMock({ 'rank': '8', 'suit': 'hearts' }),
     getValue: () => 8
@@ -19,13 +19,13 @@ describe('CardLine', () => {
   })
 
   describe('constructor()', () => {
-    it('should create an emtpy card collection with 5 slots', () => {
-      const sut = new CardLine()
+    it('should create an emtpy grid line with 5 slots', () => {
+      const sut = new GridLine()
       expect(sut.getCards()).toEqual([undefined, undefined, undefined, undefined, undefined])
     })
 
-    it('should create a card collection from array with length 5', () => {
-      const sut = new CardLine([undefined, undefined, jackHearts, eightClubs, undefined])
+    it('should create a grid line from array with length 5', () => {
+      const sut = new GridLine([undefined, undefined, jackHearts, eightClubs, undefined])
       expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, eightClubs, undefined])
     })
 
@@ -36,22 +36,22 @@ describe('CardLine', () => {
     ]
 
     invalidCollections.forEach((collection) => {
-      it(`should throw an error when creating a card collection with invalid length ${collection.length}`, () => {
-        expect(() => new CardLine(collection)).toThrowError('CardLine must have exactly 5 slots')
+      it(`should throw an error when creating a grid line with invalid length ${collection.length}`, () => {
+        expect(() => new GridLine(collection)).toThrowError('GridLine must have exactly 5 slots')
       })
     })
   })
 
   describe('addCard()', () => {
     it('addCard() should add a card at the specified position if the slot is empty', () => {
-      const sut = new CardLine()
+      const sut = new GridLine()
       sut.addCard(jackHearts, 2)
 
       expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, undefined, undefined])
     })
 
     it('addCard() should throw an error if the slot is already occupied', () => {
-      const sut = new CardLine([undefined, undefined, jackHearts, undefined, undefined])
+      const sut = new GridLine([undefined, undefined, jackHearts, undefined, undefined])
 
       expect(() => sut.addCard(eightHearts, 2)).toThrowError('Slot is not empty')
     })
@@ -62,7 +62,7 @@ describe('CardLine', () => {
 
     validSlots.forEach((slot) => {
       it(`should add a card at valid slot ${slot}`, () => {
-        const sut = new CardLine()
+        const sut = new GridLine()
         sut.addCard(eightHearts, slot)
         expect(sut.getCard(slot)).toBe(eightHearts)
       })
@@ -70,17 +70,17 @@ describe('CardLine', () => {
 
     invalidSlots.forEach((slot) => {
       it(`should throw an error when adding a card at invalid slot ${slot}`, () => {
-        const sut = new CardLine()
+        const sut = new GridLine()
         expect(() => sut.addCard(eightHearts, slot)).toThrowError('Slot index out of bounds')
       })
     })
   })
 
-  describe('CardLine with  [,,J♥,,]', () => {
+  describe('GridLine with  [,,J♥,,]', () => {
     let sut
 
     beforeEach(() => {
-      sut = new CardLine([undefined, undefined, jackHearts, undefined, undefined])
+      sut = new GridLine([undefined, undefined, jackHearts, undefined, undefined])
     })
 
     it('hasEmptySlots() should return true for collection with empty slots', () => {
@@ -100,11 +100,11 @@ describe('CardLine', () => {
     })
   })
 
-  describe('CardLine with [,J♥,,8♥,8♣]', () => {
+  describe('GridLine with [,J♥,,8♥,8♣]', () => {
     let sut
 
     beforeEach(() => {
-      sut = new CardLine([undefined, jackHearts, undefined, eightHearts, eightClubs])
+      sut = new GridLine([undefined, jackHearts, undefined, eightHearts, eightClubs])
     })
 
     it('getDistinctValues() should return [8,11]', () => {
@@ -118,19 +118,19 @@ describe('CardLine', () => {
 
   describe('isSameSuite()', () => {
     it('should return true for cards [8♥, J♥, 8♥]', () => {
-      const sut = new CardLine([eightHearts, jackHearts, eightHearts, undefined, undefined])
+      const sut = new GridLine([eightHearts, jackHearts, eightHearts, undefined, undefined])
 
       expect(sut.isSameSuite()).toBe(true)
     })
 
     it('should return false for cards [8♥, J♥, 8♣]', () => {
-      const sut = new CardLine([eightHearts, jackHearts, eightClubs, undefined, undefined])
+      const sut = new GridLine([eightHearts, jackHearts, eightClubs, undefined, undefined])
 
       expect(sut.isSameSuite()).toBe(false)
     })
 
-    it('should return true for empty CardLine', () => {
-      const sut = new CardLine()
+    it('should return true for empty GridLine', () => {
+      const sut = new GridLine()
       expect(sut.isSameSuite()).toBe(true)
     })
   })
