@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { ThreeOfAKind } from '../../src/rules/ThreeOfAKind.js'
-import { getAttributeMock } from '../lib/helpers.js'
 
 
 describe('ThreeOfAKind', () => {
