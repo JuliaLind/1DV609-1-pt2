@@ -1,4 +1,5 @@
 import { StraightFlush } from './StraightFlush.js'
+import { CardCollection } from '../logic/CardCollection.js'
 
 export class RoyalFlush extends StraightFlush {
   constructor() {
@@ -8,15 +9,17 @@ export class RoyalFlush extends StraightFlush {
     super(value, name)
   }
 
+  /**
+   * Tests if the given cards form a royal flush.
+   *
+   * @param {CardCollection} cards - the colleciton of cards to test
+   * @returns {boolean} true if the cards form a royal flush
+   */
   test(cards) {
     if (!super.test(cards)) {
       return false
     }
 
-    return this.#hasRank(cards, 'A') && this.#hasRank(cards, '10')
-  }
-
-  #hasRank(cards, rank) {
-    return cards.some(card => card.getAttribute('rank') === rank)
+    return cards.hasRank('A') && cards.hasRank('10')
   }
 }

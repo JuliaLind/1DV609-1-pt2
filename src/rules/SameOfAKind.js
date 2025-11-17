@@ -1,4 +1,5 @@
 import { Rule } from './Rule.js'
+import { CardCollection } from '../logic/CardCollection.js'
 
 export class SameOfAKind extends Rule {
   #rankCount
@@ -13,21 +14,9 @@ export class SameOfAKind extends Rule {
   }
 
   _test(cards) {
-    const ranks = {}
+    const ranks = cards.getRanks()
+    const rankCounts = Object.values(ranks)
 
-    for (const card of cards) {
-      if (!card) {
-        continue
-      }
-
-      const rank = card.getAttribute('rank')
-
-      ranks[rank] = (ranks[rank] || 0) + 1
-
-      if (ranks[rank] === this.#rankCount) {
-        return true
-      }
-    }
-    return false
+    return rankCounts.some(count => count >= this.#rankCount)
   }
 }

@@ -11,7 +11,7 @@ export class CardCollection {
     if (!this.#isSlotEmpty(position) && this.getCard(position) !== card) {
       throw new Error('Slot is not empty')
     }
-  
+
     this.#cards[position] = card
   }
 
@@ -56,5 +56,38 @@ export class CardCollection {
 
   #sortLowestToHighest(values) {
     return [...values].sort((a, b) => a - b)
+  }
+
+  isSameSuite() {
+    let suite = undefined
+
+    for (const card of this.#cards) {
+      if (!card) {
+        continue
+      }
+
+      if (!suite) {
+        suite = card.getAttribute('suit')
+      } else if (suite !== card.getAttribute('suit')) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  getRanks() {
+    const ranks = {}
+
+    for (const card of this.#cards) {
+      if (!card) {
+        continue
+      }
+      const rank = card.getAttribute('rank')
+
+      ranks[rank] = (ranks[rank] || 0) + 1
+    }
+
+    return ranks
   }
 }

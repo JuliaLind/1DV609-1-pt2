@@ -1,4 +1,5 @@
 import { Rule } from './Rule.js'
+import { CardCollection } from '../logic/CardCollection.js'
 
 export class TwoPair extends Rule {
   #ranks
@@ -12,35 +13,19 @@ export class TwoPair extends Rule {
   }
 
   test(cards) {
-    this.#reset()
+    let pairCount = 0
+    const ranks = cards.getRanks()
 
-    for (const card of cards) {
-      if (!card) {
-        continue
+    for (const count of Object.values(ranks)) {
+      if (count >= 2) {
+        pairCount += 1
+
+        if (pairCount === 2) {
+          return true
+        }
       }
-
-      this.#processRank(card.getAttribute('rank'))
-
-      if (this.#pairCount === 2) {
-        return true
-      } 
     }
-
     return false
   }
 
-  #processRank(rank) {
-    if (this.#ranks.includes(rank)) {
-        this.#pairCount++
-        this.#ranks.splice(this.#ranks.indexOf(rank), 1)
-      } else {
-        this.#ranks.push(rank)
-      }
-  }
-    
-
-  #reset() {
-    this.#pairCount = 0
-    this.#ranks = []
-  }
 }

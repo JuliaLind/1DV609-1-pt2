@@ -1,12 +1,18 @@
 import { Rule } from './Rule.js'
+import { CardCollection } from '../logic/CardCollection.js'
 
 export class Straight extends Rule {
   constructor(value=15, name='Straight') {
     super(value, name)
   }
 
+  /**
+   * 
+   * @param {CardCollection} cards - a collection of cards to test
+   * @returns 
+   */
   test(cards) {
-    if (cards.includes(undefined)) {
+    if (cards.hasEmptySlots()) {
       return false
     }
 
@@ -14,37 +20,17 @@ export class Straight extends Rule {
   }
 
   #formsStraight(cards) {
-    const values = this.#collectValues(cards)
+    const values = cards.getDistinctValues()
 
     if (this.#hasDuplicateRanks(values)) {
       return false
     }
 
-    const sorted = this.#sortLowestToHighest(values)
-
-    return this.#areSequential(sorted)
-  }
-
-  #collectValues(cards) {
-    const values = []
-  
-    for (const card of cards) {
-      const value = card.getValue()
-
-      if (!values.includes(value)) {
-        values.push(value)
-      }
-    }
-
-    return values
+    return this.#areSequential(values)
   }
 
   #hasDuplicateRanks(values) {
     return values.length < 5
-  }
-
-  #sortLowestToHighest(values) {
-    return [...values].sort((a, b) => a - b)
   }
 
   /**
