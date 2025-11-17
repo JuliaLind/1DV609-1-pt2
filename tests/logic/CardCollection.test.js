@@ -18,6 +18,30 @@ describe('CardCollection', () => {
     getValue: () => 11
   })
 
+  describe('constructor()', () => {
+    it('should create an emtpy card collection with 5 slots', () => {
+      const sut = new CardCollection()
+      expect(sut.getCards()).toEqual([undefined, undefined, undefined, undefined, undefined])
+    })
+
+    it('should create a card collection from array with length 5', () => {
+      const sut = new CardCollection([undefined, undefined, jackHearts, eightClubs, undefined])
+      expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, eightClubs, undefined])
+    })
+
+    const invalidCollections = [
+      [],
+      [undefined, undefined, undefined, undefined, undefined, undefined],
+      [jackHearts, eightClubs]
+    ]
+
+    invalidCollections.forEach((collection) => {
+      it(`should throw an error when creating a card collection with invalid length ${collection.length}`, () => {
+        expect(() => new CardCollection(collection)).toThrowError('CardCollection must have exactly 5 slots')
+      })
+    })
+  })
+
   describe('addCard()', () => {
     it('addCard() should add a card at the specified position if the slot is empty', () => {
       const sut = new CardCollection(5)
