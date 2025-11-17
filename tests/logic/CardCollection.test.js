@@ -44,15 +44,14 @@ describe('CardCollection', () => {
 
   describe('addCard()', () => {
     it('addCard() should add a card at the specified position if the slot is empty', () => {
-      const sut = new CardCollection(5)
+      const sut = new CardCollection()
       sut.addCard(jackHearts, 2)
 
       expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, undefined, undefined])
     })
 
     it('addCard() should throw an error if the slot is already occupied', () => {
-      const sut = new CardCollection(5)
-      sut.addCard(jackHearts, 2)
+      const sut = new CardCollection([undefined, undefined, jackHearts, undefined, undefined])
 
       expect(() => sut.addCard(eightHearts, 2)).toThrowError('Slot is not empty')
     })
@@ -63,7 +62,7 @@ describe('CardCollection', () => {
 
     validSlots.forEach((slot) => {
       it(`should add a card at valid slot ${slot}`, () => {
-        const sut = new CardCollection(5)
+        const sut = new CardCollection()
         sut.addCard(eightHearts, slot)
         expect(sut.getCard(slot)).toBe(eightHearts)
       })
@@ -71,7 +70,7 @@ describe('CardCollection', () => {
 
     invalidSlots.forEach((slot) => {
       it(`should throw an error when adding a card at invalid slot ${slot}`, () => {
-        const sut = new CardCollection(5)
+        const sut = new CardCollection()
         expect(() => sut.addCard(eightHearts, slot)).toThrowError('Slot index out of bounds')
       })
     })
@@ -81,8 +80,7 @@ describe('CardCollection', () => {
     let sut
 
     beforeEach(() => {
-      sut = new CardCollection(5)
-      sut.addCard(jackHearts, 2)
+      sut = new CardCollection([undefined, undefined, jackHearts, undefined, undefined])
     })
 
     it('hasEmptySlots() should return true for collection with empty slots', () => {
@@ -106,10 +104,7 @@ describe('CardCollection', () => {
     let sut
 
     beforeEach(() => {
-      sut = new CardCollection(5)
-      sut.addCard(jackHearts, 1)
-      sut.addCard(eightHearts, 3)
-      sut.addCard(eightClubs, 4)
+      sut = new CardCollection([undefined, jackHearts, undefined, eightHearts, eightClubs])
     })
 
     it('getDistinctValues() should return [8,11]', () => {
@@ -123,23 +118,19 @@ describe('CardCollection', () => {
 
   describe('isSameSuite()', () => {
     it('should return true for cards [8♥, J♥, 8♥]', () => {
-      const sut = new CardCollection(3)
-      sut.addCard(eightHearts, 0)
-      sut.addCard(jackHearts, 1)
-      sut.addCard(eightHearts, 2)
+      const sut = new CardCollection([eightHearts, jackHearts, eightHearts, undefined, undefined])
+
       expect(sut.isSameSuite()).toBe(true)
     })
 
     it('should return false for cards [8♥, J♥, 8♣]', () => {
-      const sut = new CardCollection(3)
-      sut.addCard(eightHearts, 0)
-      sut.addCard(jackHearts, 1)
-      sut.addCard(eightClubs, 2)
+      const sut = new CardCollection([eightHearts, jackHearts, eightClubs, undefined, undefined])
+
       expect(sut.isSameSuite()).toBe(false)
     })
 
     it('should return true for empty CardCollection', () => {
-      const sut = new CardCollection(3)
+      const sut = new CardCollection()
       expect(sut.isSameSuite()).toBe(true)
     })
   })
