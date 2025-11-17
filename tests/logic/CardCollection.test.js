@@ -34,7 +34,7 @@ describe('CardCollection', () => {
     })
 
     // boundary values 0 and 4 + adjacent values -1, 1, 3, 5
-    const validSlots = [0, 1, 3, 4] 
+    const validSlots = [0, 1, 3, 4]
     const invalidSlots = [-1, 5]
 
     validSlots.forEach((slot) => {
@@ -88,8 +88,35 @@ describe('CardCollection', () => {
       sut.addCard(eightClubs, 4)
     })
 
-    it ('getDistinctValues() should return [8,11]', () => {
-      expect(sut.getDistinctValues()).toEqual([8,11])
+    it('getDistinctValues() should return [8,11]', () => {
+      expect(sut.getDistinctValues()).toEqual([8, 11])
+    })
+
+    it('getRanks() should return {"J": 1, "8": 2}', () => {
+      expect(sut.getRanks()).toEqual({ 'J': 1, '8': 2 })
+    })
+  })
+
+  describe('isSameSuite()', () => {
+    it('should return true for cards [8♥, J♥, 8♥]', () => {
+      const sut = new CardCollection(3)
+      sut.addCard(eightHearts, 0)
+      sut.addCard(jackHearts, 1)
+      sut.addCard(eightHearts, 2)
+      expect(sut.isSameSuite()).toBe(true)
+    })
+
+    it('should return false for cards [8♥, J♥, 8♣]', () => {
+      const sut = new CardCollection(3)
+      sut.addCard(eightHearts, 0)
+      sut.addCard(jackHearts, 1)
+      sut.addCard(eightClubs, 2)
+      expect(sut.isSameSuite()).toBe(false)
+    })
+
+    it('should return true for empty CardCollection', () => {
+      const sut = new CardCollection(3)
+      expect(sut.isSameSuite()).toBe(true)
     })
   })
 })

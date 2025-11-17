@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { Straight } from '../../src/rules/Straight.js'
+import { CardCollection } from '../../src/logic/CardCollection.js'
 
 
 
@@ -15,51 +16,42 @@ describe('Straight', () => {
   })
 
   describe('test()', () => {
-    const threeHearts = Object.freeze({
-      getValue: () => 3
-    })
-
-    const eightClubs = Object.freeze({
-      getValue: () => 8
-    })
-
-    const eightHearts = Object.freeze({
-      getValue: () => 8
-    })
-
-    const nineDiamonds = Object.freeze({
-      getValue: () => 9
-    })
-
-    const tenSpades = Object.freeze({
-      getValue: () => 10
-    })
-
-    const jackHearts = Object.freeze({
-      getValue: () => 11
-    })
-
-    const queenClubs = Object.freeze({
-      getValue: () => 12
-    })
-
     it('should return true for ranks [Q, 10, J, 8, 9]', () => {
-      const actual = sut.test([queenClubs, tenSpades, jackHearts, eightClubs, nineDiamonds])
+      const cardCollection = {
+        hasEmptySlots: () => false,
+        getDistinctValues: () => [8, 9, 10, 11, 12],
+      }
+
+      const actual = sut.test(cardCollection)
+
       expect(actual).toBe(true)
     })
 
     it('should return false for ranks [3, 10, J, 8, 9]', () => {
-      const actual = sut.test([threeHearts, tenSpades, jackHearts, eightClubs, nineDiamonds])
+      const cardCollection = {
+        hasEmptySlots: () => false,
+        getDistinctValues: () => [3, 8, 9, 10, 11],
+      }
+
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(false)
     })
 
     it('should return false for ranks [Q, 10, J, 9]', () => {
-      const actual = sut.test([queenClubs, tenSpades, jackHearts, nineDiamonds, undefined])
+      const cardCollection = {
+        hasEmptySlots: () => true,
+        getDistinctValues: () => [9, 10, 11, 12],
+      }
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(false)
     })
 
     it('should return false for ranks [Q, 10, 8, J, 8]', () => {
-      const actual = sut.test([queenClubs, tenSpades, eightClubs, jackHearts, eightHearts])
+      const cardCollection = {
+        hasEmptySlots: () => false,
+        getDistinctValues: () => [8, 10, 11, 12],
+      }
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(false)
     })
   })

@@ -14,63 +14,58 @@ describe('Royal Flush', () => {
   })
 
   describe('test()', () => {
-    const nineClubs= Object.freeze({
-      getValue: () => 9,
-      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': '9' }),
-    })
-
-    const tenClubs = Object.freeze({
-      getValue: () => 10,
-      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': '10' }),
-    })
-
-    const jackClubs = Object.freeze({
-      getValue: () => 11,
-      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'J' }),
-    })
-
-    const queenClubs = Object.freeze({
-      getValue: () => 12,
-      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'Q' }),
-    })
-
-    const queenHearts = Object.freeze({
-      getValue: () => 12,
-      getAttribute: getAttributeMock({ 'suit': 'hearts', 'rank': 'Q' }),
-    })
-
-    const kingClubs = Object.freeze({
-      getValue: () => 13,
-      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'K' }),
-    })
-
-    const aceClubs = Object.freeze({
-      getValue: () => 14,
-      getAttribute: getAttributeMock({ 'suit': 'clubs', 'rank': 'A' }),
-    })
-
     it ('should return true for cards [A♣, 10♣, K♣, J♣, Q♣]', () => {
-      const actual = sut.test([aceClubs, tenClubs, kingClubs, jackClubs, queenClubs])
+      const cardCollection = {
+        isSameSuite: () => true,
+        getDistinctValues: () => [10, 11, 12, 13, 14],
+        hasEmptySlots: () => false,
+        hasRank: (rank) => ['10', 'J', 'Q', 'K', 'A'].includes(rank),
+      }
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(true)
     })
 
     it ('should return false for cards [A♣, 10♣, K♣, J♣, Q♥]', () => {
-      const actual = sut.test([aceClubs, tenClubs, kingClubs, jackClubs, queenHearts])
+      const cardCollection = {
+        isSameSuite: () => false,
+        getDistinctValues: () => [10, 11, 12, 13, 14],
+        hasEmptySlots: () => false,
+        hasRank: (rank) => ['10', 'J', 'Q', 'K', 'A'].includes(rank),
+      }
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(false)
     })
 
     it('should return false for cards [10♣, K♣, J♣, Q♣, 9♣]', () => {
-      const actual = sut.test([tenClubs, kingClubs, jackClubs, queenClubs, nineClubs])
+      const cardCollection = {
+        isSameSuite: () => true,
+        getDistinctValues: () => [9, 10, 11, 12, 13],
+        hasEmptySlots: () => false,
+        hasRank: (rank) => ['9','10', 'J', 'Q', 'K'].includes(rank),
+      }
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(false)
     })
 
     it ('should return false for cards [A♣, 10♣]', () => {
-      const actual = sut.test([aceClubs, tenClubs, undefined, undefined, undefined])
+      const cardCollection = {
+        isSameSuite: () => true,
+        getDistinctValues: () => [10, 14],
+        hasEmptySlots: () => true,
+        hasRank: (rank) => ['10','A'].includes(rank)
+      }
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(false)
     })
 
       it ('should return false for cards [A♣, K♣]', () => {
-      const actual = sut.test([aceClubs, undefined, kingClubs, undefined, undefined])
+      const cardCollection = {
+        isSameSuite: () => true,
+        getDistinctValues: () => [13, 14],
+        hasEmptySlots: () => true,
+        hasRank: (rank) => ['K','A'].includes(rank)
+      }
+      const actual = sut.test(cardCollection)
       expect(actual).toBe(false)
     })
   })

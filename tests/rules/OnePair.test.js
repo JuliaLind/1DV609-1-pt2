@@ -15,30 +15,20 @@ describe('OnePair', () => {
   })
 
   describe('test()', () => {
-    const twoHearts = Object.freeze({
-      getAttribute: getAttributeMock({ 'rank': '2' })
-    })
-
-    const twoSpades = Object.freeze({
-      getAttribute: getAttributeMock({ 'rank': '2' })
-    })
-
-    const threeHearts = Object.freeze({
-      getAttribute: getAttributeMock({ 'rank': '3' })
-    })
-
-    const aceHearts = Object.freeze({
-      getAttribute: getAttributeMock({ 'rank': 'A' })
-    })
-
     it('should return true for ranks [2, 3, 2]', () => {
-      const actual = sut.test([twoHearts, threeHearts, undefined, twoSpades, undefined])
+      const cardCollection = {
+        getRanks: () => ({ '2': 2, '3': 1 })
+      }
+      const actual = sut.test(cardCollection)
 
       expect(actual).toBe(true)
     })
 
     it('should return false for ranks [2, 3, A]', () => {
-      const actual = sut.test([undefined, twoHearts, threeHearts, undefined, aceHearts])
+      const cardCollection = {
+        getRanks: () => ({ '2': 1, '3': 1, 'A': 1 })
+      }
+      const actual = sut.test(cardCollection)
 
       expect(actual).toBe(false)
     })
