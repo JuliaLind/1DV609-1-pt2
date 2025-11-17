@@ -1,8 +1,15 @@
 export class CardCollection {
   #cards
 
-  constructor(length = 5) {
-    this.#cards = new Array(length)
+  constructor(cards = new Array(5)) {
+    this.#validateLength(cards.length)
+    this.#cards = [...cards]
+  }
+
+  #validateLength(length) {
+    if (length !== 5) {
+      throw new Error('CardCollection must have exactly 5 slots')
+    }
   }
 
   addCard(card, position) {
