@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { CardCollection } from '../../src/logic/CardCollection.js'
+import { CardLine } from '../../src/logic/CardLine.js'
 import { getAttributeMock } from '../lib/helpers.js'
 
-describe('CardCollection', () => {
+describe('CardLine', () => {
   const eightHearts = Object.freeze({
     getAttribute: getAttributeMock({ 'rank': '8', 'suit': 'hearts' }),
     getValue: () => 8
@@ -20,12 +20,12 @@ describe('CardCollection', () => {
 
   describe('constructor()', () => {
     it('should create an emtpy card collection with 5 slots', () => {
-      const sut = new CardCollection()
+      const sut = new CardLine()
       expect(sut.getCards()).toEqual([undefined, undefined, undefined, undefined, undefined])
     })
 
     it('should create a card collection from array with length 5', () => {
-      const sut = new CardCollection([undefined, undefined, jackHearts, eightClubs, undefined])
+      const sut = new CardLine([undefined, undefined, jackHearts, eightClubs, undefined])
       expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, eightClubs, undefined])
     })
 
@@ -37,21 +37,21 @@ describe('CardCollection', () => {
 
     invalidCollections.forEach((collection) => {
       it(`should throw an error when creating a card collection with invalid length ${collection.length}`, () => {
-        expect(() => new CardCollection(collection)).toThrowError('CardCollection must have exactly 5 slots')
+        expect(() => new CardLine(collection)).toThrowError('CardLine must have exactly 5 slots')
       })
     })
   })
 
   describe('addCard()', () => {
     it('addCard() should add a card at the specified position if the slot is empty', () => {
-      const sut = new CardCollection()
+      const sut = new CardLine()
       sut.addCard(jackHearts, 2)
 
       expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, undefined, undefined])
     })
 
     it('addCard() should throw an error if the slot is already occupied', () => {
-      const sut = new CardCollection([undefined, undefined, jackHearts, undefined, undefined])
+      const sut = new CardLine([undefined, undefined, jackHearts, undefined, undefined])
 
       expect(() => sut.addCard(eightHearts, 2)).toThrowError('Slot is not empty')
     })
@@ -62,7 +62,7 @@ describe('CardCollection', () => {
 
     validSlots.forEach((slot) => {
       it(`should add a card at valid slot ${slot}`, () => {
-        const sut = new CardCollection()
+        const sut = new CardLine()
         sut.addCard(eightHearts, slot)
         expect(sut.getCard(slot)).toBe(eightHearts)
       })
@@ -70,17 +70,17 @@ describe('CardCollection', () => {
 
     invalidSlots.forEach((slot) => {
       it(`should throw an error when adding a card at invalid slot ${slot}`, () => {
-        const sut = new CardCollection()
+        const sut = new CardLine()
         expect(() => sut.addCard(eightHearts, slot)).toThrowError('Slot index out of bounds')
       })
     })
   })
 
-  describe('CardCollection with  [,,J♥,,]', () => {
+  describe('CardLine with  [,,J♥,,]', () => {
     let sut
 
     beforeEach(() => {
-      sut = new CardCollection([undefined, undefined, jackHearts, undefined, undefined])
+      sut = new CardLine([undefined, undefined, jackHearts, undefined, undefined])
     })
 
     it('hasEmptySlots() should return true for collection with empty slots', () => {
@@ -100,11 +100,11 @@ describe('CardCollection', () => {
     })
   })
 
-  describe('CardCollection with [,J♥,,8♥,8♣]', () => {
+  describe('CardLine with [,J♥,,8♥,8♣]', () => {
     let sut
 
     beforeEach(() => {
-      sut = new CardCollection([undefined, jackHearts, undefined, eightHearts, eightClubs])
+      sut = new CardLine([undefined, jackHearts, undefined, eightHearts, eightClubs])
     })
 
     it('getDistinctValues() should return [8,11]', () => {
@@ -118,19 +118,19 @@ describe('CardCollection', () => {
 
   describe('isSameSuite()', () => {
     it('should return true for cards [8♥, J♥, 8♥]', () => {
-      const sut = new CardCollection([eightHearts, jackHearts, eightHearts, undefined, undefined])
+      const sut = new CardLine([eightHearts, jackHearts, eightHearts, undefined, undefined])
 
       expect(sut.isSameSuite()).toBe(true)
     })
 
     it('should return false for cards [8♥, J♥, 8♣]', () => {
-      const sut = new CardCollection([eightHearts, jackHearts, eightClubs, undefined, undefined])
+      const sut = new CardLine([eightHearts, jackHearts, eightClubs, undefined, undefined])
 
       expect(sut.isSameSuite()).toBe(false)
     })
 
-    it('should return true for empty CardCollection', () => {
-      const sut = new CardCollection()
+    it('should return true for empty CardLine', () => {
+      const sut = new CardLine()
       expect(sut.isSameSuite()).toBe(true)
     })
   })
