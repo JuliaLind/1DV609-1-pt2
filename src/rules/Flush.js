@@ -7,4 +7,12 @@ export class Flush extends Rule {
 
     super(value, name)
   }
+
+  test(cards) {
+    if (cards.hasEmptySlots()) {
+      return false
+    }
+
+    return cards.isSameSuite()
+  }
 }
