@@ -1,7 +1,7 @@
 import { Rule } from './Rule.js'
 
 
-export class TwoPair extends Rule {
+export class TwoPairs extends Rule {
   constructor() {
     const value = 5
     const name = 'Two Pair'

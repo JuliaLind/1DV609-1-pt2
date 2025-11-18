@@ -1,4 +1,4 @@
-import { describe, it, expect, vitest } from 'vitest'
+import { describe, it, expect, vitest, beforeEach, afterEach, afterAll, beforeAll } from 'vitest'
 import { RuleSet } from '../../src/rules/RuleSet.js'
 import { RoyalFlush } from '../../src/rules/RoyalFlush.js'
 import { StraightFlush } from '../../src/rules/StraightFlush.js'
@@ -7,7 +7,7 @@ import { FullHouse } from '../../src/rules/FullHouse.js'
 import { Flush } from '../../src/rules/Flush.js'
 import { Straight } from '../../src/rules/Straight.js'
 import { ThreeOfAKind } from '../../src/rules/ThreeOfAKind.js'
-import { TwoPair } from '../../src/rules/TwoPair.js'
+import { TwoPairs } from '../../src/rules/TwoPairs.js'
 import { OnePair } from '../../src/rules/OnePair.js'
 
 
@@ -20,32 +20,43 @@ describe('RuleSet', () => {
   let flushMock
   let straightMock
   let threeOfAKindMock
-  let twoPairMock
+  let twoPairsMock
   let onePairMock
 
-  beforeEach(() => {
+  beforeAll(() => {
     royalFlushMock = vitest.spyOn(RoyalFlush.prototype, 'test')
-      .mockReturnValue(false)
     straightFlushMock = vitest.spyOn(StraightFlush.prototype, 'test')
-      .mockReturnValue(false)
     fourOfAKindMock = vitest.spyOn(FourOfAKind.prototype, 'test')
-      .mockReturnValue(false)
     fullHouseMock = vitest.spyOn(FullHouse.prototype, 'test')
-      .mockReturnValue(false)
     flushMock = vitest.spyOn(Flush.prototype, 'test')
-      .mockReturnValue(false)
     straightMock = vitest.spyOn(Straight.prototype, 'test')
-      .mockReturnValue(false)
     threeOfAKindMock = vitest.spyOn(ThreeOfAKind.prototype, 'test')
-      .mockReturnValue(false)
-    twoPairMock = vitest.spyOn(TwoPair.prototype, 'test')
-      .mockReturnValue(false)
+    twoPairsMock = vitest.spyOn(TwoPairs.prototype, 'test')
     onePairMock = vitest.spyOn(OnePair.prototype, 'test')
-      .mockReturnValue(false)
+  })
+
+  beforeEach(() => {
+    for (const testMethodStub of [
+      royalFlushMock,
+      straightFlushMock,
+      fourOfAKindMock,
+      fullHouseMock,
+      flushMock,
+      straightMock,
+      threeOfAKindMock,
+      twoPairsMock,
+      onePairMock,
+    ]) {
+      testMethodStub.mockReturnValue(false)
+    }
   })
 
   afterEach(() => {
     vitest.clearAllMocks()
+  })
+
+  afterAll(() => {
+    vitest.restoreAllMocks()
   })
 
   describe('RuleSet.test() should call rules in correct order', () => {
@@ -86,7 +97,7 @@ describe('RuleSet', () => {
       expect(fourOfAKindMock).toHaveBeenCalled()
       expect(fullHouseMock).not.toHaveBeenCalled()
       expect(threeOfAKindMock).not.toHaveBeenCalled()
-      expect(twoPairMock).not.toHaveBeenCalled()
+      expect(twoPairsMock).not.toHaveBeenCalled()
       expect(onePairMock).not.toHaveBeenCalled()
     })
 
@@ -97,7 +108,7 @@ describe('RuleSet', () => {
 
       expect(fullHouseMock).toHaveBeenCalled()
       expect(threeOfAKindMock).not.toHaveBeenCalled()
-      expect(twoPairMock).not.toHaveBeenCalled()
+      expect(twoPairsMock).not.toHaveBeenCalled()
       expect(onePairMock).not.toHaveBeenCalled()
     })
 
@@ -106,15 +117,15 @@ describe('RuleSet', () => {
       sut.test({})
 
       expect(threeOfAKindMock).toHaveBeenCalled()
-      expect(twoPairMock).not.toHaveBeenCalled()
+      expect(twoPairsMock).not.toHaveBeenCalled()
       expect(onePairMock).not.toHaveBeenCalled()
     })
 
     it('If TwoPairs matches, OnePair should not be called', () => {
-      twoPairMock.mockReturnValue(true)
+      twoPairsMock.mockReturnValue(true)
       sut.test({})
 
-      expect(twoPairMock).toHaveBeenCalled()
+      expect(twoPairsMock).toHaveBeenCalled()
       expect(onePairMock).not.toHaveBeenCalled()
     })
   })
@@ -122,18 +133,18 @@ describe('RuleSet', () => {
   describe('RuleSet.test() returnvalue', () => {
     it('Should return {name: "", points: 0 } if no rule matches', () => {
       const result = sut.test({})
-      expect(result).toEqual({name: "", points: 0 })
+      expect(result).toEqual({ name: '', points: 0 })
     })
-    
+
     it('Should return correct result if a rule matches', () => {
       const expected = { name: 'Full House', points: 25 }
-     vitest.spyOn(FullHouse.prototype, 'toString').mockReturnValue('Full House')
-     vitest.spyOn(FullHouse.prototype, 'valueOf').mockReturnValue(25)
-     fullHouseMock.mockReturnValue(true)
+      vitest.spyOn(FullHouse.prototype, 'toString').mockReturnValue('Full House')
+      vitest.spyOn(FullHouse.prototype, 'valueOf').mockReturnValue(25)
+      fullHouseMock.mockReturnValue(true)
 
-     const actual = sut.test({})
+      const actual = sut.test({})
 
-     expect(actual).toEqual(expected)
+      expect(actual).toEqual(expected)
     })
   })
 })

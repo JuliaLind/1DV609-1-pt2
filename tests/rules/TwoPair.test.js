@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { TwoPair } from '../../src/rules/TwoPair.js'
+import { TwoPairs } from '../../src/rules/TwoPairs.js'
 
-describe('TwoPair', () => {
-  const sut = new TwoPair()
+describe('TwoPairs', () => {
+  const sut = new TwoPairs()
   it('valueOf should return 5', () => {
     expect(sut.valueOf()).toBe(5)
   })
