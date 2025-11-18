@@ -11,7 +11,7 @@ export class Rule {
     this.#name = name
   }
 
-  getValue() {
+  valueOf() {
     return this.#value
   }
 

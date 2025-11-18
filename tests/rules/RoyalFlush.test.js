@@ -4,8 +4,8 @@ import { RoyalFlush } from '../../src/rules/RoyalFlush.js'
 describe('Royal Flush', () => {
   const sut = new RoyalFlush()
 
-  it('getValue should return 100', () => {
-    expect(sut.getValue()).toBe(100)
+  it('valueOf should return 100', () => {
+    expect(sut.valueOf()).toBe(100)
   })
 
   it('toString should return "Royal Flush"', () => {

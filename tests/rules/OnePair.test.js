@@ -4,8 +4,8 @@ import { OnePair } from '../../src/rules/OnePair.js'
 describe('OnePair', () => {
   const sut = new OnePair()
 
-  it('getValue should return 2', () => {
-    expect(sut.getValue()).toBe(2)
+  it('valueOf should return 2', () => {
+    expect(sut.valueOf()).toBe(2)
   })
 
   it('toString should return "One Pair"', () => {

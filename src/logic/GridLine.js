@@ -52,7 +52,7 @@ export class GridLine {
     const values = []
 
     for (const card of this.#cards) {
-      const value = card?.getValue()
+      const value = card?.valueOf()
 
       if (value && !values.includes(value)) {
         values.push(value)

@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { TwoPair } from '../../src/rules/TwoPair.js'
 
-describe('OnePair', () => {
+describe('TwoPair', () => {
   const sut = new TwoPair()
-  it('getValue should return 5', () => {
-    expect(sut.getValue()).toBe(5)
+  it('valueOf should return 5', () => {
+    expect(sut.valueOf()).toBe(5)
   })
 
   it('toString should return "Two Pair"', () => {

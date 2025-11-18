@@ -5,17 +5,17 @@ import { getAttributeMock } from '../lib/helpers.js'
 describe('GridLine', () => {
   const eightHearts = Object.freeze({
     getAttribute: getAttributeMock({ 'rank': '8', 'suit': 'hearts' }),
-    getValue: () => 8
+    valueOf: () => 8
   })
 
   const eightClubs = Object.freeze({
     getAttribute: getAttributeMock({ 'rank': '8', 'suit': 'clubs' }),
-    getValue: () => 8
+    valueOf: () => 8
   })
 
   const jackHearts = Object.freeze({
     getAttribute: getAttributeMock({ 'rank': 'J', 'suit': 'hearts' }),
-    getValue: () => 11
+    valueOf: () => 11
   })
 
   describe('constructor()', () => {

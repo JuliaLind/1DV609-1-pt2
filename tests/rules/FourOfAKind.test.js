@@ -4,8 +4,8 @@ import { FourOfAKind } from '../../src/rules/FourOfAKind.js'
 describe('FourOfAKind', () => {
   const sut = new FourOfAKind()
 
-  it('getValue() should return 50', () => {
-    expect(sut.getValue()).toBe(50)
+  it('valueOf() should return 50', () => {
+    expect(sut.valueOf()).toBe(50)
   })
 
   it('toString() should return "Four of a Kind"', () => {

@@ -4,8 +4,8 @@ import { FullHouse } from '../../src/rules/FullHouse.js'
 describe('FullHouse', () => {
   const sut = new FullHouse()
 
-  it('getValue() should return 25', () => {
-    expect(sut.getValue()).toBe(25)
+  it('valueOf() should return 25', () => {
+    expect(sut.valueOf()).toBe(25)
   })
 
   it('toString() should return "Full House"', () => {

@@ -5,8 +5,8 @@ import { ThreeOfAKind } from '../../src/rules/ThreeOfAKind.js'
 describe('ThreeOfAKind', () => {
   const sut = new ThreeOfAKind()
 
-  it('getValue() should return 10', () => {
-    expect(sut.getValue()).toBe(10)
+  it('valueOf() should return 10', () => {
+    expect(sut.valueOf()).toBe(10)
   })
 
   it('toString() should return "Three of a Kind"', () => {
