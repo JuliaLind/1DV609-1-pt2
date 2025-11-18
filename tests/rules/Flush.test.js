@@ -13,29 +13,29 @@ describe('Flush', () => {
 
   describe('test()', () => {
     it('should return true for same suite cards', () => {
-      const cardCollection = {
+      const gridLineStub = {
         hasEmptySlots: () => false,
         isSameSuite: () => true,
       }
-      const actual = sut.test(cardCollection)
+      const actual = sut.test(gridLineStub)
       expect(actual).toBe(true)
     })
 
     it('should return false for different suite cards', () => {
-      const cardCollection = {
+      const gridLineStub = {
         hasEmptySlots: () => false,
         isSameSuite: () => false,
       }
-      const actual = sut.test(cardCollection)
+      const actual = sut.test(gridLineStub)
       expect(actual).toBe(false)
     })
 
     it('should return false for cards with empty slots', () => {
-      const cardCollection = {
+      const gridLineStub = {
         hasEmptySlots: () => true,
         isSameSuite: () => true,
       }
-      const actual = sut.test(cardCollection)
+      const actual = sut.test(gridLineStub)
       expect(actual).toBe(false)
     })
   })

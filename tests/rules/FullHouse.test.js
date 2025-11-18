@@ -14,28 +14,28 @@ describe('FullHouse', () => {
 
   describe('test()', () => {
     it('should return false for ranks [2, 3, 2, 3]', () => {
-      const cardCollection = {
+      const gridLineStub = {
         getRanks: () => ({ '2': 2, '3': 2 })
       }
-      const actual = sut.test(cardCollection)
+      const actual = sut.test(gridLineStub)
 
       expect(actual).toBe(false)
     })
 
     it('should return false for ranks [3, 2, 3, 3, 3]', () => {
-      const cardCollection = {
+      const gridLineStub = {
         getRanks: () => ({ '2': 1, '3': 4 })
       }
-      const actual = sut.test(cardCollection)
+      const actual = sut.test(gridLineStub)
 
       expect(actual).toBe(false)
     })
 
     it('should return true for ranks [3, 2, 2, 3, 3]', () => {
-      const cardCollection = {
+      const gridLineStub = {
         getRanks: () => ({ '2': 2, '3': 3 })
       }
-      const actual = sut.test(cardCollection)
+      const actual = sut.test(gridLineStub)
 
       expect(actual).toBe(true)
     })
