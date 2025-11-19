@@ -10,7 +10,7 @@ describe('poker-grid', () => {
     const pokerGrid = document.createElement('poker-grid')
     const shadowRoot = pokerGrid.shadowRoot
     expect(shadowRoot.querySelectorAll('.card-slot').length).toBe(25)
-    expect(shadowRoot.querySelectorAll('.result-slot').length).toBe(11)
+    expect(shadowRoot.querySelectorAll('.result-slot').length).toBe(10)
     expect(shadowRoot.querySelectorAll('[data-row="0"]').length).toBe(6)
     expect(shadowRoot.querySelectorAll('[data-column="0"]').length).toBe(6)
   })

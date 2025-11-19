@@ -32,42 +32,45 @@ customElements.define('poker-grid',
     }
 
     #initialize() {
-      const cardSlotTemplate = document.createElement('template')
-      cardSlotTemplate.innerHTML = `
-        <div class="card-slot" data-row="" data-column=""><slot name=""></slot></div>
-        `
-
-      const resultSlotTemplate = document.createElement('template')
-      resultSlotTemplate.innerHTML = `
-        <div class="result-slot"><span class="name"></span><span class="points"></span></div>
-        `
-
       for (let row = 0; row < 5; row += 1) {
         for (let column = 0; column < 5; column += 1) {
-          const templateCopy = cardSlotTemplate.content.cloneNode(true)
-          const cardSlot = templateCopy.querySelector('.card-slot')
-          cardSlot.dataset.row = row
-          cardSlot.dataset.column = column
-
-          this.shadowRoot.appendChild(templateCopy)
+          this.shadowRoot.appendChild(this.#makeCardSlot({row, column})
+          )
         }
-        const templateCopy = resultSlotTemplate.content.cloneNode(true)
-        const resultSlot = templateCopy.querySelector('.result-slot')
-        resultSlot.dataset.row = row
-        resultSlot.classList.add('row')
-        
-
-        this.shadowRoot.appendChild(templateCopy)
+        this.shadowRoot.appendChild(this.#makeResultSlot({row}))
       }
 
-      for (let column = 0; column < 6; column += 1) {
-        const templateCopy = resultSlotTemplate.content.cloneNode(true)
-        const resultSlot = templateCopy.querySelector('.result-slot')
-        resultSlot.dataset.column = column
-        resultSlot.classList.add('column')
-        
-        this.shadowRoot.appendChild(templateCopy)
+      for (let column = 0; column < 5; column += 1) {
+        this.shadowRoot.appendChild(this.#makeResultSlot({column}))
       }
+      this.shadowRoot.appendChild(document.createElement('div'))
+    }
+
+    #makeCardSlot(placement) {
+      const {row, column} = placement
+ 
+      const template = document.createElement('template')
+      template.innerHTML = `
+        <div class="card-slot" data-row="${row}" data-column="${column}"><slot name="r${row}c${column}"></slot></div>
+        `
+
+      return template.content.querySelector('.card-slot')
+    }
+
+    #makeResultSlot(placement) {
+      const template = document.createElement('template')
+      template.innerHTML = `
+        <div class="result-slot"><span class="name"></span><span class="points"></span></div>
+        `
+      const resultSlot = template.content.querySelector('.result-slot')
+
+
+      for (const [key, value] of Object.entries(placement)) {
+        resultSlot.dataset[key] = value
+        resultSlot.classList.add(key)
+      }
+
+      return resultSlot
     }
   }
 )
