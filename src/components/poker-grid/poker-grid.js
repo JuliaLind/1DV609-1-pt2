@@ -32,15 +32,15 @@ customElements.define('poker-grid',
     }
 
     #initialize() {
-      for (let row = 0; row < 5; row += 1) {
-        for (let column = 0; column < 5; column += 1) {
+      for (let row = 0; row < 5; row++) {
+        for (let column = 0; column < 5; column++) {
           this.shadowRoot.appendChild(this.#makeCardSlot({row, column})
           )
         }
         this.shadowRoot.appendChild(this.#makeResultSlot({row}))
       }
 
-      for (let column = 0; column < 5; column += 1) {
+      for (let column = 0; column < 5; column++) {
         this.shadowRoot.appendChild(this.#makeResultSlot({column}))
       }
       this.shadowRoot.appendChild(document.createElement('div'))
