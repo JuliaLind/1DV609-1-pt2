@@ -7,51 +7,17 @@ describe('poker-card', () => {
     expect(customElements.get('poker-card')).toBeDefined()
   })
 
-  it('Rank cannot be changed after being set', async () => {
+  it('poker-card image source should be correct', () => {
     const sut = document.createElement('poker-card')
-    sut.setAttribute('rank', 'A')
-    sut.setAttribute('rank', '5')
-
-    expect(sut.getAttribute('rank')).toBe('A')
+    const expected = 'path/to/image.png'
+    sut.setAttribute('src', expected)
+    expect(sut.shadowRoot.querySelector('img').getAttribute('src')).toBe(expected)
   })
 
-  it('Suite cannot be changed after being set', async () => {
+  it('poker-card image alt text should be correct', () => {
     const sut = document.createElement('poker-card')
-    sut.setAttribute('suite', 'hearts')
-    sut.setAttribute('suite', 'spades')
-
-    expect(sut.getAttribute('suite')).toBe('hearts')
-  })
-
-  it('Cannot set invalid suite', async () => {
-    const sut = document.createElement('poker-card')
-
-    sut.setAttribute('suite', 'invalid')
-
-    expect(sut.getAttribute('suite')).toBe('')
-  })
-
-  it('Cannot set invalid rank', async () => {
-    const sut = document.createElement('poker-card')
-
-    sut.setAttribute('rank', '1')
-
-    expect(sut.getAttribute('rank')).toBe('')
-  })
-
-  it('Value of card with rank \'10\' should be 10', async () => {
-    const sut = document.createElement('poker-card')
-
-    sut.setAttribute('rank', '10')
-
-    expect(Number(sut)).toBe(10)
-  })
-
-  it('Value of card with rank \'A\' should be 14', async () => {
-    const sut = document.createElement('poker-card')
-
-    sut.setAttribute('rank', 'A')
-
-    expect(Number(sut)).toBe(14)
+    const expected = 'A hearts'
+    sut.setAttribute('alt', expected)
+    expect(sut.shadowRoot.querySelector('img').getAttribute('alt')).toBe(expected)
   })
 })

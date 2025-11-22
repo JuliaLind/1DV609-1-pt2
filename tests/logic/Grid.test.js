@@ -1,21 +1,24 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Grid } from '../../src/logic/Grid.js'
-import { getAttributeMock } from '../lib/helpers.js'
 import { GridLine } from '../../src/logic/GridLine.js'
 
 describe('GridLine', () => {
   const eightHearts = Object.freeze({
-    getAttribute: getAttributeMock({ 'rank': '8', 'suit': 'hearts' }),
+    
+    getRank: () => '8',
+    getSuite: () => 'hearts',
     valueOf: () => 8
   })
 
   const eightClubs = Object.freeze({
-    getAttribute: getAttributeMock({ 'rank': '8', 'suit': 'clubs' }),
+    getRank: () => '8',
+    getSuite: () => 'clubs',
     valueOf: () => 8
   })
 
   const jackHearts = Object.freeze({
-    getAttribute: getAttributeMock({ 'rank': 'J', 'suit': 'hearts' }),
+    getRank: () => 'J',
+    getSuite: () => 'hearts',
     valueOf: () => 11
   })
 
