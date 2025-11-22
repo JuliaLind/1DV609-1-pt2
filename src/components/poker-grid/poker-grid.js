@@ -51,7 +51,9 @@ customElements.define('poker-grid',
  
       const template = document.createElement('template')
       template.innerHTML = `
-        <div class="card-slot" data-row="${row}" data-column="${column}"><slot name="r${row}c${column}"></slot></div>
+        <div class="card-slot" data-row="${row}" data-column="${column}">
+          <slot name="r${row}c${column}"></slot>
+        </div>
         `
 
       return template.content.querySelector('.card-slot')
@@ -60,7 +62,14 @@ customElements.define('poker-grid',
     #makeResultSlot(placement) {
       const template = document.createElement('template')
       template.innerHTML = `
-        <div class="result-slot"><span class="name"></span><span class="points"></span></div>
+        <div class="result-slot">
+          <span class="name">
+            <slot name="r${placement}-rule"></slot>
+          </span>
+          <span class="points">
+            <slot name="r${placement}-points"></slot>
+          </span>
+        </div>
         `
       const resultSlot = template.content.querySelector('.result-slot')
 
