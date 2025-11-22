@@ -1,0 +1,34 @@
+import { GridLine } from './GridLine.js'
+
+export class Grid {
+  #rows
+
+  constructor(rows = [
+    new GridLine(),
+    new GridLine(),
+    new GridLine(),
+    new GridLine(),
+    new GridLine(),
+  ]) {
+    this.#rows = [...rows]
+  }
+
+  addCard(card, row, column) {
+    this.#rows[row].addCard(card, column)
+  }
+
+  getRow(row) {
+    return new GridLine(this.#rows[row].getCards())
+  }
+
+  getColumn(column) {
+    const gridLine = new GridLine()
+
+    for (let row = 0; row < this.#rows.length; row++) {
+      const card = this.#rows[row].getCard(column)
+
+      gridLine.addCard(card, row)
+    }
+    return gridLine
+  }
+}
