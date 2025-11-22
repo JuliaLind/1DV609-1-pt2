@@ -31,4 +31,13 @@ export class Grid {
     }
     return gridLine
   }
+
+  isFull() {
+    for (const row of this.#rows) {
+      if (row.hasEmptySlots()) {
+        return false
+      }
+    }
+    return true
+  }
 }
