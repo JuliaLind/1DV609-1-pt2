@@ -1,4 +1,4 @@
-import { PokerCard } from '../components/poker-card/poker-card'
+import { Card } from './Card.js'
 import { CardFactory } from './CardFactory.js'
 
 export class CardDeck {
@@ -10,8 +10,8 @@ export class CardDeck {
   }
 
   #createCards(factory) {
-    const suites = PokerCard.SUITES
-    const ranks = Object.keys(PokerCard.RANKS)
+    const suites = Card.SUITES
+    const ranks = Object.keys(Card.RANKS)
     for (const suite of suites) {
       for (const rank of ranks) {
         const card = factory.createCard(suite, rank)

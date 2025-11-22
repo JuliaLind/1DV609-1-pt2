@@ -45,7 +45,7 @@ export class GridLine {
   }
 
   hasRank(rank) {
-    return this.#cards.some(card => card?.getAttribute('rank') === rank)
+    return this.#cards.some(card => card?.getRank() === rank)
   }
 
   getDistinctValues() {
@@ -74,8 +74,8 @@ export class GridLine {
       }
 
       if (!suite) {
-        suite = card.getAttribute('suit')
-      } else if (suite !== card.getAttribute('suit')) {
+        suite = card.getSuite()
+      } else if (suite !== card.getSuite()) {
         return false
       }
     }
@@ -90,7 +90,7 @@ export class GridLine {
       if (!card) {
         continue
       }
-      const rank = card.getAttribute('rank')
+      const rank = card.getRank()
 
       ranks[rank] = (ranks[rank] || 0) + 1
     }

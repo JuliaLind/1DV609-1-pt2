@@ -1,9 +1,7 @@
+import { Card } from './Card.js'
 
 export class CardFactory {
-    createCard(suite, rank) {
-        const card = document.createElement('poker-card')
-        card.setAttribute('suite', suite)
-        card.setAttribute('rank', rank)
-        return card
-    }
+  createCard(suite, rank) {
+    return new Card(suite, rank)
+  }
 }
