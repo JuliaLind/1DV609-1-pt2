@@ -110,4 +110,24 @@ describe('GridLine', () => {
     expect(actual).toBeInstanceOf(GridLine)
     expect(actual.getCards()).toEqual([eightClubs, undefined, undefined, jackHearts, undefined])
   })
+
+  describe('isFull()', () => {
+    it('should return true when all rows are full', () => {
+      row1.hasEmptySlots = vi.fn().mockReturnValue(false)
+      row2.hasEmptySlots = vi.fn().mockReturnValue(false)
+      row3.hasEmptySlots = vi.fn().mockReturnValue(false)
+      row4.hasEmptySlots = vi.fn().mockReturnValue(false)
+      row5.hasEmptySlots = vi.fn().mockReturnValue(false)
+      expect(sut.isFull()).toBe(true)
+    })
+
+    it('should return false when at least one row has empty slots', () => {
+      row1.hasEmptySlots = vi.fn().mockReturnValue(false)
+      row2.hasEmptySlots = vi.fn().mockReturnValue(true)
+      row3.hasEmptySlots = vi.fn().mockReturnValue(false)
+      row4.hasEmptySlots = vi.fn().mockReturnValue(false)
+      row5.hasEmptySlots = vi.fn().mockReturnValue(false)
+      expect(sut.isFull()).toBe(false)
+    })
+  })
 })
