@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "This repo is the first assignment (part 2) in the course 1DV609 Mjukvarukvalitet and contains an implementation of the game Poker Squares.",
-  "browser": "src/index.js",
+  "browser": "src/js/index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
