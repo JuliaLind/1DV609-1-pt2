@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Flush } from '../../src/rules/Flush.js'
+import { Flush } from '../../src/js/rules/Flush.js'
 
 describe('Flush', () => {
   const sut = new Flush()

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { GridLine } from '../../src/logic/GridLine.js'
+import { GridLine } from '../../src/js/logic/GridLine.js'
 
 describe('GridLine', () => {
   const eightHearts = Object.freeze({

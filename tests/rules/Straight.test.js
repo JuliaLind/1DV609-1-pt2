@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Straight } from '../../src/rules/Straight.js'
+import { Straight } from '../../src/js/rules/Straight.js'
 
 describe('Straight', () => {
   const sut = new Straight()

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { SameOfAKind } from '../../src/rules/SameOfAKind.js'
-import { Rule } from '../../src/rules/Rule.js'
+import { SameOfAKind } from '../../src/js/rules/SameOfAKind.js'
+import { Rule } from '../../src/js/rules/Rule.js'
 
 
 describe('Abstract classes should not be instantiable', () => {

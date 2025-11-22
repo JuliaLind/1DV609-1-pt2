@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { StraightFlush } from '../../src/rules/StraightFlush.js'
+import { StraightFlush } from '../../src/js/rules/StraightFlush.js'
 
 
 describe('Straight Flush', () => {

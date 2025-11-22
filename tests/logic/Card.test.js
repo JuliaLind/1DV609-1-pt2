@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Card } from '../../src/logic/Card.js'
+import { Card } from '../../src/js/logic/Card.js'
 
 
 describe('Card', () => {

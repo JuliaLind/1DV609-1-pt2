@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { OnePair } from '../../src/rules/OnePair.js'
+import { OnePair } from '../../src/js/rules/OnePair.js'
 
 describe('OnePair', () => {
   const sut = new OnePair()

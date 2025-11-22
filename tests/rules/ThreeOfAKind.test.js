@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ThreeOfAKind } from '../../src/rules/ThreeOfAKind.js'
+import { ThreeOfAKind } from '../../src/js/rules/ThreeOfAKind.js'
 
 
 describe('ThreeOfAKind', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { TwoPairs } from '../../src/rules/TwoPairs.js'
+import { TwoPairs } from '../../src/js/rules/TwoPairs.js'
 
 describe('TwoPairs', () => {
   const sut = new TwoPairs()

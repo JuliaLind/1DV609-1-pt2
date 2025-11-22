@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { FullHouse } from '../../src/rules/FullHouse.js'
+import { FullHouse } from '../../src/js/rules/FullHouse.js'
 
 describe('FullHouse', () => {
   const sut = new FullHouse()

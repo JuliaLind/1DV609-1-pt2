@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { CardDeck } from '../../src/logic/CardDeck.js'
+import { CardDeck } from '../../src/js/logic/CardDeck.js'
 import seedrandom from 'seedrandom'
 
 describe('CardDeck', () => {

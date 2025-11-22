@@ -1,66 +1,66 @@
 import { describe, it, expect, vi, beforeEach, afterEach, afterAll, beforeAll } from 'vitest'
-import { RuleSet } from '../../src/rules/RuleSet.js'
+import { RuleSet } from '../../src/js/rules/RuleSet.js'
 
-import { RoyalFlush } from '../../src/rules/RoyalFlush.js'
-import { StraightFlush } from '../../src/rules/StraightFlush.js'
-import { FourOfAKind } from '../../src/rules/FourOfAKind.js'
-import { FullHouse } from '../../src/rules/FullHouse.js'
-import { Flush } from '../../src/rules/Flush.js'
-import { Straight } from '../../src/rules/Straight.js'
-import { ThreeOfAKind } from '../../src/rules/ThreeOfAKind.js'
-import { TwoPairs } from '../../src/rules/TwoPairs.js'
-import { OnePair } from '../../src/rules/OnePair.js'
+import { RoyalFlush } from '../../src/js/rules/RoyalFlush.js'
+import { StraightFlush } from '../../src/js/rules/StraightFlush.js'
+import { FourOfAKind } from '../../src/js/rules/FourOfAKind.js'
+import { FullHouse } from '../../src/js/rules/FullHouse.js'
+import { Flush } from '../../src/js/rules/Flush.js'
+import { Straight } from '../../src/js/rules/Straight.js'
+import { ThreeOfAKind } from '../../src/js/rules/ThreeOfAKind.js'
+import { TwoPairs } from '../../src/js/rules/TwoPairs.js'
+import { OnePair } from '../../src/js/rules/OnePair.js'
 
 
-vi.mock('../../src/rules/RoyalFlush.js', () => {
+vi.mock('../../src/js/rules/RoyalFlush.js', () => {
   return {
     RoyalFlush: vi.fn()
   }
 })
 
-vi.mock('../../src/rules/StraightFlush.js', () => {
+vi.mock('../../src/js/rules/StraightFlush.js', () => {
   return {
     StraightFlush: vi.fn(),
   }
 })
 
-vi.mock('../../src/rules/FourOfAKind.js', () => {
+vi.mock('../../src/js/rules/FourOfAKind.js', () => {
   return {
     FourOfAKind: vi.fn(),
   }
 })
 
-vi.mock('../../src/rules/FullHouse.js', () => {
+vi.mock('../../src/js/rules/FullHouse.js', () => {
   return {
     FullHouse: vi.fn(),
   }
 })
 
-vi.mock('../../src/rules/Flush.js', () => {
+vi.mock('../../src/js/rules/Flush.js', () => {
   return {
     Flush: vi.fn(),
   }
 })
 
-vi.mock('../../src/rules/Straight.js', () => {
+vi.mock('../../src/js/rules/Straight.js', () => {
   return {
     Straight: vi.fn(),
   }
 })
 
-vi.mock('../../src/rules/ThreeOfAKind.js', () => {
+vi.mock('../../src/js/rules/ThreeOfAKind.js', () => {
   return {
     ThreeOfAKind: vi.fn(),
   }
 })
 
-vi.mock('../../src/rules/TwoPairs.js', () => {
+vi.mock('../../src/js/rules/TwoPairs.js', () => {
   return {
     TwoPairs: vi.fn(),
   }
 })
 
-vi.mock('../../src/rules/OnePair.js', () => {
+vi.mock('../../src/js/rules/OnePair.js', () => {
   return {
     OnePair: vi.fn(),
   }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { FourOfAKind } from '../../src/rules/FourOfAKind.js'
+import { FourOfAKind } from '../../src/js/rules/FourOfAKind.js'
 
 describe('FourOfAKind', () => {
   const sut = new FourOfAKind()

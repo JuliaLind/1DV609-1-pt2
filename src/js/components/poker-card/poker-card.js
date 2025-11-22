@@ -7,6 +7,9 @@ template.innerHTML = `
 `
 
 customElements.define('poker-card', class extends HTMLElement {
+  #rank
+  #suite
+
   /**
    * Creates an instance of poker-card.
    */
@@ -18,7 +21,7 @@ customElements.define('poker-card', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['src', 'alt']
+    return ['rank', 'suite']
   }
 
   /**
@@ -31,12 +34,25 @@ customElements.define('poker-card', class extends HTMLElement {
    */
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
-      case 'src':
-        this.shadowRoot.querySelector('img').setAttribute('src', newValue)
+      case 'rank':
+        this.#rank = newValue
+        this.#updateImage()
         break
-      case 'alt':
-        this.shadowRoot.querySelector('img').setAttribute('alt', newValue)
+      case 'suite':
+        this.#suite = newValue
+        this.#updateImage()
         break
     }
+  }
+
+  #updateImage() {
+    if (!this.#rank || !this.#suite) {
+      return
+    }
+
+    const imgName = this.#rank + this.#suite.charAt(0).toUpperCase() + '.svg'
+    const img = this.shadowRoot.querySelector('img')
+    img.setAttribute('src', `./img/${imgName}`)
+    img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
   }
 })
