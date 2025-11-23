@@ -142,7 +142,7 @@ describe('Game', () => {
         .mockReturnValueOnce({ rule: 'Rule1', points: 10 })
         .mockReturnValueOnce({ rule: 'Rule2', points: 5 })
         .mockReturnValueOnce({ rule: 'Rule3', points: 15 })
-        .mockReturnValueOnce({ rule: 'Rule4', points: 0 })
+        .mockReturnValueOnce({ rule: '', points: 0 })
 
       const sut = new Game(gridMock, ruleSetMock, cardDeckMock)
 
