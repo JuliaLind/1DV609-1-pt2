@@ -288,4 +288,8 @@ describe('RuleSet', () => {
       expect(actual).toEqual(expected)
     })
   })
+
+  it('Should throw an error if no line is provided', () => {
+    expect(() => sut.evaluate()).toThrowError('No line provided')
+  })
 })
