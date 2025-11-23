@@ -198,11 +198,11 @@ describe('RuleSet', () => {
     vi.restoreAllMocks()
   })
 
-  describe('RuleSet.evaluateLine() should call rules in correct order', () => {
+  describe('RuleSet.evaluate() should call rules in correct order', () => {
     it('If RoyalFlush matches, straightFlush, Flush and Straight should not be called', () => {
       royalFlushMock.test.mockReturnValue(true)
 
-      sut.evaluateLine({})
+      sut.evaluate({})
 
       expect(royalFlushMock.test).toHaveBeenCalled()
       expect(straightFlushMock.test).not.toHaveBeenCalled()
@@ -213,7 +213,7 @@ describe('RuleSet', () => {
     it('If StraightFlush matches, Flush and Straight should not be called', () => {
       straightFlushMock.test.mockReturnValue(true)
 
-      sut.evaluateLine({})
+      sut.evaluate({})
 
       expect(straightFlushMock.test).toHaveBeenCalled()
       expect(flushMock.test).not.toHaveBeenCalled()
@@ -221,7 +221,7 @@ describe('RuleSet', () => {
     })
 
     it("If StraightFlush doesn't match, Flush and Straight should be called", () => {
-      sut.evaluateLine({})
+      sut.evaluate({})
 
       expect(straightFlushMock.test).toHaveBeenCalled()
       expect(flushMock.test).toHaveBeenCalled()
@@ -231,7 +231,7 @@ describe('RuleSet', () => {
     it('If FourOfAKind matches, FullHouse, ThreeOfAKind, TwoPairs and OnePair should not be called', () => {
       fourOfAKindMock.test.mockReturnValue(true)
 
-      sut.evaluateLine({})
+      sut.evaluate({})
 
       expect(fourOfAKindMock.test).toHaveBeenCalled()
       expect(fullHouseMock.test).not.toHaveBeenCalled()
@@ -243,7 +243,7 @@ describe('RuleSet', () => {
     it('If FullHouse matches, ThreeOfAKind, TwoPairs and OnePair should not be called', () => {
       fullHouseMock.test.mockReturnValue(true)
 
-      sut.evaluateLine({})
+      sut.evaluate({})
 
       expect(fullHouseMock.test).toHaveBeenCalled()
       expect(threeOfAKindMock.test).not.toHaveBeenCalled()
@@ -254,7 +254,7 @@ describe('RuleSet', () => {
     it('If ThreeOfAKind matches, TwoPairs and OnePair should not be called', () => {
       threeOfAKindMock.test.mockReturnValue(true)
 
-      sut.evaluateLine({})
+      sut.evaluate({})
 
       expect(threeOfAKindMock.test).toHaveBeenCalled()
       expect(twoPairsMock.test).not.toHaveBeenCalled()
@@ -264,16 +264,16 @@ describe('RuleSet', () => {
     it('If TwoPairs matches, OnePair should not be called', () => {
       twoPairsMock.test.mockReturnValue(true)
 
-      sut.evaluateLine({})
+      sut.evaluate({})
 
       expect(twoPairsMock.test).toHaveBeenCalled()
       expect(onePairMock.test).not.toHaveBeenCalled()
     })
   })
 
-  describe('RuleSet.evaluateLine() returnvalue', () => {
+  describe('RuleSet.evaluate() returnvalue', () => {
     it('Should return {name: "", points: 0 } if no rule matches', () => {
-      const result = sut.evaluateLine({})
+      const result = sut.evaluate({})
 
       expect(result).toEqual({ name: '', points: 0 })
     })
@@ -283,101 +283,7 @@ describe('RuleSet', () => {
 
       fullHouseMock.test.mockReturnValue(true)
 
-      const actual = sut.evaluateLine({})
-
-      expect(actual).toEqual(expected)
-    })
-  })
-
-  describe('RuleSet.evaluateGrid()', () => {
-    it('Should evaluate all rows and columns', () => {
-      const row1 = {}
-      const row2 = {}
-      const row3 = {}
-      const row4 = {}
-      const row5 = {}
-      const column1 = {}
-      const column2 = {}
-      const column3 = {}
-      const column4 = {}
-      const column5 = {}
-
-      const gridStub = {
-        getRow: vi.fn().mockImplementation((index) => {
-          switch (index) {
-            case 0: return row1
-            case 1: return row2
-            case 2: return row3
-            case 3: return row4
-            case 4: return row5
-          }
-        }),
-        getColumn: vi.fn().mockImplementation((index) => {
-          switch (index) {
-            case 0: return column1
-            case 1: return column2
-            case 2: return column3
-            case 3: return column4
-            case 4: return column5
-          }
-        })
-      }
-
-      sut.evaluateLine = vi.fn()
-
-      sut.evaluateGrid(gridStub)
-
-      for (const line of [row1, row2, row3, row4, row5,
-        column1, column2, column3, column4, column5
-      ]) {
-        expect(sut.evaluateLine).toHaveBeenCalledWith(line)
-      }
-    })
-
-    it('Should return the evaluated results', () => {
-      const row3 = {}
-      const column4 = {}
-
-      sut.evaluateLine = vi.fn().mockImplementation((line) => {
-        if (line === row3) {
-          return { name: 'Three of a Kind', points: 10 }
-        }
-        if (line === column4) {
-          return { name: 'Flush', points: 20 }
-        }
-        return { name: '', points: 0 }
-      })
-
-      const gridStub = {
-        getRow: vi.fn().mockImplementation((index) => {
-          switch (index) {
-            case 2: return row3
-          }
-        }),
-        getColumn: vi.fn().mockImplementation((index) => {
-          switch (index) {
-            case 3: return column4
-          }
-        })
-      }
-
-      const actual = sut.evaluateGrid(gridStub)
-      const expected = {
-        rows: [
-          { name: '', points: 0 },
-          { name: '', points: 0 },
-          { name: 'Three of a Kind', points: 10 },
-          { name: '', points: 0 },
-          { name: '', points: 0 },
-        ],
-        columns: [
-          { name: '', points: 0 },
-          { name: '', points: 0 },
-          { name: '', points: 0 },
-          { name: 'Flush', points: 20 },
-          { name: '', points: 0 },
-        ]
-      }
+      const actual = sut.evaluate({})
 
       expect(actual).toEqual(expected)
     })
