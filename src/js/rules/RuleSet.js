@@ -27,6 +27,10 @@ export class RuleSet {
   }
 
   evaluate(line) {
+    if (!line) {
+      throw new Error('No line provided')
+    }
+
     for (const rule of this.#rules) {
       if (rule.test(line)) {
         return { name: String(rule), points: Number(rule) }
