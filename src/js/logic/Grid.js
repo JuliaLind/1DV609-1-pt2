@@ -13,8 +13,8 @@ export class Grid {
     this.#rows = [...rows]
   }
 
-  addCard(card, row, column) {
-    this.#rows[row].addCard(card, column)
+  placeCard(card, row, column) {
+    this.#rows[row].placeCard(card, column)
   }
 
   getRow(row) {
@@ -27,7 +27,7 @@ export class Grid {
     for (let row = 0; row < this.#rows.length; row++) {
       const card = this.#rows[row].getCard(column)
 
-      gridLine.addCard(card, row)
+      gridLine.placeCard(card, row)
     }
     return gridLine
   }

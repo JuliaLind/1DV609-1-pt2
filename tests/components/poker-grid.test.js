@@ -18,22 +18,17 @@ describe('poker-grid', () => {
   describe('slot-click event', () => {
     let pokerGrid
     let cardSlot
-    const wrapper = document.createElement('div')
-    document.body.appendChild(wrapper)
+    
 
     beforeEach(() => {
       pokerGrid = document.createElement('poker-grid')
-      wrapper.appendChild(pokerGrid)
+      document.body.appendChild(pokerGrid)
       const shadowRoot = pokerGrid.shadowRoot
       cardSlot = shadowRoot.querySelector('.card-slot[data-row="2"][data-column="1"]')
     })
 
     afterEach(() => {
-      wrapper.innerHTML = ''
-    })
-
-    afterAll(() => {
-      wrapper.remove()
+      pokerGrid.remove()
     })
 
     it('slot-click event should be dispatched when clicking on a card slot', () => {

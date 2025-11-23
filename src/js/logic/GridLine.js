@@ -12,7 +12,7 @@ export class GridLine {
     }
   }
 
-  addCard(card, position) {
+  placeCard(card, position) {
     this.#validateSlotIndex(position)
 
     if (!this.#isSlotEmpty(position) && this.getCard(position) !== card) {

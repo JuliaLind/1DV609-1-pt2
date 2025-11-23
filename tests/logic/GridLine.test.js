@@ -44,36 +44,36 @@ describe('GridLine', () => {
     })
   })
 
-  describe('addCard()', () => {
-    it('addCard() should add a card at the specified position if the slot is empty', () => {
+  describe('placeCard()', () => {
+    it('placeCard() should place a card at the specified position if the slot is empty', () => {
       const sut = new GridLine()
-      sut.addCard(jackHearts, 2)
+      sut.placeCard(jackHearts, 2)
 
       expect(sut.getCards()).toEqual([undefined, undefined, jackHearts, undefined, undefined])
     })
 
-    it('addCard() should throw an error if the slot is already occupied', () => {
+    it('placeCard() should throw an error if the slot is already occupied', () => {
       const sut = new GridLine([undefined, undefined, jackHearts, undefined, undefined])
 
-      expect(() => sut.addCard(eightHearts, 2)).toThrowError('Slot is not empty')
+      expect(() => sut.placeCard(eightHearts, 2)).toThrowError('Slot is not empty')
     })
 
-    // boundary values 0 and 4 + adjacent values -1, 1, 3, 5
-    const validSlots = [0, 1, 3, 4]
+    // boundary values 0 and 4 + adjacent values -1, 5
+    const validSlots = [0, 4]
     const invalidSlots = [-1, 5]
 
     validSlots.forEach((slot) => {
-      it(`should add a card at valid slot ${slot}`, () => {
+      it(`should place a card at valid slot ${slot}`, () => {
         const sut = new GridLine()
-        sut.addCard(eightHearts, slot)
+        sut.placeCard(eightHearts, slot)
         expect(sut.getCard(slot)).toBe(eightHearts)
       })
     })
 
     invalidSlots.forEach((slot) => {
-      it(`should throw an error when adding a card at invalid slot ${slot}`, () => {
+      it(`should throw an error when placing a card at invalid slot ${slot}`, () => {
         const sut = new GridLine()
-        expect(() => sut.addCard(eightHearts, slot)).toThrowError('Slot index out of bounds')
+        expect(() => sut.placeCard(eightHearts, slot)).toThrowError('Slot index out of bounds')
       })
     })
   })

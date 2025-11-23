@@ -4,7 +4,6 @@ import { GridLine } from '../../src/js/logic/GridLine.js'
 
 describe('GridLine', () => {
   const eightHearts = Object.freeze({
-    
     getRank: () => '8',
     getSuite: () => 'hearts',
     valueOf: () => 8
@@ -41,20 +40,20 @@ describe('GridLine', () => {
     )
   })
 
-  it('addCard() should add a card to the correct row', () => {
-    row1.addCard = vi.fn()
-    row2.addCard = vi.fn()
-    row3.addCard = vi.fn()
-    row4.addCard = vi.fn()
-    row5.addCard = vi.fn()
+  it('placeCard() should place a card in the correct row/column', () => {
+    row1.placeCard = vi.fn()
+    row2.placeCard = vi.fn()
+    row3.placeCard = vi.fn()
+    row4.placeCard = vi.fn()
+    row5.placeCard = vi.fn()
 
-    sut.addCard(eightHearts, 2, 1)
+    sut.placeCard(eightHearts, 2, 1)
 
-    expect(row1.addCard).not.toHaveBeenCalled()
-    expect(row2.addCard).not.toHaveBeenCalled()
-    expect(row3.addCard).toHaveBeenCalledWith(eightHearts, 1)
-    expect(row4.addCard).not.toHaveBeenCalled()
-    expect(row5.addCard).not.toHaveBeenCalled()
+    expect(row1.placeCard).not.toHaveBeenCalled()
+    expect(row2.placeCard).not.toHaveBeenCalled()
+    expect(row3.placeCard).toHaveBeenCalledWith(eightHearts, 1)
+    expect(row4.placeCard).not.toHaveBeenCalled()
+    expect(row5.placeCard).not.toHaveBeenCalled()
   })
 
   it('getRow() should return a GridLine with cards from the correct row', () => {
