@@ -1,71 +1,78 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, vi, expect, beforeEach, afterEach } from 'vitest'
 import { RoyalFlush } from '../../src/js/rules/RoyalFlush.js'
 
 describe('Royal Flush', () => {
   const sut = new RoyalFlush()
 
   it('valueOf should return 100', () => {
-    expect(sut.valueOf()).toBe(100)
+    expect(Number(sut)).toBe(100)
   })
 
   it('toString should return "Royal Flush"', () => {
-    expect(sut.toString()).toBe('Royal Flush')
+    expect(String(sut)).toBe('Royal Flush')
   })
 
-  describe('test()', () => {
-    it ('should return true for cards [A♣, 10♣, K♣, J♣, Q♣]', () => {
-      const gridLineStub = {
-        isSameSuite: () => true,
-        getDistinctValues: () => [10, 11, 12, 13, 14],
-        hasEmptySlots: () => false,
-        hasRank: (rank) => ['10', 'J', 'Q', 'K', 'A'].includes(rank),
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(true)
+  describe('RoyalFlush.test()', () => {
+    let gridLineStub
+
+    beforeEach(() => {
+      gridLineStub = vi.fn({
+        hasEmptySlots: vi.fn(),
+        getDistinctValues: vi.fn(),
+        isSameSuite: vi.fn(),
+        hasRank: vi.fn(),
+      })
     })
 
-    it ('should return false for cards [A♣, 10♣, K♣, J♣, Q♥]', () => {
-      const gridLineStub = {
-        isSameSuite: () => false,
-        getDistinctValues: () => [10, 11, 12, 13, 14],
-        hasEmptySlots: () => false,
-        hasRank: (rank) => ['10', 'J', 'Q', 'K', 'A'].includes(rank),
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
+    afterEach(() => {
+      vi.clearAllMocks()
     })
 
-    it('should return false for cards [10♣, K♣, J♣, Q♣, 9♣]', () => {
-      const gridLineStub = {
-        isSameSuite: () => true,
-        getDistinctValues: () => [9, 10, 11, 12, 13],
-        hasEmptySlots: () => false,
-        hasRank: (rank) => ['9','10', 'J', 'Q', 'K'].includes(rank),
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
-    })
+    const parameters = [
+      {
+        cards: '[A♣, 10♣, K♣, J♣, Q♣]',
+        hasEmptySlots: false,
+        distinctValues: [10, 11, 12, 13, 14],
+        ranks: ['10', 'J', 'Q', 'K', 'A'],
+        isSameSuite: true,
+        expectedResult: true
+      },
+      {
+        cards: '[A♣, 10♣, K♣, J♣, Q♥]',
+        hasEmptySlots: false,
+        distinctValues: [10, 11, 12, 13, 14],
+        ranks: ['10', 'J', 'Q', 'K', 'A'],
+        isSameSuite: false,
+        expectedResult: false
+      },
+      {
+        cards: '[10♣, K♣, J♣, Q♣, 9♣]',
+        hasEmptySlots: false,
+        distinctValues: [9, 10, 11, 12, 13],
+        ranks: ['9', '10', 'J', 'Q', 'K'],
+        isSameSuite: true,
+        expectedResult: false
+      },
+      {
+        cards: '[A♣, 10♣]',
+        hasEmptySlots: false,
+        distinctValues: [10, 14],
+        ranks: ['10', 'A'],
+        isSameSuite: true,
+        expectedResult: false
+      },
+    ]
 
-    it ('should return false for cards [A♣, 10♣]', () => {
-      const gridLineStub = {
-        isSameSuite: () => true,
-        getDistinctValues: () => [10, 14],
-        hasEmptySlots: () => true,
-        hasRank: (rank) => ['10','A'].includes(rank)
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
-    })
+    parameters.forEach(({ cards, hasEmptySlots, distinctValues, ranks, isSameSuite, expectedResult }) => {
+      it(`Should return ${expectedResult} for line with cards: ${cards}`, () => {
+        gridLineStub.hasEmptySlots.mockReturnValue(hasEmptySlots)
+        gridLineStub.getDistinctValues.mockReturnValue(distinctValues)
+        gridLineStub.isSameSuite.mockReturnValue(isSameSuite)
+        gridLineStub.hasRank.mockImplementation((rank) => ranks.includes(rank))
 
-      it ('should return false for cards [A♣, K♣]', () => {
-      const gridLineStub = {
-        isSameSuite: () => true,
-        getDistinctValues: () => [13, 14],
-        hasEmptySlots: () => true,
-        hasRank: (rank) => ['K','A'].includes(rank)
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
+        const actual = sut.test(gridLineStub)
+        expect(actual).toBe(expectedResult)
+      })
     })
   })
 })

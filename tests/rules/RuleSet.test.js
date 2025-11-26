@@ -82,56 +82,56 @@ describe('RuleSet', () => {
   beforeAll(() => {
     royalFlushMock = {
       test: vi.fn().mockName('RoyalFlush.test'), // mockName is the name shown in test output if fails
-      toString: () => 'Royal Flush',
-      valueOf: () => 100,
+      toString: vi.fn().mockReturnValue('Royal Flush'),
+      valueOf: vi.fn().mockReturnValue(100),
     }
 
     straightFlushMock = {
       test: vi.fn().mockName('StraightFlush.test'),
-      toString: () => 'Straight Flush',
-      valueOf: () => 75,
+      toString: vi.fn().mockReturnValue('Straight Flush'),
+      valueOf: vi.fn().mockReturnValue(75),
     }
 
     fourOfAKindMock = {
       test: vi.fn().mockName('FourOfAKind.test'),
-      toString: () => 'Four of a Kind',
-      valueOf: () => 50,
+      toString: vi.fn().mockReturnValue('Four of a Kind'),
+      valueOf: vi.fn().mockReturnValue(50),
     }
 
     fullHouseMock = {
       test: vi.fn().mockName('FullHouse.test'),
-      toString: () => 'Full House',
-      valueOf: () => 25,
+      toString: vi.fn().mockReturnValue('Full House'),
+      valueOf: vi.fn().mockReturnValue(25),
     }
 
     flushMock = {
       test: vi.fn().mockName('Flush.test'),
-      toString: () => 'Flush',
-      valueOf: () => 20,
+      toString: vi.fn().mockReturnValue('Flush'),
+      valueOf: vi.fn().mockReturnValue(20),
     }
 
     straightMock = {
       test: vi.fn().mockName('Straight.test'),
-      toString: () => 'Straight',
-      valueOf: () => 15,
+      toString: vi.fn().mockReturnValue('Straight'),
+      valueOf: vi.fn().mockReturnValue(15),
     }
 
     threeOfAKindMock = {
       test: vi.fn().mockName('ThreeOfAKind.test'),
-      toString: () => 'Three of a Kind',
-      valueOf: () => 10,
+      toString: vi.fn().mockReturnValue('Three of a Kind'),
+      valueOf: vi.fn().mockReturnValue(10),
     }
 
     twoPairsMock = {
       test: vi.fn().mockName('TwoPairs.test'),
-      toString: () => 'Two Pairs',
-      valueOf: () => 5,
+      toString: vi.fn().mockReturnValue('Two Pairs'),
+      valueOf: vi.fn().mockReturnValue(5),
     }
 
     onePairMock = {
       test: vi.fn().mockName('OnePair.test'),
-      toString: () => 'One Pair',
-      valueOf: () => 2,
+      toString: vi.fn().mockReturnValue('One Pair'),
+      valueOf: vi.fn().mockReturnValue(2),
     }
 
     RoyalFlush.mockImplementation(function () {
