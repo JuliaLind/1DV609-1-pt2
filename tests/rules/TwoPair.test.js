@@ -3,31 +3,29 @@ import { TwoPairs } from '../../src/js/rules/TwoPairs.js'
 
 describe('TwoPairs', () => {
   const sut = new TwoPairs()
+  
   it('valueOf should return 5', () => {
-    expect(sut.valueOf()).toBe(5)
+    expect(Number(sut)).toBe(5)
   })
 
   it('toString should return "Two Pair"', () => {
-    expect(sut.toString()).toBe('Two Pair')
+    expect(String(sut)).toBe('Two Pair')
   })
 
-  describe('test()', () => {
-    it('should return true for ranks [2, 3, 2, 3]', () => {
-      const gridLineStub = {
-        getRanks: () => ({ '2': 2, '3': 2 })
-      }
-      const actual = sut.test(gridLineStub)
+  describe('TwoPairs.test()', () => {
+    const parameters = [
+      { ranksObservations: { '2': 2, '3': 2 }, expectedResult: true },
+      { ranksObservations: { '2': 1, '3': 3 }, expectedResult: false }
+    ]
 
-      expect(actual).toBe(true)
-    })
-
-    it('should return false for ranks [2, 3, 3, 3]', () => {
-      const gridLineStub = {
-        getRanks: () => ({ '2': 1, '3': 3 })
-      }
-      const actual = sut.test(gridLineStub)
-
-      expect(actual).toBe(false)
+    parameters.forEach(({ ranksObservations, expectedResult }) => {
+      it(`should return ${expectedResult} for ranks ${JSON.stringify(ranksObservations)}`, () => {
+        const gridLineStub = {
+          getRanks: () => ranksObservations
+        }
+        const actual = sut.test(gridLineStub)
+        expect(actual).toBe(expectedResult)
+      })
     })
   })
 })

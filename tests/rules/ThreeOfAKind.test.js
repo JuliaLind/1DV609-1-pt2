@@ -6,30 +6,28 @@ describe('ThreeOfAKind', () => {
   const sut = new ThreeOfAKind()
 
   it('valueOf() should return 10', () => {
-    expect(sut.valueOf()).toBe(10)
+    expect(Number(sut)).toBe(10)
   })
 
   it('toString() should return "Three of a Kind"', () => {
-    expect(sut.toString()).toBe('Three of a Kind')
+    expect(String(sut)).toBe('Three of a Kind')
   })
 
-  describe('test()', () => {
-    it('should return false for ranks [2, 3, 2, 3]', () => {
-      const gridLineStub = {
-        getRanks: () => ({ '2': 2, '3': 2 })
-      }
-      const actual = sut.test(gridLineStub)
+  describe('ThreeOfAKind.test()', () => {
+    const parameters = [
+      { ranksObservations: { '2': 2, '3': 2 }, expectedResult: false },
+      { ranksObservations: { '2': 1, '3': 3 }, expectedResult: true }
+    ]
 
-      expect(actual).toBe(false)
-    })
+    parameters.forEach(({ ranksObservations, expectedResult }) => {
+      it(`should return ${expectedResult} for ranks ${JSON.stringify(ranksObservations)}`, () => {
+        const gridLineStub = {
+          getRanks: () => ranksObservations
+        }
+        const actual = sut.test(gridLineStub)
 
-    it('should return true for ranks [2, 3, 3, 3]', () => {
-      const gridLineStub = {
-        getRanks: () => ({ '2': 1, '3': 3 })
-      }
-      const actual = sut.test(gridLineStub)
-
-      expect(actual).toBe(true)
+        expect(actual).toBe(expectedResult)
+      })
     })
   })
 })

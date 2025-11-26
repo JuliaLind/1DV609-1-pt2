@@ -1,55 +1,66 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { Straight } from '../../src/js/rules/Straight.js'
 
 describe('Straight', () => {
   const sut = new Straight()
 
   it('valueOf should return 15', () => {
-    expect(sut.valueOf()).toBe(15)
+    expect(Number(sut)).toBe(15)
   })
 
   it('toString should return "Straight"', () => {
-    expect(sut.toString()).toBe('Straight')
+    expect(String(sut)).toBe('Straight')
   })
 
-  describe('test()', () => {
-    it('should return true for ranks [Q, 10, J, 8, 9]', () => {
-      const gridLineStub = {
-        hasEmptySlots: () => false,
-        getDistinctValues: () => [8, 9, 10, 11, 12],
-      }
+  describe('Straight.test()', () => {
+    let gridLineStub
 
-      const actual = sut.test(gridLineStub)
-
-      expect(actual).toBe(true)
+    beforeEach(() => {
+      gridLineStub = vi.fn({
+        hasEmptySlots: vi.fn(),
+        getDistinctValues: vi.fn(),
+      })
     })
 
-    it('should return false for ranks [3, 10, J, 8, 9]', () => {
-      const gridLineStub = {
-        hasEmptySlots: () => false,
-        getDistinctValues: () => [3, 8, 9, 10, 11],
-      }
-
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
+    afterEach(() => {
+      vi.clearAllMocks()
     })
 
-    it('should return false for ranks [Q, 10, J, 9]', () => {
-      const gridLineStub = {
-        hasEmptySlots: () => true,
-        getDistinctValues: () => [9, 10, 11, 12],
+    const parameters = [
+      {
+        ranks: '[Q, 10, J, 8, 9]',
+        emptySlots: false,
+        distinctValues: [8, 9, 10, 11, 12],
+        expectedResult: true
+      },
+      {
+        ranks: '[3, 10, J, 8, 9]',
+        emptySlots: false,
+        distinctValues: [3, 8, 9, 10, 11],
+        expectedResult: false
+      },
+      {
+        ranks: '[Q, 10, J, 9]',
+        emptySlots: true,
+        distinctValues: [9, 10, 11, 12],
+        expectedResult: false
+      },
+      {
+        ranks: '[Q, 10, 8, J, 8]',
+        emptySlots: false,
+        distinctValues: [8, 10, 11, 12],
+        expectedResult: false
       }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
-    })
+    ]
 
-    it('should return false for ranks [Q, 10, 8, J, 8]', () => {
-      const gridLineStub = {
-        hasEmptySlots: () => false,
-        getDistinctValues: () => [8, 10, 11, 12],
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
+    parameters.forEach(({ ranks, emptySlots, distinctValues, expectedResult }) => {
+      it(`Should return ${expectedResult} for line with ranks: ${ranks}`, () => {
+        gridLineStub.hasEmptySlots.mockReturnValue(emptySlots)
+        gridLineStub.getDistinctValues.mockReturnValue(distinctValues)
+
+        const actual = sut.test(gridLineStub)
+        expect(actual).toBe(expectedResult)
+      })
     })
   })
 })
