@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, vi, expect } from 'vitest'
 import { TwoPairs } from '../../src/js/rules/TwoPairs.js'
 
 describe('TwoPairs', () => {
@@ -14,16 +14,23 @@ describe('TwoPairs', () => {
 
   describe('TwoPairs.test()', () => {
     const parameters = [
-      { ranksObservations: { '2': 2, '3': 2 }, expectedResult: true },
-      { ranksObservations: { '2': 1, '3': 3 }, expectedResult: false }
+      { 
+        ranks: ['2', '2', '3', '3'],
+        ranksObservations: { '2': 2, '3': 2 }, expectedResult: true
+      },
+      { ranks: ['2', '3', '3', '3'], 
+        ranksObservations: { '2': 1, '3': 3 },
+        expectedResult: false 
+      }
     ]
 
-    parameters.forEach(({ ranksObservations, expectedResult }) => {
-      it(`should return ${expectedResult} for ranks ${JSON.stringify(ranksObservations)}`, () => {
-        const gridLineStub = {
-          getRanks: () => ranksObservations
-        }
+    parameters.forEach(({ ranks, ranksObservations, expectedResult }) => {
+      it(`should return ${expectedResult} for ranks ${ranks}`, () => {
+        const gridLineStub = vi.fn({
+          getRanks: vi.fn().mockReturnValue(ranksObservations),
+        })
         const actual = sut.test(gridLineStub)
+
         expect(actual).toBe(expectedResult)
       })
     })

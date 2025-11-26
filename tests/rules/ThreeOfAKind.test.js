@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, vi, expect } from 'vitest'
 import { ThreeOfAKind } from '../../src/js/rules/ThreeOfAKind.js'
 
 
@@ -15,15 +15,22 @@ describe('ThreeOfAKind', () => {
 
   describe('ThreeOfAKind.test()', () => {
     const parameters = [
-      { ranksObservations: { '2': 2, '3': 2 }, expectedResult: false },
-      { ranksObservations: { '2': 1, '3': 3 }, expectedResult: true }
+      {
+        ranks: ['2', '3', '2', '3'],
+        ranksObservations: { '2': 2, '3': 2 },
+        expectedResult: false },
+      { 
+        ranks: ['2', '3', '3', '3'],
+        ranksObservations: { '2': 1, '3': 3 },
+        expectedResult: true
+      }
     ]
 
-    parameters.forEach(({ ranksObservations, expectedResult }) => {
-      it(`should return ${expectedResult} for ranks ${JSON.stringify(ranksObservations)}`, () => {
-        const gridLineStub = {
-          getRanks: () => ranksObservations
-        }
+    parameters.forEach(({ ranks, ranksObservations, expectedResult }) => {
+      it(`should return ${expectedResult} for ranks ${ranks}`, () => {
+        const gridLineStub = vi.fn({
+          getRanks: vi.fn().mockReturnValue(ranksObservations),
+        })
         const actual = sut.test(gridLineStub)
 
         expect(actual).toBe(expectedResult)

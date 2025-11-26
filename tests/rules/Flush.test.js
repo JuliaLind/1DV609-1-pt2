@@ -4,39 +4,43 @@ import { Flush } from '../../src/js/rules/Flush.js'
 describe('Flush', () => {
   const sut = new Flush()
   it('valueOf should return 20', () => {
-    expect(sut.valueOf()).toBe(20)
+    expect(Number(sut)).toBe(20)
   })
 
   it('toString should return "Flush"', () => {
-    expect(sut.toString()).toBe('Flush')
+    expect(String(sut)).toBe('Flush')
   })
 
   describe('test()', () => {
-    it('should return true for same suite cards', () => {
-      const gridLineStub = {
-        hasEmptySlots: () => false,
-        isSameSuite: () => true,
+    const parameters = [
+      {
+        description: 'same suite cards',
+        hasEmptySlots: false,
+        isSameSuite: true,
+        expectedResult: true
+      },
+      {
+        description: 'different suite cards',
+        hasEmptySlots: false,
+        isSameSuite: false,
+        expectedResult: false
+      },
+      {
+        description: 'line with empty slots',
+        hasEmptySlots: true,
+        isSameSuite: true,
+        expectedResult: false
       }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(true)
-    })
-
-    it('should return false for different suite cards', () => {
-      const gridLineStub = {
-        hasEmptySlots: () => false,
-        isSameSuite: () => false,
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
-    })
-
-    it('should return false for cards with empty slots', () => {
-      const gridLineStub = {
-        hasEmptySlots: () => true,
-        isSameSuite: () => true,
-      }
-      const actual = sut.test(gridLineStub)
-      expect(actual).toBe(false)
+    ]
+    parameters.forEach(({ description, hasEmptySlots, isSameSuite, expectedResult }) => {
+      it(`should return ${expectedResult} for ${description}`, () => {
+        const gridLineStub = {
+          hasEmptySlots: () => hasEmptySlots,
+          isSameSuite: () => isSameSuite,
+        }
+        const actual = sut.test(gridLineStub)
+        expect(actual).toBe(expectedResult)
+      })
     })
   })
 })

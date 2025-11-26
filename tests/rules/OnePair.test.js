@@ -1,34 +1,42 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, vi, expect } from 'vitest'
 import { OnePair } from '../../src/js/rules/OnePair.js'
 
 describe('OnePair', () => {
   const sut = new OnePair()
 
   it('valueOf should return 2', () => {
-    expect(sut.valueOf()).toBe(2)
+    expect(Number(sut)).toBe(2)
   })
 
   it('toString should return "One Pair"', () => {
-    expect(sut.toString()).toBe('One Pair')
+    expect(String(sut)).toBe('One Pair')
   })
 
-  describe('test()', () => {
-    it('should return true for ranks [2, 3, 2]', () => {
-      const gridLineStub = {
-        getRanks: () => ({ '2': 2, '3': 1 })
+  describe('OnePair.test()', () => {
+    const parameters = [
+      { 
+        ranks: ['2', '3', '2'],
+        ranksObservations: { '2': 2, '3': 1 },
+        expectedResult: true
+      },
+      { 
+        ranks: ['2', '3', 'A'],
+        ranksObservations: { '2': 1, '3': 1, 'A': 1 },
+        expectedResult: false
       }
-      const actual = sut.test(gridLineStub)
+    ]
 
-      expect(actual).toBe(true)
-    })
+    parameters.forEach(({ ranks, ranksObservations, expectedResult }) => {
+      it(`should return ${expectedResult} for ranks ${ranks}`, () => {
+        const gridLineStub = vi.fn(
+          {
+            getRanks: vi.fn().mockReturnValue(ranksObservations),
+          }
+        )
+        const actual = sut.test(gridLineStub)
 
-    it('should return false for ranks [2, 3, A]', () => {
-      const gridLineStub = {
-        getRanks: () => ({ '2': 1, '3': 1, 'A': 1 })
-      }
-      const actual = sut.test(gridLineStub)
-
-      expect(actual).toBe(false)
+        expect(actual).toBe(expectedResult)
+      })
     })
   })
 })
