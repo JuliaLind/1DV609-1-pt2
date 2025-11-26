@@ -37,7 +37,15 @@ export class GridLine {
   }
 
   getCard(position) {
-    return this.#cards[position]
+    this.#validateSlotIndex(position)
+
+    const card = this.#cards[position]
+
+    if (!card) {
+      throw new Error('Slot is empty')
+    }
+
+    return card
   }
 
   hasEmptySlots() {

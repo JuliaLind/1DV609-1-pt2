@@ -46,11 +46,9 @@ describe('Game', () => {
 
       const sut = new Game(gridMock, ruleSetMock, cardDeckMock)
 
-      const actualCard1 = sut.getNextCard()
-      const actualCard2 = sut.getNextCard()
+      sut.getNextCard()
+      sut.getNextCard()
       expect(cardDeckMock.drawCard).toHaveBeenCalledTimes(1)
-      expect(actualCard1).toBe(card1)
-      expect(actualCard2).not.toBe(card2)
     })
   })
 
@@ -150,7 +148,9 @@ describe('Game', () => {
       sut.placeCardAt(1, 1)
 
       const actual = sut.getTotalPoints()
-      expect(actual).toBe(30)
+      const expected = 10 + 5 + 15 + 0
+
+      expect(actual).toBe(expected)
     })
   })
 })

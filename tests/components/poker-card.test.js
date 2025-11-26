@@ -7,21 +7,27 @@ describe('poker-card', () => {
     expect(customElements.get('poker-card')).toBeDefined()
   })
 
-  it('poker-card image source should be correct', () => {
-    const sut = document.createElement('poker-card')
-    sut.setAttribute('rank', 'A')
-    sut.setAttribute('suite', 'hearts')
-    const expected = './img/AH.svg'
-    expect(sut.shadowRoot.querySelector('img').getAttribute('src')).toBe(expected)
-  })
+  const parameters = [
+    {
+      testedAttribute: 'src',
+      expected: './img/AH.svg',
+    },
+    {
+      testedAttribute: 'alt',
+      expected: 'A of hearts',
+    }
+  ]
 
-  it('poker-card image alt text should be correct', () => {
-    const sut = document.createElement('poker-card')
+  parameters.forEach(({ testedAttribute, expected }) => {
+    it(`poker-card with suite hearts and rank A should have attribute ${testedAttribute} = ${expected}`, () => {
+      const sut = document.createElement('poker-card')
 
-    const expected = 'A of hearts'
+      sut.setAttribute('rank', 'A')
+      sut.setAttribute('suite', 'hearts')
 
-    sut.setAttribute('rank', 'A')
-    sut.setAttribute('suite', 'hearts')
-    expect(sut.shadowRoot.querySelector('img').getAttribute('alt')).toBe(expected)
+      const actual = sut.shadowRoot.querySelector('img').getAttribute(testedAttribute)
+
+      expect(actual).toBe(expected)
+    })
   })
 })

@@ -53,10 +53,13 @@ describe('poker-grid', () => {
 
     it('clicking outside a card slot should not dispatch slot-click event', () => {
       let eventDispatched = false
+
       pokerGrid.addEventListener('slot-click', () => {
         eventDispatched = true
       })
+
       pokerGrid.shadowRoot.querySelector('.result-slot').click()
+
       expect(eventDispatched).toBe(false)
     })
   })

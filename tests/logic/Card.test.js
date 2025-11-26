@@ -8,18 +8,20 @@ describe('Card', () => {
   })
 
   it('Cannot set invalid rank', async () => {
-    expect(() => new Card('hearts', '23')).toThrow()
+    expect(() => new Card('hearts', '1')).toThrow()
   })
 
-  it('Value of card with rank \'10\' should be 10', async () => {
-    const sut = new Card('hearts', '10')
+  describe('valueOf() boundary values', () => {
+    const parameters = [
+      { rank: '2', expectedValue: 2 },
+      { rank: 'J', expectedValue: 11 },
+    ]
 
-    expect(Number(sut)).toBe(10)
-  })
-
-  it('Value of card with rank \'A\' should be 14', async () => {
-    const sut = new Card('spades', 'A')
-
-    expect(Number(sut)).toBe(14)
+    parameters.forEach(({ rank, expectedValue }) => {
+      it(`Value of card with rank '${rank}' should be ${expectedValue}`, async () => {
+        const sut = new Card('hearts', rank)
+        expect(Number(sut)).toBe(expectedValue)
+      })
+    })
   })
 })
