@@ -75,15 +75,17 @@ export class GridLine {
 
   isSameSuite() {
     let suite = undefined
-
+    
     for (const card of this.#cards) {
       if (!card) {
         continue
       }
 
+      const cardSuite = card.getSuite()
+
       if (!suite) {
-        suite = card.getSuite()
-      } else if (suite !== card.getSuite()) {
+        suite = cardSuite
+      } else if (suite !== cardSuite) {
         return false
       }
     }
