@@ -12,24 +12,15 @@ export class Straight extends Rule {
    * @returns { boolean } true if the cards form a straight
    */
   test(line) {
-    if (line.hasEmptySlots()) {
-      return false
-    }
-
-    return this.#formsStraight(line)
+    return !line.hasEmptySlots() && this.#formsStraight(line)
   }
 
   #formsStraight(line) {
-    const values = line.getDistinctValues()
-    if (this.#hasDuplicateRanks(values)) {
-      return false
-    }
-
-    return this.#areSequential(values)
+    return !this.#hasDuplicateRanks(line) && this.#isSequential(line)
   }
 
-  #hasDuplicateRanks(values) {
-    return values.length < 5
+  #hasDuplicateRanks(line) {
+    return Object.values(line.getRankFrequencies()).some(count => count > 1)
   }
 
   /**
@@ -38,7 +29,9 @@ export class Straight extends Rule {
    * @param {number[]} values 
    * @returns {boolean} true if the values form a straight
    */
-  #areSequential(values) {
+  #isSequential(line) {
+    const values = line.getDistinctValues()
+
     return values[values.length - 1] - values[0] === values.length - 1
   }
 }

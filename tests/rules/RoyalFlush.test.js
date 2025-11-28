@@ -15,15 +15,6 @@ describe('Royal Flush', () => {
   describe('RoyalFlush.test()', () => {
     let gridLineStub
 
-    beforeEach(() => {
-      gridLineStub = vi.fn({
-        hasEmptySlots: vi.fn(),
-        getDistinctValues: vi.fn(),
-        isSameSuite: vi.fn(),
-        hasRank: vi.fn(),
-      })
-    })
-
     afterEach(() => {
       vi.clearAllMocks()
     })
@@ -34,6 +25,7 @@ describe('Royal Flush', () => {
         hasEmptySlots: false,
         distinctValues: [10, 11, 12, 13, 14],
         ranks: ['10', 'J', 'Q', 'K', 'A'],
+        rankFrequencies: { '10': 1, 'J': 1, 'Q': 1, 'K': 1, 'A': 1 },
         isSameSuite: true,
         expectedResult: true
       },
@@ -42,6 +34,7 @@ describe('Royal Flush', () => {
         hasEmptySlots: false,
         distinctValues: [10, 11, 12, 13, 14],
         ranks: ['10', 'J', 'Q', 'K', 'A'],
+        rankFrequencies: { '10': 1, 'J': 1, 'Q': 1, 'K': 1, 'A': 1 },
         isSameSuite: false,
         expectedResult: false
       },
@@ -50,6 +43,7 @@ describe('Royal Flush', () => {
         hasEmptySlots: false,
         distinctValues: [9, 10, 11, 12, 13],
         ranks: ['9', '10', 'J', 'Q', 'K'],
+        rankFrequencies: { '9': 1, '10': 1, 'J': 1, 'Q': 1, 'K': 1 },
         isSameSuite: true,
         expectedResult: false
       },
@@ -58,17 +52,21 @@ describe('Royal Flush', () => {
         hasEmptySlots: false,
         distinctValues: [10, 14],
         ranks: ['10', 'A'],
+        rankFrequencies: { '10': 1, 'A': 1 },
         isSameSuite: true,
         expectedResult: false
       },
     ]
 
-    parameters.forEach(({ cards, hasEmptySlots, distinctValues, ranks, isSameSuite, expectedResult }) => {
+    parameters.forEach(({ cards, hasEmptySlots, distinctValues, ranks, rankFrequencies, isSameSuite, expectedResult }) => {
       it(`Should return ${expectedResult} for line with cards: ${cards}`, () => {
-        gridLineStub.hasEmptySlots.mockReturnValue(hasEmptySlots)
-        gridLineStub.getDistinctValues.mockReturnValue(distinctValues)
-        gridLineStub.isSameSuite.mockReturnValue(isSameSuite)
-        gridLineStub.hasRank.mockImplementation((rank) => ranks.includes(rank))
+        gridLineStub = vi.fn({
+          hasEmptySlots: vi.fn().mockReturnValue(hasEmptySlots),
+          getDistinctValues: vi.fn().mockReturnValue(distinctValues),
+          isSameSuite: vi.fn().mockReturnValue(isSameSuite),
+          hasRank: vi.fn().mockImplementation((rank) => ranks.includes(rank)),
+          getRankFrequencies: vi.fn().mockReturnValue(rankFrequencies),
+        })
 
         const actual = sut.test(gridLineStub)
         expect(actual).toBe(expectedResult)

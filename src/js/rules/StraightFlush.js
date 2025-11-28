@@ -13,10 +13,10 @@ export class StraightFlush extends Straight {
    * @returns { boolean } true if the cards form a straight flush
    */
   test (line) {
-    if(!super.test(line)) {
-      return false
-    }
+    return this.#hasStraight(line) && line.isSameSuite()
+  }
 
-    return line.isSameSuite()
+  #hasStraight(line) {
+    return super.test(line)
   }
 }
