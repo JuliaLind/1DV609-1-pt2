@@ -9,7 +9,7 @@ export class FullHouse extends Rule {
   }
 
   test(line) {
-    const ranks = line.getRanks()
+    const ranks = line.getRankFrequencies()
     const rankCounts = Object.values(ranks)
 
     return this.#hasThreeOfAKind(rankCounts) && this.#hasPair(rankCounts)

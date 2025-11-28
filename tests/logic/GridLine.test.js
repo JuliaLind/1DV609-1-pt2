@@ -146,8 +146,8 @@ describe('GridLine', () => {
       expect(sut.getDistinctValues()).toEqual([8, 11])
     })
 
-    it('getRanks() should return {"J": 1, "8": 2}', () => {
-      expect(sut.getRanks()).toEqual({ 'J': 1, '8': 2 })
+    it('getRankFrequencies() should return {"J": 1, "8": 2}', () => {
+      expect(sut.getRankFrequencies()).toEqual({ 'J': 1, '8': 2 })
     })
   })
 

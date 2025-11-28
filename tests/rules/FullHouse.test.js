@@ -34,7 +34,7 @@ describe('FullHouse', () => {
     parameters.forEach(({ ranks, ranksObservations, expectedResult }) => {
       it(`should return ${expectedResult} for ranks ${ranks}`, () => {
         const gridLineStub = vi.fn({
-          getRanks: vi.fn().mockReturnValue(ranksObservations),
+          getRankFrequencies: vi.fn().mockReturnValue(ranksObservations),
         })
         const actual = sut.test(gridLineStub)
 

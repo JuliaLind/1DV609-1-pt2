@@ -12,7 +12,7 @@ export class TwoPairs extends Rule {
   }
 
   test(line) {
-    return this.#hasTwoPairs(line.getRanks())
+    return this.#hasTwoPairs(line.getRankFrequencies())
   }
 
   #hasTwoPairs(rankFrequencies) {

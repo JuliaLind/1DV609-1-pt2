@@ -91,7 +91,7 @@ export class GridLine {
     return true
   }
 
-  getRanks() {
+  getRankFrequencies() {
     const ranks = {}
 
     for (const card of this.#cards) {
