@@ -16,10 +16,14 @@ export class RoyalFlush extends StraightFlush {
    * @returns {boolean} true if the cards form a royal flush
    */
   test(line) {
-    if (!super.test(line)) {
-      return false
-    }
+    return this.#hasStraightFlush(line) && this.#hasAceAndTen(line)
+  }
 
+  #hasStraightFlush(line) {
+    return super.test(line)
+  }
+
+  #hasAceAndTen(line) {
     return line.hasRank('A') && line.hasRank('10')
   }
 }

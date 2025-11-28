@@ -27,15 +27,27 @@ export class RuleSet {
   }
 
   evaluate(line) {
+    this.#validateLine(line)
+
+    const matchingRule = this.#findMatchingRule(line)
+
+    return matchingRule ? matchingRule.toObject() : this.#getDummyRule()
+  }
+
+  #findMatchingRule(line) {
+    return this.#rules.find(rule => rule.test(line))
+  }
+
+  #validateLine(line) {
     if (!line) {
       throw new Error('No line provided')
     }
+  }
 
-    for (const rule of this.#rules) {
-      if (rule.test(line)) {
-        return { name: String(rule), points: Number(rule) }
-      }
+  #getDummyRule() {
+    return {
+      name: '',
+      points: 0
     }
-    return { name: '', points: 0 }
   }
 }

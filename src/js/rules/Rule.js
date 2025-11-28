@@ -18,4 +18,11 @@ export class Rule {
   toString() {
     return this.#name
   }
+
+  toObject() {
+    return {
+      rule: this.#name,
+      points: this.#value
+    }
+  }
 }
