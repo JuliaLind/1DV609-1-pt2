@@ -31,7 +31,7 @@ describe('Game', () => {
     vi.clearAllMocks()
   })
 
-  describe('getNextCard()', () => {
+  describe('Game.getNextCard()', () => {
     it('Should retrieve the next card from the deck', () => {
       const expectedCard = {}
       cardDeckMock.drawCard.mockReturnValue(expectedCard)
@@ -52,7 +52,7 @@ describe('Game', () => {
     })
   })
 
-  describe('placeCardAt()', () => {
+  describe('Game.placeCardAt()', () => {
     it('Should draw a new card after placing the current card', () => {
       const sut = new Game(gridMock, ruleSetMock, cardDeckMock)
 
@@ -82,25 +82,58 @@ describe('Game', () => {
       expect(sut.getLineResult('column', 3)).toEqual(expectedColumnResult)
     })
 
-    it('Should overwrite previous results for the same row and column', () => {
+    describe('Should overwrite previous results', () => {
       const firstRowResult = { rule: 'First row rule', points: 10 }
       const secondRowResult = { rule: 'Second row rule', points: 20 }
       const firstColumnResult = { rule: 'First column rule', points: 5 }
       const secondColumnResult = { rule: 'Second column rule', points: 15 }
-      ruleSetMock.evaluate
-        .mockReturnValueOnce(firstRowResult)
-        .mockReturnValueOnce(firstColumnResult)
-        .mockReturnValueOnce(secondRowResult)
-        .mockReturnValueOnce(secondColumnResult)
-      const sut = new Game(gridMock, ruleSetMock, cardDeckMock)
-      sut.placeCardAt(2, 2)
-      sut.placeCardAt(2, 3)
-      expect(sut.getLineResult('row', 2)).toEqual(secondRowResult)
-      expect(sut.getLineResult('column', 2)).toEqual(firstColumnResult)
+      let sut
+
+      beforeEach(() => {
+        ruleSetMock.evaluate
+          .mockReturnValueOnce(firstRowResult)
+          .mockReturnValueOnce(firstColumnResult)
+          .mockReturnValueOnce(secondRowResult)
+          .mockReturnValueOnce(secondColumnResult)
+
+        sut = new Game(gridMock, ruleSetMock, cardDeckMock)
+      })
+
+      afterEach(() => {
+        vi.clearAllMocks()
+      })
+
+      it('Should overwrite previous results for the same row', () => {
+        sut.placeCardAt(2, 2)
+        sut.placeCardAt(2, 3)
+        expect(sut.getLineResult('row', 2)).toEqual(secondRowResult)
+      })
+
+
+      it('Should not overwrite previous results for different row', () => {
+        sut.placeCardAt(2, 2)
+        sut.placeCardAt(3, 2)
+        expect(sut.getLineResult('row', 2)).toEqual(firstRowResult)
+
+      })
+
+      it('Should overwrite previous results for the same column', () => {
+        sut.placeCardAt(2, 2)
+        sut.placeCardAt(3, 2)
+
+        expect(sut.getLineResult('column', 2)).toEqual(secondColumnResult)
+      })
+
+      it('Should overwrite previous results for the different column', () => {
+        sut.placeCardAt(2, 2)
+        sut.placeCardAt(2, 3)
+
+        expect(sut.getLineResult('column', 2)).toEqual(firstColumnResult)
+      })
     })
   })
 
-  describe('getLineResult()', () => {
+  describe('Game.getLineResult()', () => {
     const resultSlots = [
       { direction: 'row', index: 0 },
       { direction: 'row', index: 4 },
@@ -118,7 +151,7 @@ describe('Game', () => {
     })
   })
 
-  describe('isGameOver()', () => {
+  describe('Game.isGameOver()', () => {
     it('Should return true if the grid is full', () => {
       gridMock.isFull.mockReturnValue(true)
       const sut = new Game(gridMock, ruleSetMock, cardDeckMock)
@@ -134,7 +167,7 @@ describe('Game', () => {
     })
   })
 
-  describe('getTotalPoints()', () => {
+  describe('Game.getTotalPoints()', () => {
     it('Should return the sum of all row and column points', () => {
       ruleSetMock.evaluate
         .mockReturnValueOnce({ rule: 'Rule1', points: 10 })

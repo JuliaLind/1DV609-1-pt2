@@ -45,13 +45,9 @@ describe('CardDeck', () => {
       vi.spyOn(Math, 'random').mockImplementation(() => rng())
 
       const sut = new CardDeck(cardFactoryMock)
-      const firstExpectedCard = fullCardSet[44]
-      const secondExpectedCard = fullCardSet[13]
-      const firstActualCard = sut.drawCard()
-      const secondActualCard = sut.drawCard()
 
-      expect(firstActualCard).toBe(firstExpectedCard)
-      expect(secondActualCard).toBe(secondExpectedCard)
+      expect(sut.drawCard()).toBe(fullCardSet[44])
+      expect(sut.drawCard()).toBe(fullCardSet[13])
     })
 
     it('Should throw error when drawing from empty deck', () => {
@@ -61,6 +57,7 @@ describe('CardDeck', () => {
       for (let i = 0; i < 52; i++) {
         sut.drawCard()
       }
+
       expect(() => sut.drawCard()).toThrow()
     })
   })

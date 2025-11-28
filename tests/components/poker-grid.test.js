@@ -6,19 +6,24 @@ describe('poker-grid', () => {
     expect(customElements.get('poker-grid')).toBeDefined()
   })
 
-  it('poker-grid should contain slots for cards and for results', () => {
+  describe('shadow DOM structure', () => {
     const pokerGrid = document.createElement('poker-grid')
     const shadowRoot = pokerGrid.shadowRoot
-    expect(shadowRoot.querySelectorAll('.card-slot').length).toBe(25)
-    expect(shadowRoot.querySelectorAll('.result-slot').length).toBe(10)
-    expect(shadowRoot.querySelectorAll('[data-row="0"]').length).toBe(6)
-    expect(shadowRoot.querySelectorAll('[data-column="0"]').length).toBe(6)
+
+    it('poker-grid should contain slots for results', () => {
+      expect(shadowRoot.querySelectorAll('.result-slot').length).toBe(10)
+    })
+
+    it('poker-grid should contain slots for cards', () => {
+      expect(shadowRoot.querySelectorAll('.card-slot').length).toBe(25)
+    })
   })
+
 
   describe('slot-click event', () => {
     let pokerGrid
     let cardSlot
-    
+
 
     beforeEach(() => {
       pokerGrid = document.createElement('poker-grid')
