@@ -45,6 +45,21 @@ describe('Game.placeCardAt()', () => {
     expect(gridMock.placeCard).toHaveBeenCalledWith(card1, 1, 3)
   })
 
+
+  it('Game.placeCardAt() should evaluate and store the result for the affected row and column', () => {
+    const expectedRowResult = { rule: 'SomeRule', points: 10 }
+    const expectedColumnResult = { rule: 'AnotherRule', points: 5 }
+
+    ruleSetMock.evaluate
+      .mockReturnValueOnce(expectedRowResult)
+      .mockReturnValueOnce(expectedColumnResult)
+    const sut = new Game(gridMock, ruleSetMock, cardDeckMock)
+
+    sut.placeCardAt(1, 3)
+    expect(sut.getLineResult('row', 1)).toEqual(expectedRowResult)
+    expect(sut.getLineResult('column', 3)).toEqual(expectedColumnResult)
+  })
+
   describe('Should update results after placing a card', () => {
     const firstRowResult = { rule: 'First row rule', points: 10 }
     const secondRowResult = { rule: 'Second row rule', points: 20 }
@@ -95,21 +110,5 @@ describe('Game.placeCardAt()', () => {
 
       expect(sut.getLineResult('column', 2)).toEqual(firstColumnResult)
     })
-  })
-
-
-
-  it('Game.placeCardAt() should evaluate and store the result for the affected row and column', () => {
-    const expectedRowResult = { rule: 'SomeRule', points: 10 }
-    const expectedColumnResult = { rule: 'AnotherRule', points: 5 }
-
-    ruleSetMock.evaluate
-      .mockReturnValueOnce(expectedRowResult)
-      .mockReturnValueOnce(expectedColumnResult)
-    const sut = new Game(gridMock, ruleSetMock, cardDeckMock)
-
-    sut.placeCardAt(1, 3)
-    expect(sut.getLineResult('row', 1)).toEqual(expectedRowResult)
-    expect(sut.getLineResult('column', 3)).toEqual(expectedColumnResult)
   })
 })

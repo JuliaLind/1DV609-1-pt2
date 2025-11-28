@@ -2,6 +2,8 @@ import { Rule } from './Rule.js'
 
 
 export class TwoPairs extends Rule {
+
+
   constructor() {
     const value = 5
     const name = 'Two Pair'
@@ -10,19 +12,11 @@ export class TwoPairs extends Rule {
   }
 
   test(line) {
-    let pairCount = 0
-    const ranks = line.getRanks()
-
-    for (const count of Object.values(ranks)) {
-      if (count >= 2) {
-        pairCount += 1
-
-        if (pairCount === 2) {
-          return true
-        }
-      }
-    }
-    return false
+    return this.#hasTwoPairs(line.getRanks())
   }
 
+  #hasTwoPairs(rankFrequencies) {
+    const frequencies = Object.values(rankFrequencies)
+    return frequencies.filter((count => count === 2)).length === 2
+  }
 }
