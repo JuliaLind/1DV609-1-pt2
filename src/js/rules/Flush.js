@@ -9,10 +9,6 @@ export class Flush extends Rule {
   }
 
   test(line) {
-    if (line.hasEmptySlots()) {
-      return false
-    }
-
-    return line.isSameSuite()
+    return !line.hasEmptySlots() && line.isSameSuite()
   }
 }
