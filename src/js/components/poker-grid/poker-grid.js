@@ -35,17 +35,25 @@ customElements.define('poker-grid',
 
     #initialize() {
       for (let row = 0; row < 5; row++) {
-        for (let column = 0; column < 5; column++) {
-          this.shadowRoot.appendChild(this.#makeCardSlot({ row, column })
-          )
-        }
-        this.shadowRoot.appendChild(this.#makeResultSlot({ row }))
+        this.#createSlotRow(row)
+        this.#createResultField({ row })
       }
 
+      this.#createResultRow()
+    }
+
+    #createSlotRow(row) {
       for (let column = 0; column < 5; column++) {
-        this.shadowRoot.appendChild(this.#makeResultSlot({ column }))
+        this.#createCardSlot({ row, column })
       }
-      this.shadowRoot.appendChild(document.createElement('div'))
+    }
+
+    #createResultRow() {
+      for (let column = 0; column < 5; column++) {
+        this.#createResultField({ column })
+      }
+
+      // this.shadowRoot.appendChild(document.createElement('div'))
     }
 
     connectedCallback() {
@@ -56,32 +64,32 @@ customElements.define('poker-grid',
       this.#abortController.abort()
     }
 
-    #makeCardSlot(placement) {
+    #createCardSlot(placement) {
       const { row, column } = placement
-
       const template = document.createElement('template')
+
       template.innerHTML = `
         <div class="card-slot" data-row="${row}" data-column="${column}">
           <slot name="r${row}c${column}"></slot>
         </div>
         `
 
-      return template.content.querySelector('.card-slot')
+      this.shadowRoot.appendChild(template.content.querySelector('.card-slot'))
     }
 
-    #makeResultSlot(placement) {
+    #createResultField(placement) {
       const resultField = document.createElement('div')
       resultField.classList.add('result-slot')
 
       for (const [direction, index] of Object.entries(placement)) {
         resultField.dataset[direction] = index
-        
+
         const slot = document.createElement('slot')
         slot.name = `result-${direction}${index}`
         resultField.appendChild(slot)
       }
 
-      return resultField
+      this.shadowRoot.appendChild(resultField)
     }
 
     #onClick = (event) => {
@@ -90,8 +98,8 @@ customElements.define('poker-grid',
         return
       }
 
-      const row = parseInt(cardSlot.dataset.row, 10)
-      const column = parseInt(cardSlot.dataset.column, 10)
+      const row = parseInt(cardSlot.dataset.row)
+      const column = parseInt(cardSlot.dataset.column)
       this.dispatchEvent(new CustomEvent('slot-click', {
         detail: { row, column },
         bubbles: true
