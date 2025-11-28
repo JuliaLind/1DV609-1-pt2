@@ -2,6 +2,11 @@ export class Rule {
   #value
   #name
 
+  static default = Object.freeze({
+    rule: '',
+    points: 0
+  })
+
   constructor(value, name) {
     if (new.target === Rule) {
       throw new Error('Rule is an abstract class')

@@ -7,6 +7,7 @@ import { Straight } from './Straight.js'
 import { ThreeOfAKind } from './ThreeOfAKind.js'
 import { TwoPairs } from './TwoPairs.js'
 import { OnePair } from './OnePair.js'
+import { Rule } from './Rule.js'
 
 
 export class RuleSet {
@@ -31,7 +32,7 @@ export class RuleSet {
 
     const matchingRule = this.#findMatchingRule(line)
 
-    return matchingRule ? matchingRule.toObject() : this.#getDummyRule()
+    return matchingRule ? matchingRule.toObject() : Rule.default
   }
 
   #findMatchingRule(line) {
@@ -41,13 +42,6 @@ export class RuleSet {
   #validateLine(line) {
     if (!line) {
       throw new Error('No line provided')
-    }
-  }
-
-  #getDummyRule() {
-    return {
-      name: '',
-      points: 0
     }
   }
 }

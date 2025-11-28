@@ -82,47 +82,47 @@ describe('RuleSet', () => {
   beforeAll(() => {
     royalFlushMock = {
       test: vi.fn().mockName('RoyalFlush.test'), // mockName is the name shown in test output if fails
-      toObject: vi.fn().mockReturnValue({ name: 'Royal Flush', points: 100 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Royal Flush', points: 100 }),
     }
 
     straightFlushMock = {
       test: vi.fn().mockName('StraightFlush.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'Straight Flush', points: 75 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Straight Flush', points: 75 }),
     }
 
     fourOfAKindMock = {
       test: vi.fn().mockName('FourOfAKind.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'Four of a Kind', points: 50 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Four of a Kind', points: 50 }),
     }
 
     fullHouseMock = {
       test: vi.fn().mockName('FullHouse.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'Full House', points: 25 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Full House', points: 25 }),
     }
 
     flushMock = {
       test: vi.fn().mockName('Flush.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'Flush', points: 20 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Flush', points: 20 }),
     }
 
     straightMock = {
       test: vi.fn().mockName('Straight.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'Straight', points: 15 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Straight', points: 15 }),
     }
 
     threeOfAKindMock = {
       test: vi.fn().mockName('ThreeOfAKind.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'Three of a Kind', points: 10 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Three of a Kind', points: 10 }),
     }
 
     twoPairsMock = {
       test: vi.fn().mockName('TwoPairs.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'Two Pairs', points: 5 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'Two Pairs', points: 5 }),
     }
 
     onePairMock = {
       test: vi.fn().mockName('OnePair.test'),
-      toObject: vi.fn().mockReturnValue({ name: 'One Pair', points: 2 }),
+      toObject: vi.fn().mockReturnValue({ rule: 'One Pair', points: 2 }),
     }
 
     RoyalFlush.mockImplementation(function () {
@@ -176,8 +176,9 @@ describe('RuleSet', () => {
       twoPairsMock,
       onePairMock,
     ]) {
-      ruleStub.test.mockReset()
-      ruleStub.test.mockReturnValue(false)
+      ruleStub.test
+      .mockReset()
+      .mockReturnValue(false)
     }
   })
 
@@ -263,15 +264,14 @@ describe('RuleSet', () => {
   })
 
   describe('RuleSet.evaluate() returnvalue', () => {
-    it('Should return {name: "", points: 0 } if no rule matches', () => {
+    it('Should return {rule: "", points: 0 } if no rule matches', () => {
       const result = sut.evaluate({})
 
-      expect(result).toEqual({ name: '', points: 0 })
+      expect(result).toEqual({ rule: '', points: 0 })
     })
 
     it('Should return correct result if a rule matches', () => {
-      const expected = { name: 'Full House', points: 25 }
-
+      const expected = { rule: 'Full House', points: 25 }
       fullHouseMock.test.mockReturnValue(true)
 
       const actual = sut.evaluate({})

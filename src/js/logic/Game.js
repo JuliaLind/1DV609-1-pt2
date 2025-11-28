@@ -1,6 +1,7 @@
 import { Grid } from "./Grid.js"
 import { RuleSet } from "../rules/RuleSet.js"
 import { CardDeck } from "./CardDeck.js"
+import { Rule } from "../rules/Rule.js"
 
 export class Game {
   #grid
@@ -23,8 +24,13 @@ export class Game {
 
   #clearResults() {
     this.#results = {
-      row: new Array(5).fill({ rule: '', points: 0 }),
-      column: new Array(5).fill({ rule: '', points: 0 }),
+      row: new Array(5),
+      column: new Array(5),
+    }
+
+    for (let index = 0; index < 5; index++) {
+      this.#results.row[index] = {...Rule.default}
+      this.#results.column[index] = {...Rule.default}
     }
   }
 
