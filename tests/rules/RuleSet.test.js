@@ -11,7 +11,6 @@ import { ThreeOfAKind } from '../../src/js/rules/ThreeOfAKind.js'
 import { TwoPairs } from '../../src/js/rules/TwoPairs.js'
 import { OnePair } from '../../src/js/rules/OnePair.js'
 
-
 vi.mock('../../src/js/rules/RoyalFlush.js', () => {
   return {
     RoyalFlush: vi.fn()
@@ -72,7 +71,7 @@ describe('RuleSet', () => {
   })
 
   it('RuleSet should create the rules in the correct order', () => {
-    const _ruleSet = new RuleSet()
+    new RuleSet() // eslint-disable-line no-new
 
     const actualOrder = [
       RoyalFlush.mock.invocationCallOrder[0],
