@@ -32,4 +32,9 @@ describe('Card', () => {
     const sut = new Card('7', 'clubs')
     expect(sut.rank).toBe('7')
   })
+
+  it('getter for suite should return correct suite', () => {
+    const sut = new Card('10', 'diamonds')
+    expect(sut.suite).toBe('diamonds')
+  })
 })
