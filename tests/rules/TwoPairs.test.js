@@ -29,7 +29,7 @@ describe('TwoPairs', () => {
     expect(sut.test(lineStub)).toBe(true)
   })
 
-  it('TwoPairs.test() should return false for line that has three twos and two threes', () => {
+  it('TwoPairs.test() should return false for line that has one pair', () => {
     const sut = new TwoPairs()
     const lineStub = {
       /**
