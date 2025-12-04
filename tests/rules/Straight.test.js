@@ -55,7 +55,7 @@ describe('Straight', () => {
     expect(sut.test(lineStub)).toBe(false)
   })
 
-    it('Straight.test() should return false for line with ranks 7, 8, 10, J, Q', () => {
+  it('Straight.test() should return false for line with ranks 7, 8, 10, J, Q', () => {
     const sut = new Straight()
     const lineStub = {
       /**
