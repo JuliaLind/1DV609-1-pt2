@@ -56,7 +56,7 @@ export class SameOfAKind extends Rule {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
-    return frequencies.some(frequency => frequency === this.#sameRankCount)
+    return frequencies.includes(this.#sameRankCount)
   }
 
   /**
