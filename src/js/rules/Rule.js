@@ -2,8 +2,8 @@
  * Abstract base class for all rules.
  */
 export class Rule {
-  #name = ''
-  #value = 0
+  #name
+  #value
 
   /**
    * Creates an instance of Rule.
@@ -28,6 +28,18 @@ export class Rule {
     return {
       name: this.#name,
       points: this.#value
+    }
+  }
+
+  /**
+   * Returns a default plain object representation of the Rule.
+   * 
+   * @returns {Object} - an associative array with name and points of the rule
+   */
+  static toObject() {
+    return {
+      name: '',
+      points: 0
     }
   }
 }
