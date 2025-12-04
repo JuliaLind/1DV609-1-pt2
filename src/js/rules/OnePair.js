@@ -1,4 +1,5 @@
 import { SameOfAKind } from "./SameOfAKind.js"
+
 /**
  * Class representing the One Pair rule.
  */

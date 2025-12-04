@@ -28,11 +28,20 @@ export class SameOfAKind extends Rule {
    * @param {number} rankCount - the number of cards required of the same rank
    */
   #setRankCount(rankCount) {
-    if (!rankCount) {
-      throw new Error('rankCount must be a positive number')
-    }
+    this.#validateRankCount(rankCount)
 
     this.#rankCount = rankCount
+  }
+
+  /**
+   * Checks that the rank count has been provided.
+   * 
+   * @param {number} rankCount - the required rankCount to fulfill the rule 
+   */
+  #validateRankCount(rankCount) {
+    if (!rankCount) {
+      throw new Error('rankCount missing')
+    }
   }
 
   /**
