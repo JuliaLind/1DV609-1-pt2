@@ -42,4 +42,14 @@ describe('SameOfAKind', () => {
       expect(sut.test(line)).toBe(expected)
     })
   })
+
+  it('Instantiating subclass of SameOfAKind without the rankCount parameter should throw an Error', () => {
+    class ConcreteRule extends SameOfAKind {
+      constructor(rankCount) {
+        super(rankCount)
+      }
+    }
+
+    expect(() => new ConcreteRule()).toThrowError()
+  })
 })
