@@ -56,4 +56,14 @@ export class SameOfAKind extends Rule {
 
     return frequencies.some(frequency => frequency === this.#sameRankCount)
   }
+
+  /**
+   * Gets the number of same rank cards required to fulfill the rule.
+   * For testing purposes.
+   *
+   * @return {number} - the number of same rank cards required
+   */
+  get sameRankCount() {
+    return this.#sameRankCount
+  }
 }

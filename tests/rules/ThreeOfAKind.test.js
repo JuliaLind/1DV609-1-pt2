@@ -13,8 +13,14 @@ describe('ThreeOfAKind', () => {
     expect(sut.toObject()).toEqual(expected)
   })
 
-  it ('ThreeOfAKind should inherit test method from SameOfAKind', () => {
+  it('ThreeOfAKind should inherit test method from SameOfAKind', () => {
     expect(ThreeOfAKind.prototype.test).toBe(SameOfAKind.prototype.test)
+  })
+
+  it('ThreeOfAKind sameRankRount getter should return 3', () => {
+    const sut = new ThreeOfAKind()
+
+    expect(sut.sameRankCount).toBe(3)
   })
 
 })
