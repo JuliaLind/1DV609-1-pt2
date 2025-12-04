@@ -109,4 +109,13 @@ export class Card {
   get suite () {
     return this.#suite
   }
+
+  /**
+   * Returns the numeric value of the current card instance.
+   *
+   * @returns {number} the numeric value of the current card instance
+   */
+  valueOf () {
+    return Card.RANKS[this.#rank]
+  }
 }
