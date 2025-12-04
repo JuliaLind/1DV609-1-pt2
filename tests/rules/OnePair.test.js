@@ -16,8 +16,7 @@ describe('OnePair', () => {
     const sut = new OnePair()
     const line = {
       getRankFrequencies: () => ({
-        2: 2,
-        3: 1,
+        9: 2
       })
     }
     expect(sut.test(line)).toBe(true)

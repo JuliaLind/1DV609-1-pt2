@@ -24,7 +24,7 @@ describe('SameOfAKind', () => {
   ]
 
   parameters.forEach(({ rankCount, expected }) => {
-    it(`test() method should return ${expected} for rule that requires ${rankCount} of same rank when the line contains tree cards of rank 2`, () => {
+    it(`SameOfAKind.test() method should return ${expected} for rule that requires ${rankCount} of same rank when the line contains tree cards of rank 2`, () => {
       class ConcreteRule extends SameOfAKind {
         constructor(rankCount) {
           super(rankCount)
