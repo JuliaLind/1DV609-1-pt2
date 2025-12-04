@@ -1,17 +1,24 @@
 import { Rule } from './Rule.js'
+import { OnePair } from './OnePair.js'
 
 /**
  * Class representing the Full House rule.
  */
 export class FullHouse extends Rule {
+  #onePairRule
+
   /**
    * Creates an instance of FullHouse class.
+   *
+   * @param {OnePair} onePairRule - an instance of the OnePair rule
    */
-  constructor () {
+  constructor (onePairRule = new OnePair()) {
     const name = 'Full House'
     const value = 25
 
     super(name, value)
+
+    this.#onePairRule = onePairRule
   }
 
   /**
@@ -21,9 +28,6 @@ export class FullHouse extends Rule {
    * @returns { boolean} - true if the line has a pair of one rank and three of another rank, false otherwise
    */
   test (line) {
-    const rankFrequencies = line.getRankFrequencies()
-    const frequencies = Object.values(rankFrequencies)
-
-    return frequencies.includes(3) && frequencies.includes(2)
+    return this.#onePairRule.test(line)
   }
 }

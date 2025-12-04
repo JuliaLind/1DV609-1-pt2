@@ -51,7 +51,6 @@ describe('StraightFlush', () => {
     expect(sut.test()).toBe(false)
   })
 
-  
   it('StraightFlush.test() should return true if both Straight.test and Flush.test return true', () => {
     const straightMock = {
       /**

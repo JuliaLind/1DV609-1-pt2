@@ -1,4 +1,4 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { FullHouse } from '../../src/js/rules/FullHouse.js'
 
 describe('FullHouse', () => {
@@ -14,6 +14,11 @@ describe('FullHouse', () => {
 
   it('FullHouse.test() should return false if OnePair.test returns false', () => {
     const onePairStub = {
+      /**
+       * Stub method for test.
+       *
+       * @returns {boolean} - always returns false
+       */
       test: () => false
     }
 

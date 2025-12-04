@@ -14,7 +14,7 @@ describe('SameOfAKind', () => {
       /**
        * Creates an instance of ConcreteRule.
        */
-      constructor() {
+      constructor () {
         super(2)
       }
     }
