@@ -72,7 +72,7 @@ describe('RuleSet', () => {
   })
 
   it('RuleSet should create the rules in the correct order', () => {
-    const _newRuleset = new RuleSet()
+    const _ruleSet = new RuleSet()
 
     const actualOrder = [
       RoyalFlush.mock.invocationCallOrder[0],
