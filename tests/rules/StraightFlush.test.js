@@ -50,4 +50,29 @@ describe('StraightFlush', () => {
 
     expect(sut.test()).toBe(false)
   })
+
+  
+  it('StraightFlush.test() should return true if both Straight.test and Flush.test return true', () => {
+    const straightMock = {
+      /**
+       * Mock method for test.
+       *
+       * @returns {boolean} - always returns true
+       */
+      test: () => true
+    }
+
+    const flushMock = {
+      /**
+       * Mock method for test.
+       *
+       * @returns {boolean} - always returns true
+       */
+      test: () => true
+    }
+
+    const sut = new StraightFlush(straightMock, flushMock)
+
+    expect(sut.test()).toBe(true)
+  })
 })

@@ -14,7 +14,7 @@ describe('SameOfAKind', () => {
       /**
        * Creates an instance of ConcreteRule.
        */
-      constructor () {
+      constructor() {
         super(2)
       }
     }
@@ -24,7 +24,8 @@ describe('SameOfAKind', () => {
 
   const parameters = [
     { rankCount: 3, expected: true },
-    { rankCount: 2, expected: false }
+    { rankCount: 2, expected: false },
+    { rankCount: 4, expected: false }
   ]
 
   parameters.forEach(({ rankCount, expected }) => {
@@ -32,7 +33,7 @@ describe('SameOfAKind', () => {
       /**
        * Subclass of SameOfAKind for testing purposes.
        */
-      class ConcreteRule extends SameOfAKind {}
+      class ConcreteRule extends SameOfAKind { }
 
       const sut = new ConcreteRule(rankCount)
 
@@ -55,7 +56,7 @@ describe('SameOfAKind', () => {
     /**
      * Subclass of SameOfAKind for testing purposes.
      */
-    class ConcreteRule extends SameOfAKind {}
+    class ConcreteRule extends SameOfAKind { }
 
     expect(() => new ConcreteRule()).toThrowError()
   })
