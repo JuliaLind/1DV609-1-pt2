@@ -12,7 +12,7 @@ describe('Flush', () => {
     expect(sut.toObject()).toEqual(expected)
   })
 
-  it ('Flush.test() should return true for line that has five cards of the same suit', () => {
+  it('Flush.test() should return true for line that has five cards of the same suit', () => {
     const sut = new Flush()
     const lineStub = {
       /**

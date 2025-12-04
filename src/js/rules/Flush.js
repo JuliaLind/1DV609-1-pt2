@@ -13,4 +13,18 @@ export class Flush extends Rule {
 
     super(name, value)
   }
+
+  /**
+   * Tests if the hand contains five cards of same suit.
+   *
+   * @param {object} line - the line of cards to test for the rule
+   * @returns { boolean} - true if the line has five cards of the same suit, false otherwise
+   */
+  test (line) {
+    const suitFrequencies = line.getSuitFrequencies()
+    const frequencies = Object.values(suitFrequencies)
+    const requiredFrequency = 5
+
+    return frequencies.includes(requiredFrequency)
+  }
 }
