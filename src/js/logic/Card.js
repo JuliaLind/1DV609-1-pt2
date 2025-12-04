@@ -2,7 +2,7 @@
  * Represents the logic of a playing card.
  */
 export class Card {
-  static SUITES = Object.freeze(['hearts', 'diamonds', 'clubs', 'spades'])
+  static SUITES = Object.freeze(['Hearts', 'Diamonds', 'Clubs', 'Spades'])
 
   static RANKS = Object.freeze({
     2: 2,
