@@ -13,4 +13,8 @@ export class Straight extends Rule {
 
     super(name, value)
   }
+
+  test (line) {
+    return true
+  }
 }
