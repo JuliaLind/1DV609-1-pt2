@@ -14,4 +14,14 @@ export class CardDeck {
   constructor (cardFactory = new CardFactory()) {
     this.#cards = cardFactory.createCards()
   }
+
+  /**
+   * Gets the cards in the deck.
+   * Keep for testing purposes.
+   *
+   * @returns {Card[]} - array of cards in the deck
+   */
+  get cards () {
+    return Array.from(this.#cards)
+  }
 }
