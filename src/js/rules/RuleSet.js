@@ -33,9 +33,16 @@ export class RuleSet {
   /**
    * Evaluates the given line against the set of poker rules.
    *
+   * @param {object} line - the line of cards to evaluate
    * @returns {object} - name and points of the highest ranking rule that matches the line.
    */
-  evaluate () {
+  evaluate (line) {
+    const rule = this.#rules.find((rule) => rule.test(line))
+
+    if (rule) {
+      return rule.toObject()
+    }
+
     return Rule.toObject()
   }
 }
