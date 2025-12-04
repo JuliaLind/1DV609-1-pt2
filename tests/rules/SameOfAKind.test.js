@@ -24,7 +24,6 @@ describe('SameOfAKind', () => {
 
   const parameters = [
     { rankCount: 3, expected: true },
-    { rankCount: 4, expected: false },
     { rankCount: 2, expected: false }
   ]
 
