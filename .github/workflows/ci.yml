@@ -7,6 +7,16 @@ on:
     branches: [ "*" ]
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm run lint
+
   test-unit:
     name: Unit Tests
     runs-on: ubuntu-latest

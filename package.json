@@ -8,7 +8,9 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "vitest run --coverage --reporter=verbose"
+    "test": "vitest run --coverage --reporter=verbose",
+    "lint": "npx eslint ./ || exit 0",
+    "lint:fix": "npx eslint ./ --fix || exit 0"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/JuliaLind/1DV609-1-pt2#readme",
   "dependencies": {
+    "@lnu/eslint-config": "^1.1.10",
     "vite": "^7.2.2"
   },
   "devDependencies": {
@@ -35,6 +38,11 @@
     ],
     "reporter": [
       "text"
+    ]
+  }, 
+  "eslintConfig": {
+    "extends": [
+      "@lnu/eslint-config"
     ]
   }
 }
