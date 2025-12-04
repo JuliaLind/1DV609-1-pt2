@@ -107,7 +107,7 @@ describe('RuleSet', () => {
 
   describe('RuleSet.evaluate', () => {
     const royalFlushStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -122,7 +122,7 @@ describe('RuleSet', () => {
     })
 
     const straightFlushStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -138,7 +138,7 @@ describe('RuleSet', () => {
     })
 
     const fourOfAKindStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -154,7 +154,7 @@ describe('RuleSet', () => {
     })
 
     const fullHouseStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -170,7 +170,7 @@ describe('RuleSet', () => {
     })
 
     const flushStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -186,7 +186,7 @@ describe('RuleSet', () => {
     })
 
     const straightStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -202,7 +202,7 @@ describe('RuleSet', () => {
     })
 
     const threeOfAKindStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -220,7 +220,7 @@ describe('RuleSet', () => {
     })
 
     const twoPairsStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -236,7 +236,7 @@ describe('RuleSet', () => {
     })
 
     const onePairStub = {
-      test: vi.fn(),
+      test: vi.fn().mockReturnValue(false),
       /**
        * Stub method.
        *
@@ -252,20 +252,6 @@ describe('RuleSet', () => {
     })
 
     it('RuleSet.evaluate should return default rule value when no rules match', () => {
-      for (const ruleMock of [
-        royalFlushStub,
-        straightFlushStub,
-        fourOfAKindStub,
-        fullHouseStub,
-        flushStub,
-        straightStub,
-        threeOfAKindStub,
-        twoPairsStub,
-        onePairStub
-      ]) {
-        ruleMock.test.mockReturnValue(false)
-      }
-
       const sut = new RuleSet()
       const lineStub = {}
       const result = sut.evaluate(lineStub)
@@ -274,6 +260,29 @@ describe('RuleSet', () => {
         name: '',
         points: 0
       })
+    })
+
+    it('RuleSet.evaluate should return the highest ranking rule that matches', () => {
+      for (const ruleMock of [
+        straightFlushStub,
+        flushStub,
+        straightStub
+      ]) {
+        ruleMock.test
+          .mockReset()
+          .mockReturnValue(true)
+      }
+
+      const sut = new RuleSet()
+      const lineStub = {}
+
+      const expected = {
+        name: 'Straight Flush',
+        points: 75
+      }
+      const actual = sut.evaluate(lineStub)
+
+      expect(actual).toEqual(expected)
     })
   })
 })
