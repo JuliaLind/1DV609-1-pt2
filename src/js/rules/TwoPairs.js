@@ -34,5 +34,7 @@ export class TwoPairs extends Rule {
         return true
       }
     }
+
+    return false
   }
 }

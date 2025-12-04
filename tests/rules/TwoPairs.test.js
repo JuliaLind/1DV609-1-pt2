@@ -29,7 +29,6 @@ describe('TwoPairs', () => {
     expect(sut.test(lineStub)).toBe(true)
   })
 
-  
   it('TwoPairs.test() should return false for line with a pair and a three of a kind', () => {
     const sut = new TwoPairs()
     const lineStub = {
