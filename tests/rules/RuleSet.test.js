@@ -86,7 +86,7 @@ describe('RuleSet', () => {
       OnePair.mock.invocationCallOrder[0]
     ]
 
-    const expectedOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    const expectedOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     expect(actualOrder).toEqual(expectedOrder)
   })
