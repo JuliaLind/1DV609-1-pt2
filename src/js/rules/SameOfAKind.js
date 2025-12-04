@@ -9,10 +9,12 @@ export class SameOfAKind extends Rule {
 
   /**
    * Creates an instance of SameOfAKind.
-   * 
+   *
    * @param {number} sameRankCount - the number of same rank cards required to fulfill the rule
+   * @param name
+   * @param value
    */
-  constructor(sameRankCount, name, value) {
+  constructor (sameRankCount, name, value) {
     if (new.target === SameOfAKind) {
       throw new Error('SameOfAKind is an abstract class')
     }
@@ -27,7 +29,7 @@ export class SameOfAKind extends Rule {
    *
    * @param {number} rankCount - the number of cards required of the same rank
    */
-  #setSameRankCount(rankCount) {
+  #setSameRankCount (rankCount) {
     this.#validateRankCount(rankCount)
 
     this.#sameRankCount = rankCount
@@ -35,10 +37,10 @@ export class SameOfAKind extends Rule {
 
   /**
    * Checks that the rank count has been provided.
-   * 
-   * @param {number} rankCount - the required rankCount to fulfill the rule 
+   *
+   * @param {number} rankCount - the required rankCount to fulfill the rule
    */
-  #validateRankCount(rankCount) {
+  #validateRankCount (rankCount) {
     if (!rankCount) {
       throw new Error('rankCount missing')
     }
@@ -47,10 +49,10 @@ export class SameOfAKind extends Rule {
   /**
    * Tests if the given line of cards fulfills the rule.
    *
-   * @param {object} line - the line of cards to test for the rule 
+   * @param {object} line - the line of cards to test for the rule
    * @returns {boolean} - true if the line fulfills the rule, false otherwise
    */
-  test(line) {
+  test (line) {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
@@ -61,9 +63,9 @@ export class SameOfAKind extends Rule {
    * Gets the number of same rank cards required to fulfill the rule.
    * For testing purposes.
    *
-   * @return {number} - the number of same rank cards required
+   * @returns {number} - the number of same rank cards required
    */
-  get sameRankCount() {
+  get sameRankCount () {
     return this.#sameRankCount
   }
 }

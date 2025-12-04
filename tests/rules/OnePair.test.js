@@ -1,4 +1,4 @@
-import { describe, it, vi, expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { OnePair } from '../../src/js/rules/OnePair.js'
 import { SameOfAKind } from '../../src/js/rules/SameOfAKind.js'
 

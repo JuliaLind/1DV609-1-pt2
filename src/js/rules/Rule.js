@@ -8,9 +8,11 @@ export class Rule {
   /**
    * Creates an instance of Rule.
    *
+   * @param {string} name - name of the rule
+   * @param {number} value - value is the number of points the rule is worth
    * @throws {Error} If instantiated directly.
    */
-  constructor(name = '', value = 0) {
+  constructor (name = '', value = 0) {
     if (new.target === Rule) {
       throw new Error('Rule is an abstract class')
     }
@@ -21,10 +23,10 @@ export class Rule {
 
   /**
    * Returns an plain object representation of the rule.
-   * 
-   * @returns {Object} - an associative array with name and points of the rule
+   *
+   * @returns {object} - an associative array with name and points of the rule
    */
-  toObject() {
+  toObject () {
     return {
       name: this.#name,
       points: this.#value
@@ -33,10 +35,10 @@ export class Rule {
 
   /**
    * Returns a default plain object representation of the Rule.
-   * 
-   * @returns {Object} - an associative array with name and points of the rule
+   *
+   * @returns {object} - an associative array with name and points of the rule
    */
-  static toObject() {
+  static toObject () {
     return {
       name: '',
       points: 0

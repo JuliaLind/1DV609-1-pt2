@@ -22,5 +22,4 @@ describe('ThreeOfAKind', () => {
 
     expect(sut.sameRankCount).toBe(3)
   })
-
 })

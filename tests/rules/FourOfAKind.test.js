@@ -7,7 +7,6 @@ describe('FourOfAKind', () => {
     expect(FourOfAKind.prototype.test).toBe(SameOfAKind.prototype.test)
   })
 
-
   it('FourOfAKind sameRankRount getter should return 4', () => {
     const sut = new FourOfAKind()
 
@@ -23,5 +22,4 @@ describe('FourOfAKind', () => {
 
     expect(sut.toObject()).toEqual(expected)
   })
-
 })
