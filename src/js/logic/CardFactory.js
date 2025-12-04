@@ -5,20 +5,23 @@ import { Card } from './Card.js'
  */
 export class CardFactory {
   /**
-   * Creates a standard deck of 52 playing cards.
+   * Creates all 52 cards.
    *
-   * @returns {Card[]} - array of Card instances
+   * @returns {Card[]} - array of created cards
    */
   createCards () {
-    const cards = []
-    const suites = Card.SUITES
+    return Card.SUITES.flatMap((suite) => this.#createCardsOfSuite(suite))
+  }
+
+  /**
+   * Creates a set 2-A of cards for a given suite.
+   *
+   * @param {string} suite - the suite of the cards to create.
+   * @returns {Card[]} - array of created cards for the given suite
+   */
+  #createCardsOfSuite (suite) {
     const ranks = Object.keys(Card.RANKS)
 
-    suites.forEach((suite) => {
-      ranks.forEach((rank) => {
-        cards.push(new Card(rank, suite))
-      })
-    })
-    return cards
+    return ranks.map((rank) => new Card(rank, suite))
   }
 }
