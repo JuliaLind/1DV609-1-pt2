@@ -5,21 +5,21 @@ import { Rule } from './Rule.js'
  * for a certain number of cards of the same rank.
  */
 export class SameOfAKind extends Rule {
-  #rankCount
+  #sameRankCount
 
   /**
    * Creates an instance of SameOfAKind.
    * 
-   * @param {number} rankCount - the number of same rank cards required to fulfill the rule
+   * @param {number} sameRankCount - the number of same rank cards required to fulfill the rule
    */
-  constructor(rankCount, name, value) {
+  constructor(sameRankCount, name, value) {
     if (new.target === SameOfAKind) {
       throw new Error('SameOfAKind is an abstract class')
     }
 
     super(name, value)
 
-    this.#setRankCount(rankCount)
+    this.#setSameRankCount(sameRankCount)
   }
 
   /**
@@ -27,10 +27,10 @@ export class SameOfAKind extends Rule {
    *
    * @param {number} rankCount - the number of cards required of the same rank
    */
-  #setRankCount(rankCount) {
+  #setSameRankCount(rankCount) {
     this.#validateRankCount(rankCount)
 
-    this.#rankCount = rankCount
+    this.#sameRankCount = rankCount
   }
 
   /**
@@ -54,6 +54,6 @@ export class SameOfAKind extends Rule {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
-    return frequencies.some(frequency => frequency === this.#rankCount)
+    return frequencies.some(frequency => frequency === this.#sameRankCount)
   }
 }
