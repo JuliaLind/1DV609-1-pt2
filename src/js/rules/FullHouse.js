@@ -13,4 +13,17 @@ export class FullHouse extends Rule {
 
     super(name, value)
   }
+
+  /**
+   * Tests if the line of cards fulfills the Full House rule.
+   *
+   * @param {object} line - the line of cards to test for the rule 
+   * @returns { boolean} - true if the line has a pair of one rank and three of another rank, false otherwise
+   */
+  test (line) {
+    const rankFrequencies = line.getRankFrequencies()
+    const frequencies = Object.values(rankFrequencies)
+
+    return frequencies.includes(3) && frequencies.includes(2)
+  }
 }
