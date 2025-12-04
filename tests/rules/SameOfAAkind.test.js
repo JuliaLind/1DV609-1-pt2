@@ -17,21 +17,29 @@ describe('SameOfAKind', () => {
     expect(() => new ConcreteRule()).not.toThrow()
   })
 
-  it('test() method should return true if the line meets the required rank count', () => {
-    class ConcreteRule extends SameOfAKind {
-      constructor(rankCount) {
-        super(rankCount)
+  const parameters = [
+    { rankCount: 3, expected: true },
+    { rankCount: 4, expected: false },
+    { rankCount: 2, expected: false },
+  ]
+
+  parameters.forEach(({ rankCount, expected }) => {
+    it(`test() method should return ${expected} for rule that requires ${rankCount} of same rank when the line contains tree cards of rank 2`, () => {
+      class ConcreteRule extends SameOfAKind {
+        constructor(rankCount) {
+          super(rankCount)
+        }
       }
-    }
 
-    const sut = new ConcreteRule(3)
+      const sut = new ConcreteRule(rankCount)
 
-    const line = {
-      getRankFrequencies: () => ({
-        2: 3,
-      })
-    }
+      const line = {
+        getRankFrequencies: () => ({
+          2: 3,
+        })
+      }
 
-    expect(sut.test(line)).toBe(true)
+      expect(sut.test(line)).toBe(expected)
+    })
   })
 })
