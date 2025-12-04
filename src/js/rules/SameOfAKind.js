@@ -37,10 +37,6 @@ export class SameOfAKind {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
-    for (const frequency of frequencies) {
-      if (frequency >= this.#rankCount) {
-        return true
-      }
-    }
+    return frequencies.some(frequency => frequency === this.#rankCount)
   }
 }
