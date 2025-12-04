@@ -11,4 +11,12 @@ describe('Card', () => {
 
     expect(sut.toObject()).toEqual(expected)
   })
+
+  const invalidRanks = [undefined, 'B', 1]
+
+  invalidRanks.forEach((invalidRank) => {
+    it(`constructor should throw for invalid rank: ${invalidRank}`, () => {
+      expect(() => new Card(invalidRank, 'hearts')).toThrow()
+    })
+  })
 })
