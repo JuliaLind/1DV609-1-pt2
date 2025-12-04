@@ -11,4 +11,20 @@ describe('Flush', () => {
 
     expect(sut.toObject()).toEqual(expected)
   })
+
+  it ('Flush.test() should return true for line that has five cards of the same suit', () => {
+    const sut = new Flush()
+    const lineStub = {
+      /**
+       * Stub method for getSuitFrequencies.
+       *
+       * @returns {object} - a stubbed suit frequencies object that says there are five cards of the same suit
+       */
+      getSuitFrequencies: () => ({
+        hearts: 5
+      })
+    }
+
+    expect(sut.test(lineStub)).toBe(true)
+  })
 })
