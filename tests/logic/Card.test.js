@@ -19,4 +19,12 @@ describe('Card', () => {
       expect(() => new Card(invalidRank, 'hearts')).toThrow()
     })
   })
+
+  const invalidSuites = [undefined, 2, '', 'invalidSuite']
+
+  invalidSuites.forEach((invalidSuite) => {
+    it(`constructor should throw for invalid suite: ${invalidSuite}`, () => {
+      expect(() => new Card('A', invalidSuite)).toThrow()
+    })
+  })
 })
