@@ -13,4 +13,26 @@ export class TwoPairs extends Rule {
 
     super(name, value)
   }
+
+  /**
+   * Tests whether the line contains two pairs.
+   *
+   * @param {object} line - the line of cards to test for the rule
+   * @returns {boolean} - true if the line contains two pairs, false otherwise
+   */
+  test (line) {
+    const rankFrequencies = line.getRankFrequencies()
+    const frequencies = Object.values(rankFrequencies)
+
+    let pairCount = 0
+
+    for (const frequency of frequencies) {
+      if (frequency === 2) {
+        pairCount += 1
+      }
+      if (pairCount === 2) {
+        return true
+      }
+    }
+  }
 }
