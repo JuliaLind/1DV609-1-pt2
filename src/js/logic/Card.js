@@ -118,4 +118,13 @@ export class Card {
   valueOf () {
     return Card.RANKS[this.#rank]
   }
+
+  /**
+   * Returns the string representation of the card.
+   *
+   * @returns {string} - string representation of the card
+   */
+  toString () {
+    return `${this.#rank} of ${this.#suite}`
+  }
 }
