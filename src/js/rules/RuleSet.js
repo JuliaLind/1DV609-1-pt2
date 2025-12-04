@@ -7,6 +7,7 @@ import { FullHouse } from './FullHouse.js'
 import { FourOfAKind } from './FourOfAKind.js'
 import { StraightFlush } from './StraightFlush.js'
 import { RoyalFlush } from './RoyalFlush.js'
+import { Rule } from './Rule.js'
 
 /**
  * Class representing a set of poker rules.
@@ -27,5 +28,14 @@ export class RuleSet {
     this.#rules.push(new ThreeOfAKind())
     this.#rules.push(new TwoPairs())
     this.#rules.push(new OnePair())
+  }
+
+  /**
+   * Evaluates the given line against the set of poker rules.
+   *
+   * @returns {object} - name and points of the highest ranking rule that matches the line.
+   */
+  evaluate () {
+    return Rule.toObject()
   }
 }
