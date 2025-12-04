@@ -11,4 +11,20 @@ describe('RoyalFlush', () => {
 
     expect(sut.toObject()).toEqual(expected)
   })
+
+  it('RoyalFlush.test should return false if StraightFlush.test returns false', () => {
+    const straightFlushMock = {
+      /**
+       * Stub method for test.
+       *
+       * @returns {boolean} - always returns false
+       */
+      test: () => false
+    }
+
+    const sut = new RoyalFlush(straightFlushMock)
+    const lineStub = {}
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
 })
