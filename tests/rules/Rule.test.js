@@ -30,4 +30,15 @@ describe('Rule', () => {
 
     expect(actual).toEqual(expected)
   })
+
+  it('static toObject() method should return default values', () => {
+    const expected = {
+      name: '',
+      points: 0
+    }
+
+    const actual = Rule.toObject()
+
+    expect(actual).toEqual(expected)
+  })
 })
