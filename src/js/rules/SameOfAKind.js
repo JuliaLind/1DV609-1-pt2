@@ -24,6 +24,10 @@ export class SameOfAKind {
    * @param {number} rankCount - the number of cards required of the same rank
    */
   #setRankCount(rankCount) {
+    if (!rankCount) {
+      throw new Error('rankCount must be a positive number')
+    }
+
     this.#rankCount = rankCount
   }
 

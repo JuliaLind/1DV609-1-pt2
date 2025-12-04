@@ -10,7 +10,7 @@ describe('SameOfAKind', () => {
   it('Instantiating subclass of SameOfAKind should not throw an error', () => {
     class ConcreteRule extends SameOfAKind {
       constructor() {
-        super()
+        super(2)
       }
     }
 
