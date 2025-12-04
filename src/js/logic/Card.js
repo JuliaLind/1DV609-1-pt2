@@ -91,4 +91,22 @@ export class Card {
       suite: this.#suite
     }
   }
+
+  /**
+   * Getter for the rank attribute.
+   *
+   * @returns {string} - the rank of the card
+   */
+  get rank () {
+    return this.#rank
+  }
+
+  /**
+   * Returns the numeric value of the Card.
+   *
+   * @returns {number} - the numeric value of the Card
+   */
+  valueOf () {
+    return Card.RANKS[this.#rank]
+  }
 }
