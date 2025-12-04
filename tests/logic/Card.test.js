@@ -27,4 +27,9 @@ describe('Card', () => {
       expect(() => new Card('A', invalidSuite)).toThrow()
     })
   })
+
+  it('getter for rank should return correct rank', () => {
+    const sut = new Card('7', 'clubs')
+    expect(sut.rank).toBe('7')
+  })
 })
