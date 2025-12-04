@@ -15,6 +15,13 @@ export class Straight extends Rule {
   }
 
   test (line) {
+    const rankFrequencies = line.getRankFrequencies()
+    const uniqueRanks = Object.keys(rankFrequencies)
+    
+    if (uniqueRanks.length !== 5) {
+      return false
+    }
+    
     return true
   }
 }
