@@ -27,4 +27,37 @@ describe('Flush', () => {
 
     expect(sut.test(lineStub)).toBe(true)
   })
+
+  it('Flush.test() should return false for line that has five cards of two suites', () => {
+    const sut = new Flush()
+    const lineStub = {
+      /**
+       * Stub method for getSuitFrequencies.
+       *
+       * @returns {object} - a stubbed suit frequencies object that says there are five cards of the same suit
+       */
+      getSuitFrequencies: () => ({
+        hearts: 4,
+        spades: 1
+      })
+    }
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
+
+  it('Flush.test() should return false for line that has four cards of same suites', () => {
+    const sut = new Flush()
+    const lineStub = {
+      /**
+       * Stub method for getSuitFrequencies.
+       *
+       * @returns {object} - a stubbed suit frequencies object that says there are five cards of the same suit
+       */
+      getSuitFrequencies: () => ({
+        hearts: 4
+      })
+    }
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
 })
