@@ -16,4 +16,18 @@ describe('Rule', () => {
 
     expect(() => new ConcreteRule()).not.toThrow()
   })
+
+  it('toObject() should return correct object representation', () => {
+    class ConcreteRule extends Rule { }
+    const sut = new ConcreteRule('Concrete Rule', 100)
+
+    const expected = {
+      name: 'Concrete Rule',
+      points: 100
+    }
+
+    const actual = sut.toObject()
+
+    expect(actual).toEqual(expected)
+  })
 })
