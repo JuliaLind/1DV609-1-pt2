@@ -6,4 +6,14 @@ describe('Rule', () => {
   it('Rule should be abstract - instantiating directly should throw an error', () => {
     expect(() => new Rule()).toThrowError(Error)
   })
+
+  it('Instantiating subclass of Rule should not throw an error', () => {
+    class ConcreteRule extends Rule {
+      constructor() {
+        super()
+      }
+    }
+
+    expect(() => new ConcreteRule()).not.toThrow()
+  })
 })
