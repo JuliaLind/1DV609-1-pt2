@@ -11,4 +11,21 @@ describe('FullHouse', () => {
 
     expect(sut.toObject()).toEqual(expected)
   })
+
+  it('FullHouse.test() should return true for line with two fives and three sixes', () => {
+    const sut = new FullHouse()
+    const lineStub = {
+      /**
+       * Stub method for getRankFrequencies.
+       *
+       * @returns {object} - a stubbed rank frequencies object that says there are two fives and three sixes
+       */
+      getRankFrequencies: () => ({
+        5: 2,
+        6: 3
+      })
+    }
+
+    expect(sut.test(lineStub)).toBe(true)
+  })
 })

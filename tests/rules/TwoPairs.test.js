@@ -12,7 +12,7 @@ describe('TwoPairs', () => {
     expect(sut.toObject()).toEqual(expected)
   })
 
-  it('TwoPairs.test() should return true for line where two pairs are present', () => {
+  it('TwoPairs.test() should return true for line that has two twos and two threes', () => {
     const sut = new TwoPairs()
     const lineStub = {
       /**
@@ -29,7 +29,7 @@ describe('TwoPairs', () => {
     expect(sut.test(lineStub)).toBe(true)
   })
 
-  it('TwoPairs.test() should return false for line with a pair and a three of a kind', () => {
+  it('TwoPairs.test() should return false for line that has three twos and two threes', () => {
     const sut = new TwoPairs()
     const lineStub = {
       /**
