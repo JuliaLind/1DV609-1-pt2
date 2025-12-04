@@ -8,7 +8,7 @@ describe('SameOfAKind', () => {
 
   it('Instantiating subclass of SameOfAKind should not throw an error', () => {
     /**
-     * Subclass of SameOfAKind for testing purposes
+     * Subclass of SameOfAKind for testing purposes.
      */
     class ConcreteRule extends SameOfAKind {
       /**
@@ -31,7 +31,7 @@ describe('SameOfAKind', () => {
   parameters.forEach(({ rankCount, expected }) => {
     it(`SameOfAKind.test() method should return ${expected} for rule that requires ${rankCount} of same rank when the line contains tree cards of rank 2`, () => {
       /**
-       * Subclass of SameOfAKind for testing purposes
+       * Subclass of SameOfAKind for testing purposes.
        */
       class ConcreteRule extends SameOfAKind {}
 
@@ -39,7 +39,7 @@ describe('SameOfAKind', () => {
 
       const lineStub = {
         /**
-         * Stub method for getRankFrequencies
+         * Stub method for getRankFrequencies.
          *
          * @returns {object} - a stubbed rank frequencies object that says there are three cards of rank 2
          */
@@ -54,7 +54,7 @@ describe('SameOfAKind', () => {
 
   it('Instantiating subclass of SameOfAKind without the rankCount parameter should throw an Error', () => {
     /**
-     * Subclass of SameOfAKind for testing purposes
+     * Subclass of SameOfAKind for testing purposes.
      */
     class ConcreteRule extends SameOfAKind {}
 
