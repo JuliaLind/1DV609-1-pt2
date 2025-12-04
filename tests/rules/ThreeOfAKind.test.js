@@ -5,7 +5,7 @@ describe('ThreeOfAKind', () => {
   it('toObject should return {name: "Three of a Kind", points: 2 }', () => {
     const sut = new ThreeOfAKind()
     const expected = {
-      name: 'One Pair',
+      name: 'Three Of A Kind',
       points: 10
     }
 
