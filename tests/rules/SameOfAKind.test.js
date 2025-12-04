@@ -14,7 +14,7 @@ describe('SameOfAKind', () => {
       /**
        * Creates an instance of ConcreteRule.
        */
-      constructor() {
+      constructor () {
         super(2)
       }
     }
@@ -33,16 +33,7 @@ describe('SameOfAKind', () => {
       /**
        * Subclass of SameOfAKind for testing purposes
        */
-      class ConcreteRule extends SameOfAKind {
-        /**
-         * Creates an instance of ConcreteRule.
-         *
-         * @param {number} sameRankCount - the number of same rank cards required to fulfill the rule
-         */
-        constructor(sameRankCount) {
-          super(sameRankCount)
-        }
-      }
+      class ConcreteRule extends SameOfAKind {}
 
       const sut = new ConcreteRule(rankCount)
 
