@@ -3,7 +3,7 @@ import { ThreeOfAKind } from '../../src/js/rules/ThreeOfAKind.js'
 import { SameOfAKind } from '../../src/js/rules/SameOfAKind.js'
 
 describe('ThreeOfAKind', () => {
-  it('toObject should return {name: "Three of a Kind", points: 2 }', () => {
+  it('toObject should return {name: "Three Of A Kind", points: 2 }', () => {
     const sut = new ThreeOfAKind()
     const expected = {
       name: 'Three Of A Kind',
