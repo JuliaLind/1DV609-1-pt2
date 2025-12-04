@@ -37,4 +37,10 @@ describe('Card', () => {
     const sut = new Card('10', 'diamonds')
     expect(sut.suite).toBe('diamonds')
   })
+
+  it('valueOf should return correct numeric value for rank', () => {
+    const sut = new Card('K', 'hearts')
+
+    expect(Number(sut)).toBe(13)
+  })
 })
