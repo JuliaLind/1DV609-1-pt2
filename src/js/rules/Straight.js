@@ -14,14 +14,20 @@ export class Straight extends Rule {
     super(name, value)
   }
 
+  /**
+   * Tests whether the given line contains five cards of consecutive ranks.
+   *
+   * @param {object} line - the line of cards to test
+   * @returns { boolean } - true if the line contains five cards of consecutive ranks, false otherwise
+   */
   test (line) {
     const rankFrequencies = line.getRankFrequencies()
     const uniqueRanks = Object.keys(rankFrequencies)
-    
+
     if (uniqueRanks.length !== 5) {
       return false
     }
-    
+
     return true
   }
 }
