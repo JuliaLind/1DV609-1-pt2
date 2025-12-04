@@ -17,7 +17,7 @@ export class FullHouse extends Rule {
   /**
    * Tests if the line of cards fulfills the Full House rule.
    *
-   * @param {object} line - the line of cards to test for the rule 
+   * @param {object} line - the line of cards to test for the rule
    * @returns { boolean} - true if the line has a pair of one rank and three of another rank, false otherwise
    */
   test (line) {
