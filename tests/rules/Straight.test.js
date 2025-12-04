@@ -11,4 +11,26 @@ describe('Straight', () => {
 
     expect(sut.toObject()).toEqual(expected)
   })
+
+  it('Straight.test() should return true for line with ranks 8, 9, 10, J, Q', () => {
+    const sut = new Straight()
+    const lineStub = {
+      /**
+       * Stub method for getRankFrequencies.
+       *
+       * @returns {object} - a stubbed rank frequencies object that contains five consecutive ranks
+       */
+      getRankFrequencies: () => {
+        return {
+          10: 1,
+          11: 1,
+          8: 1,
+          9: 1,
+          12: 1
+        }
+      }
+    }
+
+    expect(sut.test(lineStub)).toBe(true)
+  })
 })
