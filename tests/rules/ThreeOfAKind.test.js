@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { ThreeOfAKind } from '../../src/js/rules/ThreeOfAKind.js'
+import { SameOfAKind } from '../../src/js/rules/SameOfAKind.js'
 
 describe('ThreeOfAKind', () => {
   it('toObject should return {name: "Three of a Kind", points: 2 }', () => {
@@ -10,6 +11,10 @@ describe('ThreeOfAKind', () => {
     }
 
     expect(sut.toObject()).toEqual(expected)
+  })
+
+  it ('ThreeOfAKind should inherit test method from SameOfAKind', () => {
+    expect(ThreeOfAKind.prototype.test).toBe(SameOfAKind.prototype.test)
   })
 
 })
