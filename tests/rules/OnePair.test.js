@@ -12,13 +12,7 @@ describe('OnePair', () => {
     expect(sut.toObject()).toEqual(expected)
   })
 
-  it('Test should return true for line with at least one pair', () => {
-    const sut = new OnePair()
-    const line = {
-      getRankFrequencies: () => ({
-        9: 2
-      })
-    }
-    expect(sut.test(line)).toBe(true)
+  it ('OnePair should inherit test method from SameOfAKind', () => {
+    expect(OnePair.prototype.test).toBe(SameOfAKind.prototype.test)
   })
 })
