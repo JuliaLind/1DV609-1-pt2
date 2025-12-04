@@ -28,6 +28,6 @@ export class RoyalFlush extends Rule {
    * @returns { boolean } - true if the line satisfies the Royal Flush rule, false otherwise
    */
   test (line) {
-    return this.#straightFlushRule.test(line)
+    return this.#straightFlushRule.test(line) && line.hasRank(14)
   }
 }
