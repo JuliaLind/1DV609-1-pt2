@@ -11,6 +11,21 @@ import { ThreeOfAKind } from '../../src/js/rules/ThreeOfAKind.js'
 import { TwoPairs } from '../../src/js/rules/TwoPairs.js'
 import { OnePair } from '../../src/js/rules/OnePair.js'
 
+vi.mock('../../src/js/rules/Rule.js', () => {
+  return {
+    Rule: vi.fn({
+      /**
+       * Default toObject method stub.
+       *
+       * @returns {object} - associative array with empty string as name and 0 as points.
+       */
+      toObject: () => {
+        return { name: '', points: 0 }
+      }
+    })
+  }
+})
+
 vi.mock('../../src/js/rules/RoyalFlush.js', () => {
   return {
     RoyalFlush: vi.fn()
@@ -88,5 +103,177 @@ describe('RuleSet', () => {
     const expectedOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     expect(actualOrder).toEqual(expectedOrder)
+  })
+
+  describe('RuleSet.evaluate', () => {
+    const royalFlushStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'Royal Flush', points: 100 }
+      }
+    }
+    RoyalFlush.mockImplementation(function () {
+      return royalFlushStub
+    })
+
+    const straightFlushStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'Straight Flush', points: 75 }
+      }
+    }
+
+    StraightFlush.mockImplementation(function () {
+      return straightFlushStub
+    })
+
+    const fourOfAKindStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'Four of a Kind', points: 50 }
+      }
+    }
+
+    FourOfAKind.mockImplementation(function () {
+      return fourOfAKindStub
+    })
+
+    const fullHouseStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'Full House', points: 25 }
+      }
+    }
+
+    FullHouse.mockImplementation(function () {
+      return fullHouseStub
+    })
+
+    const flushStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'Flush', points: 20 }
+      }
+    }
+
+    Flush.mockImplementation(function () {
+      return flushStub
+    })
+
+    const straightStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'Straight', points: 15 }
+      }
+    }
+
+    Straight.mockImplementation(function () {
+      return straightStub
+    })
+
+    const threeOfAKindStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return {
+          name: 'Three of a Kind', points: 10
+        }
+      }
+    }
+
+    ThreeOfAKind.mockImplementation(function () {
+      return threeOfAKindStub
+    })
+
+    const twoPairsStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'Two Pairs', points: 5 }
+      }
+    }
+
+    TwoPairs.mockImplementation(function () {
+      return twoPairsStub
+    })
+
+    const onePairStub = {
+      test: vi.fn(),
+      /**
+       * Stub method.
+       *
+       * @returns {object} - associative array with name and points of the rule.
+       */
+      toObject: () => {
+        return { name: 'One Pair', points: 2 }
+      }
+    }
+
+    OnePair.mockImplementation(function () {
+      return onePairStub
+    })
+
+    it('RuleSet.evaluate should return default rule value when no rules match', () => {
+      for (const ruleMock of [
+        royalFlushStub,
+        straightFlushStub,
+        fourOfAKindStub,
+        fullHouseStub,
+        flushStub,
+        straightStub,
+        threeOfAKindStub,
+        twoPairsStub,
+        onePairStub
+      ]) {
+        ruleMock.test.mockReturnValue(false)
+      }
+
+      const sut = new RuleSet()
+      const lineStub = {}
+      const result = sut.evaluate(lineStub)
+
+      expect(result).toEqual({
+        name: '',
+        points: 0
+      })
+    })
   })
 })
