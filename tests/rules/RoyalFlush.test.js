@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { RoyalFlush } from '../../src/js/rules/RoyalFlush.js'
 
 describe('RoyalFlush', () => {
@@ -24,6 +24,25 @@ describe('RoyalFlush', () => {
 
     const sut = new RoyalFlush(straightFlushMock)
     const lineStub = {}
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
+
+
+  it('RoyalFlush.test should return false if StraightFlush.test returns true but line does not contain an Ace', () => {
+    const straightFlushMock = {
+      /**
+       * Stub method for test.
+       *
+       * @returns {boolean} - always returns true
+       */
+      test: () => true
+    }
+
+    const sut = new RoyalFlush(straightFlushMock)
+    const lineStub = {
+      hasRank: (rank) => rank === '14' ? false : true
+    }
 
     expect(sut.test(lineStub)).toBe(false)
   })
