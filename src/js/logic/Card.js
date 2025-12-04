@@ -2,6 +2,8 @@
  * Represents the logic of a playing card.
  */
 export class Card {
+  static SUITES = Object.freeze(['hearts', 'diamonds', 'clubs', 'spades'])
+
   static RANKS = Object.freeze({
     2: 2,
     3: 3,
@@ -30,7 +32,7 @@ export class Card {
   constructor (rank, suite) {
     this.#setRank(rank)
 
-    this.#suite = suite
+    this.#setSuite(suite)
   }
 
   /**
@@ -53,6 +55,28 @@ export class Card {
   #validateRank (rank) {
     if (!Object.keys(Card.RANKS).includes(rank)) {
       throw new Error(`Invalid rank: ${rank}`)
+    }
+  }
+
+  /**
+   * Setter for the suite attribute.
+   *
+   * @param {string} suite - the suite of the card
+   */
+  #setSuite (suite) {
+    this.#validateSuite(suite)
+    this.#suite = suite
+  }
+
+  /**
+   * Validates the suite of the card.
+   *
+   * @param {string} suite - the suite of the card
+   * @throws {Error} - if the suite is invalid
+   */
+  #validateSuite (suite) {
+    if (!Card.SUITES.includes(suite)) {
+      throw new Error(`Invalid suite: ${suite}`)
     }
   }
 
