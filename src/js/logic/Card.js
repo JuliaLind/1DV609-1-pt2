@@ -102,11 +102,11 @@ export class Card {
   }
 
   /**
-   * Returns the numeric value of the Card.
+   * Getter for the suite attribute.
    *
-   * @returns {number} - the numeric value of the Card
+   * @returns {string} - the suite of the card
    */
-  valueOf () {
-    return Card.RANKS[this.#rank]
+  get suite () {
+    return this.#suite
   }
 }
