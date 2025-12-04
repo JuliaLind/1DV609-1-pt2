@@ -1,13 +1,12 @@
-import { Rule } from './Rule.js'
-
+import { SameOfAKind } from "./SameOfAKind.js"
 /**
  * Class representing the One Pair rule.
  */
-export class OnePair extends Rule {
+export class OnePair extends SameOfAKind {
   /**
    * Creates an instance of OnePair rule.
    */
   constructor() {
-    super('One Pair', 2)
+    super(2, 'One Pair', 2)
   }
 }
