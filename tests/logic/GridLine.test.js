@@ -7,5 +7,4 @@ describe('GridLine', () => {
 
     expect(sut.slots.length).toBe(5)
   })
-
 })
