@@ -1,7 +1,11 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest'
 import { CardDeck } from '../../src/js/logic/CardDeck.js'
 
 describe('CardDeck', () => {
+  const card1 = { rank: 'A', suite: 'Hearts' }
+  const card2 = { rank: 'K', suite: 'Spades' }
+  const card3 = { rank: '10', suite: 'Diamonds' }
+
   it('CardDeck constructor should call the CardFactory.createCards method', () => {
     const cardFactoryMock = {
       createCards: vi.fn().mockReturnValue([])
@@ -12,9 +16,7 @@ describe('CardDeck', () => {
   })
 
   it('The cards should be shuffled in the CardDeck constructor', () => {
-    const card1 = { rank: 'A', suite: 'Hearts' }
-    const card2 = { rank: 'K', suite: 'Spades' }
-    const card3 = { rank: '10', suite: 'Diamonds' }
+
     const originalOrder = [card1, card2, card3]
 
     const cardFactoryMock = {
@@ -30,4 +32,32 @@ describe('CardDeck', () => {
 
     expect(sut.cards).toEqual(expectedOrder)
   })
+
+  describe('CardDeck.drawCard', () => {
+    const cardFactoryMock = {
+      createCards: vi.fn()
+    }
+
+    beforeAll(() => {
+      vi.spyOn(Math, 'random')
+        .mockReturnValue(1)  // To ensure the order remains [card1, card2]
+    })
+
+    afterAll(() => {
+      vi.restoreAllMocks()
+    })
+
+    it('drawCard should return the top card from the deck', () => {
+      const cards = [card1, card2]
+
+      cardFactoryMock.createCards.mockClear().mockReturnValue(cards)
+
+      const sut = new CardDeck(cardFactoryMock)
+      const drawnCard = sut.drawCard()
+
+      expect(drawnCard).toEqual(card2)
+    })
+  })
+
+
 })

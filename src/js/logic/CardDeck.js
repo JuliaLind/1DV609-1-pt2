@@ -23,7 +23,6 @@ export class CardDeck {
   #shuffleInPlace () {
     for (let index = this.#cards.length - 1; index > 0; index--) {
       const randomIndex = this.#selectRandomIndex(index + 1)
-      console.log(`Swapping index ${index} with random index ${randomIndex}`)
 
       this.#swapCards(index, randomIndex)
     }
