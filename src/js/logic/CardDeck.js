@@ -64,6 +64,6 @@ export class CardDeck {
    * @returns {Card} - the top card from the deck
    */
   drawCard () {
-    return this.#cards[this.#cards.length - 1]
+    return this.#cards.pop()
   }
 }
