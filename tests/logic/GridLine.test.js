@@ -19,5 +19,23 @@ describe('GridLine', () => {
 
       expect(sut.slots).toEqual(slots)
     })
+
+    it('modifying the returned slots array should not affect the slots inside GridLine', () => {
+      const slots = [card1, undefined, card2, card3, undefined]
+      const sut = new GridLine(slots)
+
+      const returnedSlots = sut.slots
+      returnedSlots[0] = { rank: '2', suite: 'Clubs' }
+      expect(sut.slots[0]).toEqual(card1)
+    })
+
+    it('modifying the slots array passed into constructor should not affect the slots inside GridLine', () => {
+      const slots = [card1, undefined, card2, card3, undefined]
+      const sut = new GridLine(slots)
+
+      slots[0] = { rank: '2', suite: 'Clubs' }
+    
+      expect(sut.slots[0]).toEqual(card1)
+    })
   })
 })
