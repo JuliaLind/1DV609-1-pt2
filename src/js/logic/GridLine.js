@@ -12,7 +12,7 @@ export class GridLine {
    * @param {Card[]} slots - array of cards to initialize the grid line with
    */
   constructor (slots = new Array(5)) {
-    this.#slots = slots
+    this.#slots = [...slots]
   }
 
   /**
