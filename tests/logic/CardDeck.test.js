@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
 import { CardDeck } from '../../src/js/logic/CardDeck.js'
 
 describe('CardDeck', () => {
@@ -37,9 +37,11 @@ describe('CardDeck', () => {
       createCards: vi.fn()
     }
 
-    beforeAll(() => {
+    beforeEach(() => {
       vi.spyOn(Math, 'random')
-        .mockReturnValue(1) // To ensure the order remains [card1, card2]
+        .mockClear()
+        .mockReturnValueOnce(0.9)
+        .mockReturnValueOnce(0.8)
     })
 
     afterAll(() => {
@@ -55,6 +57,17 @@ describe('CardDeck', () => {
       const drawnCard = sut.drawCard()
 
       expect(drawnCard).toEqual(card2)
+    })
+
+    it('drawCard should remove the top card from the deck', () => {
+      const cards = [card1, card2]
+
+      cardFactoryMock.createCards.mockClear().mockReturnValue(cards)
+      const sut = new CardDeck(cardFactoryMock)
+      expect(sut.cards).toEqual([card1, card2])
+      sut.drawCard()
+
+      expect(sut.cards).toEqual([card1])
     })
   })
 })
