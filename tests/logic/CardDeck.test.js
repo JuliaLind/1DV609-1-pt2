@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
+import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest'
 import { CardDeck } from '../../src/js/logic/CardDeck.js'
 
 describe('CardDeck', () => {
@@ -23,8 +23,7 @@ describe('CardDeck', () => {
     }
 
     vi.spyOn(Math, 'random')
-      .mockReturnValueOnce(0.1)
-      .mockReturnValueOnce(0.2)
+      .mockReturnValue(0.1) // each index will be swapped with card at index 0
 
     const sut = new CardDeck(cardFactoryMock)
     const expectedOrder = [card2, card3, card1]
@@ -33,15 +32,14 @@ describe('CardDeck', () => {
   })
 
   describe('CardDeck.drawCard', () => {
-    const cardFactoryMock = {
+    const cardFactoryStub = {
       createCards: vi.fn()
     }
 
-    beforeEach(() => {
+    beforeAll(() => {
       vi.spyOn(Math, 'random')
         .mockClear()
-        .mockReturnValueOnce(0.9)
-        .mockReturnValueOnce(0.8)
+        .mockReturnValue(0.9)
     })
 
     afterAll(() => {
@@ -51,9 +49,9 @@ describe('CardDeck', () => {
     it('drawCard should return the top card from the deck', () => {
       const cards = [card1, card2]
 
-      cardFactoryMock.createCards.mockClear().mockReturnValue(cards)
+      cardFactoryStub.createCards.mockClear().mockReturnValue(cards)
 
-      const sut = new CardDeck(cardFactoryMock)
+      const sut = new CardDeck(cardFactoryStub)
       const drawnCard = sut.drawCard()
 
       expect(drawnCard).toEqual(card2)
@@ -62,12 +60,19 @@ describe('CardDeck', () => {
     it('drawCard should remove the top card from the deck', () => {
       const cards = [card1, card2]
 
-      cardFactoryMock.createCards.mockClear().mockReturnValue(cards)
-      const sut = new CardDeck(cardFactoryMock)
+      cardFactoryStub.createCards.mockClear().mockReturnValue(cards)
+      const sut = new CardDeck(cardFactoryStub)
       expect(sut.cards).toEqual([card1, card2])
       sut.drawCard()
 
       expect(sut.cards).toEqual([card1])
+    })
+
+    it('drawing a card from an empty deck should throw an error', () => {
+      const cards = []
+      cardFactoryStub.createCards.mockClear().mockReturnValue(cards)
+      const sut = new CardDeck(cardFactoryStub)
+      expect(() => sut.drawCard()).toThrowError()
     })
   })
 })
