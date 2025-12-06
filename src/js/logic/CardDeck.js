@@ -57,4 +57,13 @@ export class CardDeck {
   get cards () {
     return Array.from(this.#cards)
   }
+
+  /**
+   * Picks the top card from the deck.
+   *
+   * @returns {Card} - the top card from the deck
+   */
+  drawCard () {
+    return this.#cards[this.#cards.length - 1]
+  }
 }

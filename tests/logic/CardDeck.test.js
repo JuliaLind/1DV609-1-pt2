@@ -16,7 +16,6 @@ describe('CardDeck', () => {
   })
 
   it('The cards should be shuffled in the CardDeck constructor', () => {
-
     const originalOrder = [card1, card2, card3]
 
     const cardFactoryMock = {
@@ -40,7 +39,7 @@ describe('CardDeck', () => {
 
     beforeAll(() => {
       vi.spyOn(Math, 'random')
-        .mockReturnValue(1)  // To ensure the order remains [card1, card2]
+        .mockReturnValue(1) // To ensure the order remains [card1, card2]
     })
 
     afterAll(() => {
@@ -58,6 +57,4 @@ describe('CardDeck', () => {
       expect(drawnCard).toEqual(card2)
     })
   })
-
-
 })
