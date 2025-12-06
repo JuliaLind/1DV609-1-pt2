@@ -14,10 +14,10 @@ describe('GridLine', () => {
     const card3 = { rank: '10', suite: 'Diamonds' }
 
     it('should create a GridLine with the given array of cards', () => {
-      const cardsArray = [card1, undefined, card2, card3, undefined]
-      const sut = GridLine(cardsArray)
+      const slots = [card1, undefined, card2, card3, undefined]
+      const sut = new GridLine(slots)
 
-      expect(sut.slots).toEqual(cardsArray)
+      expect(sut.slots).toEqual(slots)
     })
   })
 })
