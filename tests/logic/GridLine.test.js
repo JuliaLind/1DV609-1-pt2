@@ -7,4 +7,17 @@ describe('GridLine', () => {
 
     expect(sut.slots.length).toBe(5)
   })
+
+  describe('GridLine from array', () => {
+    const card1 = { rank: 'A', suite: 'Hearts' }
+    const card2 = { rank: 'K', suite: 'Spades' }
+    const card3 = { rank: '10', suite: 'Diamonds' }
+
+    it('should create a GridLine with the given array of cards', () => {
+      const cardsArray = [card1, undefined, card2, card3, undefined]
+      const sut = GridLine(cardsArray)
+
+      expect(sut.slots).toEqual(cardsArray)
+    })
+  })
 })
