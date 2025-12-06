@@ -34,8 +34,16 @@ describe('GridLine', () => {
       const sut = new GridLine(slots)
 
       slots[0] = { rank: '2', suite: 'Clubs' }
-    
+
       expect(sut.slots[0]).toEqual(card1)
+    })
+
+    it('Passing an array with less than 5 slots should throw an error', () => {
+      expect(() => new GridLine(new Array(4))).toThrowError()
+    })
+
+    it('Passing an array with more than 5 slots should throw an error', () => {
+      expect(() => new GridLine(new Array(6))).toThrowError()
     })
   })
 })
