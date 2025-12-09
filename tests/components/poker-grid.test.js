@@ -62,6 +62,5 @@ describe('poker-grid', () => {
 
       expect(eventDispatched).toBe(false)
     })
-
   })
 })
