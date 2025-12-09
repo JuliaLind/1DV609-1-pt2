@@ -36,7 +36,7 @@ customElements.define('poker-game',
     /**
      * Creates an instance of poker-game.
      */
-    constructor() {
+    constructor () {
       super()
       this.attachShadow({ mode: 'open' })
       this.shadowRoot.appendChild(template.content.cloneNode(true))
@@ -50,7 +50,7 @@ customElements.define('poker-game',
     /**
      * Initializes the game component.
      */
-    #init() {
+    #init () {
       this.#createResultFields()
       this.#renderNextCard()
     }
@@ -58,7 +58,7 @@ customElements.define('poker-game',
     /**
      * Renders the next card in the next card slot.
      */
-    #renderNextCard() {
+    #renderNextCard () {
       const nextCard = this.#game.getNextCard()
 
       const card = document.createElement('poker-card')
@@ -72,7 +72,7 @@ customElements.define('poker-game',
     /**
      * Creates 10 result fields in the grid.
      */
-    #createResultFields() {
+    #createResultFields () {
       for (let index = 0; index < 5; index++) {
         this.#createOneResultField('row', index)
         this.#createOneResultField('column', index)
@@ -85,7 +85,7 @@ customElements.define('poker-game',
      * @param {string} direction - row or column
      * @param {number} index - index of the row or column
      */
-    #createOneResultField(direction, index) {
+    #createOneResultField (direction, index) {
       const template = document.createElement('template')
 
       template.innerHTML = `
@@ -109,7 +109,7 @@ customElements.define('poker-game',
      * Called when the component is added to the DOM.
      * Sets up event listeners.
      */
-    connectedCallback() {
+    connectedCallback () {
       this.#grid.addEventListener('slot-click', this.#onSlotClick, { signal: this.#abortController.signal })
     }
 
@@ -130,7 +130,7 @@ customElements.define('poker-game',
      * @param {number} row - row to place the card in
      * @param {number} column - column to place the card in
      */
-    #placeCardAt(row, column) {
+    #placeCardAt (row, column) {
       this.#game.placeCardAt(row, column)
       this.#nextCard.setAttribute('slot', `r${row}c${column}`)
       this.#grid.appendChild(this.#nextCard)
@@ -139,6 +139,31 @@ customElements.define('poker-game',
       this.#updateResult({ direction: 'row', index: row })
       this.#updateResult({ direction: 'column', index: column })
 
+      this.#handleGameOver()
+    }
+
+    /**
+     * Updates the content of one resultfield.
+     *
+     * @param {object} fieldId - direction and index position of the resultfield
+     */
+    #updateResult (fieldId) {
+      const { direction, index } = fieldId
+
+      const { points, name } = this.#game.getResult(direction, index)
+
+      this.#results[direction][index].name.textContent = name
+      this.#results[direction][index].points.textContent = points
+    }
+
+    /**
+     * Displays a message with given title and text.
+     *
+     * @param {object} content - message content
+     * @param {string} content.title - title of the message
+     * @param {string} content.text - text of the message
+     */
+    #displayMessage ({ title, text }) {
       const template = document.createElement('template')
       template.innerHTML = `
         <game-message>
@@ -149,30 +174,28 @@ customElements.define('poker-game',
         </game-message>
         `
       const message = template.content.querySelector('game-message')
-      message.querySelector('.title').textContent = 'Congrants, you finished the poker game!'
-      message.querySelector('.text').textContent = `Your total points: ${this.#game.getTotalPoints()}`
+      message.querySelector('.title').textContent = title
+      message.querySelector('.text').textContent = text
       this.shadowRoot.appendChild(message)
     }
 
     /**
-     * Updates the content of one resultfield.
-     *
-     * @param {object} fieldId - direction and index position of the resultfield
+     * Handles the game over event.
      */
-    #updateResult(fieldId) {
-      const { direction, index } = fieldId
-
-      const { points, name } = this.#game.getResult(direction, index)
-
-      this.#results[direction][index].name.textContent = name
-      this.#results[direction][index].points.textContent = points
+    #handleGameOver () {
+      this.#displayMessage(
+        {
+          title: 'Congrants, you finished the poker game!',
+          text: `Your total points: ${this.#game.getTotalPoints()}`
+        }
+      )
     }
 
     /**
      * Called when the component is removed from the DOM.
      * Cleans up event listeners.
      */
-    disconnectedCallback() {
+    disconnectedCallback () {
       this.#abortController.abort()
     }
   })
