@@ -1,4 +1,5 @@
 import '../poker-card/'
+import '../poker-grid/'
 import { Game } from '../../logic/Game.js'
 
 const template = document.createElement('template')
@@ -12,6 +13,7 @@ template.innerHTML = `
   </style>
 
     <div id="next-card"></div>
+    <poker-grid></poker-grid>
 `
 
 customElements.define('poker-game',
@@ -19,8 +21,10 @@ customElements.define('poker-game',
    * Represents the poker-game component.
    */
   class extends HTMLElement {
+    #abortController = new AbortController()
     #game = new Game()
     #nextCardSlot
+    #grid
 
     /**
      * Creates an instance of poker-game.
@@ -31,6 +35,7 @@ customElements.define('poker-game',
       this.shadowRoot.appendChild(template.content.cloneNode(true))
 
       this.#nextCardSlot = this.shadowRoot.querySelector('#next-card')
+      this.#grid = this.shadowRoot.querySelector('poker-grid')
 
       this.#renderNextCard()
     }
@@ -46,5 +51,24 @@ customElements.define('poker-game',
       card.setAttribute('rank', nextCard.rank)
 
       this.#nextCardSlot.appendChild(card)
+    }
+
+    /**
+     * Called when the component is added to the DOM.
+     * Sets up event listeners.
+     */
+    connectedCallback () {
+      this.#grid.addEventListener('slot-click', (event) => {
+        const { row, column } = event.detail
+        this.#game.placeCardAt(row, column)
+      }, { signal: this.#abortController.signal })
+    }
+
+    /**
+     * Called when the component is removed from the DOM.
+     * Cleans up event listeners.
+     */
+    disconnectedCallback () {
+      this.#abortController.abort()
     }
   })
