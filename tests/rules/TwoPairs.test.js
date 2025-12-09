@@ -28,4 +28,21 @@ describe('TwoPairs', () => {
 
     expect(sut.test(lineStub)).toBe(true)
   })
+
+  it('TwoPairs.test() should return false for line that has one pair', () => {
+    const sut = new TwoPairs()
+    const lineStub = {
+      /**
+       * Stub method for getRankFrequencies.
+       *
+       * @returns {object} - a stubbed rank frequencies object that says there are two pairs
+       */
+      getRankFrequencies: () => ({
+        2: 3,
+        3: 2
+      })
+    }
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
 })
