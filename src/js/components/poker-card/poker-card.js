@@ -62,13 +62,20 @@ customElements.define('poker-card',
         case 'rank':
           this.#rank = newValue
 
-          this.#img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
+          this.#updateAltAttribute()
           break
         case 'suite':
           this.#suite = newValue
 
-          this.#img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
+          this.#img.updateAltAttribute()
           break
       }
+    }
+
+    /**
+     * Updates the alt attribute of the poker card image.
+     */
+    #updateAltAttribute() {
+      this.#img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
     }
   })
