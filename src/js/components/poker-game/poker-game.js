@@ -30,7 +30,7 @@ customElements.define('poker-game',
     /**
      * Creates an instance of poker-game.
      */
-    constructor() {
+    constructor () {
       super()
       this.attachShadow({ mode: 'open' })
       this.shadowRoot.appendChild(template.content.cloneNode(true))
@@ -44,7 +44,7 @@ customElements.define('poker-game',
     /**
      * Renders the next card in the next card slot.
      */
-    #renderNextCard() {
+    #renderNextCard () {
       const nextCard = this.#game.getNextCard()
 
       const card = document.createElement('poker-card')
@@ -59,7 +59,7 @@ customElements.define('poker-game',
      * Called when the component is added to the DOM.
      * Sets up event listeners.
      */
-    connectedCallback() {
+    connectedCallback () {
       this.#grid.addEventListener('slot-click', this.#onSlotClick, { signal: this.#abortController.signal })
     }
 
@@ -70,10 +70,20 @@ customElements.define('poker-game',
      */
     #onSlotClick = (event) => {
       const { row, column } = event.detail
+
+      this.#placeCardAt(row, column)
+    }
+
+    /**
+     * Places the next card at the specified row and column in the grid.
+     *
+     * @param {number} row - row to place the card in
+     * @param {number} column - column to place the card in
+     */
+    #placeCardAt (row, column) {
       this.#game.placeCardAt(row, column)
       this.#nextCard.setAttribute('slot', `r${row}c${column}`)
       this.#grid.appendChild(this.#nextCard)
-
       this.#renderNextCard()
     }
 
@@ -81,7 +91,7 @@ customElements.define('poker-game',
      * Called when the component is removed from the DOM.
      * Cleans up event listeners.
      */
-    disconnectedCallback() {
+    disconnectedCallback () {
       this.#abortController.abort()
     }
   })
