@@ -1,0 +1,48 @@
+{
+  "name": "1dv609-1-pt2",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "This repo is the first assignment (part 2) in the course 1DV609 Mjukvarukvalitet and contains an implementation of the game Poker Squares.",
+  "browser": "src/js/index.js",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "vitest run --coverage --reporter=verbose",
+    "lint": "npx eslint ./ || exit 0",
+    "lint:fix": "npx eslint ./ --fix || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuliaLind/1DV609-1-pt2.git"
+  },
+  "author": "Julia Lind (jl225vf@student.lnu.se)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JuliaLind/1DV609-1-pt2/issues"
+  },
+  "homepage": "https://github.com/JuliaLind/1DV609-1-pt2#readme",
+  "dependencies": {
+    "@lnu/eslint-config": "^1.1.10",
+    "vite": "^7.2.2"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.9",
+    "jsdom": "^27.2.0",
+    "vitest": "^4.0.9"
+  },
+  "c8": {
+    "all": true,
+    "include": [
+      "src/**/*.js"
+    ],
+    "reporter": [
+      "text"
+    ]
+  }, 
+  "eslintConfig": {
+    "extends": [
+      "@lnu/eslint-config"
+    ]
+  }
+}
