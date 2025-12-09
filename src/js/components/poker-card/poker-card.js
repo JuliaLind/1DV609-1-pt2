@@ -83,7 +83,7 @@ customElements.define('poker-card',
       }
 
       if (['rank', 'suite'].includes(name)) {
-        this['#' + name] = newValue
+        this[name] = newValue
 
         this.#refreshImage()
       }
