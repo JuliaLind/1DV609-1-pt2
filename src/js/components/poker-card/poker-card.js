@@ -31,7 +31,7 @@ customElements.define('poker-card',
     /**
      * Creates an instance of poker-card.
      */
-    constructor () {
+    constructor() {
       super()
 
       this.attachShadow({ mode: 'open' })
@@ -45,8 +45,28 @@ customElements.define('poker-card',
      *
      * @returns {Array} - array of attribute names to observe
      */
-    static get observedAttributes () {
+    static get observedAttributes() {
       return ['rank', 'suite']
+    }
+
+    /**
+     * Sets the rank of the poker card.
+     *
+     * @param {string} value - rank of the poker card
+     */
+    set rank(value) {
+      this.setAttribute('rank', value)
+      this.#rank = value
+    }
+
+    /**
+     * Sets the suite of the poker card.
+     *
+     * @param {string} value - suite of the poker card
+     */
+    set suite(value) {
+      this.setAttribute('suite', value)
+      this.#suite = value
     }
 
     /**
@@ -57,25 +77,21 @@ customElements.define('poker-card',
      * @param {any} oldValue - old value of the changed attribute
      * @param {any} newValue - new value of the changed attribute
      */
-    attributeChangedCallback (name, oldValue, newValue) {
-      switch (name) {
-        case 'rank':
-          this.#rank = newValue
+    attributeChangedCallback(name, oldValue, newValue) {
+      if (oldValue === newValue) {
+        return
+      }
 
-          this.#updateAltAttribute()
-          break
-        case 'suite':
-          this.#suite = newValue
-
-          this.#updateAltAttribute()
-          break
+      if (['rank', 'suite'].includes(name)) {
+        this[name] = newValue
+        this.#updateAltAttribute()
       }
     }
 
     /**
      * Updates the alt attribute of the poker card image.
      */
-    #updateAltAttribute () {
+    #updateAltAttribute() {
       this.#img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
     }
   })
