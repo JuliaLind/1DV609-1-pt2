@@ -6,10 +6,15 @@ export class SameOfAKind {
   /**
    * Creates an instance of SameOfAKind.
    *
+   * @param {number} sameRankCount - the number of same rank cards required to fulfill the rule
    */
-  constructor () {
+  constructor(sameRankCount) {
     if (new.target === SameOfAKind) {
       throw new Error('SameOfAKind is an abstract class')
+    }
+
+    if (!sameRankCount) {
+      throw new Error('rankCount missing')
     }
   }
 }
