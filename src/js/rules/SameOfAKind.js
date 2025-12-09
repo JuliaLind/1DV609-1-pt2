@@ -13,7 +13,16 @@ export class SameOfAKind {
       throw new Error('SameOfAKind is an abstract class')
     }
 
-    if (!sameRankCount) {
+    this.#validateRankCount(sameRankCount)
+  }
+
+/**
+ * Checks that the rank count has been provided.
+ *
+ * @param {number} rankCount - the required rankCount to fulfill the rule
+ */
+  #validateRankCount(rankCount) {
+    if (!rankCount) {
       throw new Error('rankCount missing')
     }
   }
