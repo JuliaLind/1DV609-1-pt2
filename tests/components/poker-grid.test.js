@@ -49,5 +49,19 @@ describe('poker-grid', () => {
 
       expect(eventDispatched).toBe(true)
     })
+
+    it('slot-click event should not be dispatched when clicking on a result field', () => {
+      let eventDispatched = false
+
+      pokerGrid.addEventListener('slot-click', () => {
+        eventDispatched = true
+      })
+
+      const resultField = pokerGrid.shadowRoot.querySelector('.result-field')
+      resultField.click()
+
+      expect(eventDispatched).toBe(false)
+    })
+
   })
 })
