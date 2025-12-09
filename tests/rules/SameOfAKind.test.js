@@ -13,7 +13,15 @@ describe('SameOfAKind', () => {
     class ConcreteRule extends SameOfAKind {
     }
 
-    expect(() => new ConcreteRule()).not.toThrow()
+    expect(() => new ConcreteRule(2)).not.toThrow()
   })
 
+  it('Instantiating subclass of SameOfAKind without the rankCount parameter should throw an Error', () => {
+    /**
+     * Subclass of SameOfAKind for testing purposes.
+     */
+    class ConcreteRule extends SameOfAKind { }
+
+    expect(() => new ConcreteRule()).toThrowError()
+  })
 })
