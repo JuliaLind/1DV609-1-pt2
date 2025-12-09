@@ -32,4 +32,16 @@ export class Rule {
       points: this.#value
     }
   }
+
+  /**
+ * Returns a default plain object representation of the Rule.
+ *
+ * @returns {object} - an associative array with name and points of the rule
+ */
+  static toObject() {
+    return {
+      name: '',
+      points: 0
+    }
+  }
 }
