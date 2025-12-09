@@ -9,7 +9,9 @@ export class FourOfAKind extends SameOfAKind {
    */
   constructor () {
     const sameRankCount = 4
+    const name = 'Four Of A Kind'
+    const value = 50
 
-    super(sameRankCount)
+    super(sameRankCount, name, value)
   }
 }
