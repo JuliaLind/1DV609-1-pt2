@@ -42,12 +42,15 @@ customElements.define('poker-game',
       this.#nextCardSlot = this.shadowRoot.querySelector('#next-card')
       this.#grid = this.shadowRoot.querySelector('poker-grid')
 
-      this.#renderNextCard()
+      this.#init()
+    }
 
-      for (let index = 0; index < 5; index++) {
-        this.#createOneResultField('row', index)
-        this.#createOneResultField('column', index)
-      }
+    /**
+     * Initializes the game component.
+     */
+    #init () {
+      this.#createResultFields()
+      this.#renderNextCard()
     }
 
     /**
@@ -62,6 +65,16 @@ customElements.define('poker-game',
 
       this.#nextCardSlot.appendChild(card)
       this.#nextCard = card
+    }
+
+    /**
+     * Creates 10 result fields in the grid.
+     */
+    #createResultFields () {
+      for (let index = 0; index < 5; index++) {
+        this.#createOneResultField('row', index)
+        this.#createOneResultField('column', index)
+      }
     }
 
     /**
