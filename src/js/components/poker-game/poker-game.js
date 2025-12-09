@@ -26,6 +26,10 @@ customElements.define('poker-game',
     #nextCardSlot
     #grid
     #nextCard
+    #results = {
+      row: [],
+      column: []
+    }
 
     /**
      * Creates an instance of poker-game.
@@ -39,6 +43,11 @@ customElements.define('poker-game',
       this.#grid = this.shadowRoot.querySelector('poker-grid')
 
       this.#renderNextCard()
+
+      for (let index = 0; index < 5; index++) {
+        this.#createOneResultField('row', index)
+        this.#createOneResultField('column', index)
+      }
     }
 
     /**
@@ -53,6 +62,32 @@ customElements.define('poker-game',
 
       this.#nextCardSlot.appendChild(card)
       this.#nextCard = card
+    }
+
+    /**
+     * Creates a result field.
+     *
+     * @param {string} direction - row or column
+     * @param {number} index - index of the row or column
+     */
+    #createOneResultField (direction, index) {
+      const template = document.createElement('template')
+
+      template.innerHTML = `
+        <div class="result-field" slot="result-${direction + index}">
+          <span class="points">0</span>
+          <span class="name"></span>
+
+        </div>
+        `
+      const field = template.content.querySelector('.result-field')
+
+      this.#results[direction].push({
+        name: field.querySelector('.name'),
+        points: field.querySelector('.points')
+      })
+
+      this.#grid.appendChild(field)
     }
 
     /**
@@ -99,18 +134,9 @@ customElements.define('poker-game',
       const { direction, index } = fieldId
 
       const { points, name } = this.#game.getResult(direction, index)
-      const template = document.createElement('template')
 
-      template.innerHTML = `
-        <div class="result-field" slot="result-${direction}${index}">
-          <span class="points">${points}</span>
-          <span class="name">${name}</span>
-
-        </div>
-        `
-      const field = template.content.querySelector('.result-field')
-
-      this.#grid.appendChild(field)
+      this.#results[direction][index].name.textContent = name
+      this.#results[direction][index].points.textContent = points
     }
 
     /**
