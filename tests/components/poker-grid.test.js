@@ -5,4 +5,16 @@ describe('poker-grid', () => {
   it('poker-grid should be defined as a custom element', () => {
     expect(customElements.get('poker-grid')).toBeDefined()
   })
+
+  describe('poker-grid shadow dom structure', () => {
+    const pokerGrid = document.createElement('poker-grid')
+
+    it('poker-grid should contain 25 slots for cards', () => {
+      const actualQtySlots = pokerGrid.shadowRoot.querySelectorAll('.card-slot').length
+      const expectedQtySlots = 25
+
+      expect(actualQtySlots).toBe(expectedQtySlots)
+    })
+  })
+
 })
