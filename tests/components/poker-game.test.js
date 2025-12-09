@@ -157,5 +157,18 @@ describe('poker-game', () => {
       expect(messageText).toContain('37')
       gameMessage.remove()
     })
+
+    it('When poker-grid is clicked and Game class throws error, an error message should be displayed', () => {
+      gameMock.placeCardAt.mockImplementationOnce(() => {
+        throw new Error('Test error')
+      })
+
+      pokerGrid.dispatchEvent(new CustomEvent('slot-click', {
+        detail: { row, column }
+      }))
+
+      const gameMessage = pokerGame.shadowRoot.querySelector('game-message').textContent
+      expect(gameMessage).toContain('Test error')
+    })
   })
 })
