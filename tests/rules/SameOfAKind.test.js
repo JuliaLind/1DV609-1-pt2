@@ -25,25 +25,32 @@ describe('SameOfAKind', () => {
     expect(() => new ConcreteRule()).toThrowError()
   })
 
-  it(`SameOfAKind.test() method should return true for rule that requires 3 of same rank when the line contains tree cards of rank 2`, () => {
-    /**
-     * Subclass of SameOfAKind for testing purposes.
-     */
-    class ConcreteRule extends SameOfAKind { }
+  const parameters = [
+    { sameRankCount: 3, expected: true },
+    { sameRankCount: 4, expected: false },
+  ]
 
-    const sut = new ConcreteRule(3)
-
-    const lineStub = {
+  parameters.forEach(({ sameRankCount, expected }) => {
+    it(`SameOfAKind.test() method should return ${expected} for rule that requires ${sameRankCount} of same rank when the line contains tree cards of rank 2`, () => {
       /**
-       * Stub method for getRankFrequencies.
-       *
-       * @returns {object} - a stubbed rank frequencies object that says there are three cards of rank 2
+       * Subclass of SameOfAKind for testing purposes.
        */
-      getRankFrequencies: () => ({
-        2: 3
-      })
-    }
+      class ConcreteRule extends SameOfAKind { }
 
-    expect(sut.test(lineStub)).toBe(true)
+      const sut = new ConcreteRule(sameRankCount)
+
+      const lineStub = {
+        /**
+         * Stub method for getRankFrequencies.
+         *
+         * @returns {object} - a stubbed rank frequencies object that says there are three cards of rank 2
+         */
+        getRankFrequencies: () => ({
+          2: 3
+        })
+      }
+
+      expect(sut.test(lineStub)).toBe(expected)
+    })
   })
 })
