@@ -114,7 +114,13 @@ customElements.define('poker-grid',
         return
       }
 
-      this.dispatchEvent(new CustomEvent('slot-click'))
+      const row = parseInt(cardSlot.dataset.row)
+      const column = parseInt(cardSlot.dataset.column)
+
+      this.dispatchEvent(new CustomEvent('slot-click', {
+        detail: { row, column },
+        bubbles: true
+      }))
     }
 
     /**
