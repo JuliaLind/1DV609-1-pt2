@@ -22,7 +22,7 @@ describe('poker-game', () => {
   const gameMock = {
     getNextCard: vi.fn(),
     placeCardAt: vi.fn(),
-    getRowResult: vi.fn()
+    getResult: vi.fn()
   }
 
   beforeAll(() => {
@@ -62,9 +62,10 @@ describe('poker-game', () => {
         .mockReturnValueOnce(firstCardStub)
         .mockReturnValueOnce(secondCardStub)
 
-      gameMock.getRowResult
+      gameMock.getResult
         .mockReset()
         .mockReturnValueOnce({ name: 'RowRule', points: 15 })
+        .mockReturnValueOnce({ name: 'ColumnRule', points: 20 })
 
       pokerGame = document.createElement('poker-game')
       document.body.appendChild(pokerGame)
@@ -117,6 +118,18 @@ describe('poker-game', () => {
 
       expect(resultName.textContent).toBe('RowRule')
       expect(resultPoints.textContent).toBe('15')
+    })
+
+    it('When poker-grid is clicked, the result for the column should be updated', () => {
+      pokerGrid.dispatchEvent(new CustomEvent('slot-click', {
+        detail: { row, column }
+      }))
+
+      const resultName = pokerGame.shadowRoot.querySelector(`[slot="result-column${column}"] .name`)
+      const resultPoints = pokerGame.shadowRoot.querySelector(`[slot="result-column${column}"] .points`)
+
+      expect(resultName.textContent).toBe('ColumnRule')
+      expect(resultPoints.textContent).toBe('20')
     })
   })
 })
