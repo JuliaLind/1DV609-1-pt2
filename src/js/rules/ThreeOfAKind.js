@@ -9,7 +9,9 @@ export class ThreeOfAKind extends SameOfAKind {
    */
   constructor () {
     const sameRankCount = 3
+    const name = 'Three Of A Kind'
+    const value = 10
 
-    super(sameRankCount)
+    super(sameRankCount, name, value)
   }
 }
