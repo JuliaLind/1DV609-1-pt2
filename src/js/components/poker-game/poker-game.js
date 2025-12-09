@@ -30,14 +30,21 @@ customElements.define('poker-game',
       this.attachShadow({ mode: 'open' })
       this.shadowRoot.appendChild(template.content.cloneNode(true))
 
-      const nextCardSlot = this.shadowRoot.querySelector('#next-card')
+      this.#nextCardSlot = this.shadowRoot.querySelector('#next-card')
 
+      this.#renderNextCard()
+    }
+
+    /**
+     * Renders the next card in the next card slot.
+     */
+    #renderNextCard () {
       const nextCard = this.#game.getNextCard()
 
       const card = document.createElement('poker-card')
       card.setAttribute('suite', nextCard.suite)
       card.setAttribute('rank', nextCard.rank)
 
-      nextCardSlot.appendChild(card)
+      this.#nextCardSlot.appendChild(card)
     }
   })
