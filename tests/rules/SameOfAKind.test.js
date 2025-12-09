@@ -28,6 +28,7 @@ describe('SameOfAKind', () => {
   const parameters = [
     { sameRankCount: 3, expected: true },
     { sameRankCount: 4, expected: false },
+    { sameRankCount: 2, expected: false }
   ]
 
   parameters.forEach(({ sameRankCount, expected }) => {
