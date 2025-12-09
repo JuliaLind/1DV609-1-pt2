@@ -89,5 +89,17 @@ describe('poker-game', () => {
 
       expect(nextCard).not.toBeNull()
     })
+
+    it('When poker-grid is clicked, the next card should be placed in the grid', () => {
+      const nextCard = pokerGame.shadowRoot.querySelector('#next-card poker-card')
+
+      pokerGrid.dispatchEvent(new CustomEvent('slot-click', {
+        detail: { row, column }
+      }))
+
+      const placedCard = pokerGrid.querySelector(`poker-card[slot="r${row}c${column}"]`)
+
+      expect(placedCard).toBe(nextCard)
+    })
   })
 })
