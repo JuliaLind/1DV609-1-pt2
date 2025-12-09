@@ -3,6 +3,6 @@ export default {
   build: {
     outDir: '../dist',
     target: 'esnext',
-    assetsInlineLimit: 0,
+    assetsInlineLimit: 0
   }
 }

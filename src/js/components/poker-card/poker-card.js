@@ -11,7 +11,7 @@ template.innerHTML = `
   }
 
   img {
-   width: 100%;
+    width: 100%;
     object-fit: contain;
   }
 
@@ -31,7 +31,7 @@ customElements.define('poker-card',
     /**
      * Creates an instance of poker-card.
      */
-    constructor() {
+    constructor () {
       super()
 
       this.attachShadow({ mode: 'open' })
@@ -45,7 +45,7 @@ customElements.define('poker-card',
      *
      * @returns {Array} - array of attribute names to observe
      */
-    static get observedAttributes() {
+    static get observedAttributes () {
       return ['rank', 'suite']
     }
 
@@ -54,7 +54,7 @@ customElements.define('poker-card',
      *
      * @param {string} value - rank of the poker card
      */
-    set rank(value) {
+    set rank (value) { // eslint-disable-line accessor-pairs
       this.setAttribute('rank', value)
       this.#rank = value
     }
@@ -64,7 +64,7 @@ customElements.define('poker-card',
      *
      * @param {string} value - suite of the poker card
      */
-    set suite(value) {
+    set suite (value) { // eslint-disable-line accessor-pairs
       this.setAttribute('suite', value)
       this.#suite = value
     }
@@ -77,13 +77,13 @@ customElements.define('poker-card',
      * @param {any} oldValue - old value of the changed attribute
      * @param {any} newValue - new value of the changed attribute
      */
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback (name, oldValue, newValue) {
       if (oldValue === newValue) {
         return
       }
 
       if (['rank', 'suite'].includes(name)) {
-        this[name] = newValue
+        this['#' + name] = newValue
 
         this.#refreshImage()
       }
@@ -92,7 +92,7 @@ customElements.define('poker-card',
     /**
      * Refreshes the poker card image based on the current rank and suite.
      */
-    #refreshImage() {
+    #refreshImage () {
       if (this.#rank && this.#suite) {
         this.#updateAltAttribute()
         this.#updateSrcAttribute()
@@ -102,14 +102,14 @@ customElements.define('poker-card',
     /**
      * Updates the alt attribute of the poker card image.
      */
-    #updateAltAttribute() {
+    #updateAltAttribute () {
       this.#img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
     }
 
     /**
      * Updates the src attribute of the poker card image.
      */
-    #updateSrcAttribute() {
+    #updateSrcAttribute () {
       const imageName = this.#rank + this.#suite.charAt(0)
       const imagePath = `./img/${imageName}.svg`
       this.#img.setAttribute('src', new URL(imagePath, import.meta.url).href)

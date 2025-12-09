@@ -30,7 +30,6 @@ describe('poker-card', () => {
       }
     })
 
-
     const sut = document.createElement('poker-card')
 
     sut.setAttribute('rank', 'A')
