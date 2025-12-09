@@ -12,4 +12,14 @@ describe('OnePair', () => {
 
     expect(sut.sameRankCount).toBe(2)
   })
+
+  it('toObject should return {name: "One Pair", points: 2 }', () => {
+    const sut = new OnePair()
+    const expected = {
+      name: 'One Pair',
+      points: 2
+    }
+
+    expect(sut.toObject()).toEqual(expected)
+  })
 })
