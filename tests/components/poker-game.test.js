@@ -14,6 +14,11 @@ describe('poker-game', () => {
     rank: 'A'
   }
 
+  const secondCardStub = {
+    suite: 'Spades',
+    rank: '10'
+  }
+
   const gameMock = {
     getNextCard: vi.fn(),
     placeCardAt: vi.fn()
@@ -51,6 +56,11 @@ describe('poker-game', () => {
     const column = 3
 
     beforeEach(() => {
+      gameMock.getNextCard
+        .mockReset()
+        .mockReturnValueOnce(firstCardStub)
+        .mockReturnValueOnce(secondCardStub)
+
       pokerGame = document.createElement('poker-game')
       document.body.appendChild(pokerGame)
       pokerGrid = pokerGame.shadowRoot.querySelector('poker-grid')
@@ -68,6 +78,16 @@ describe('poker-game', () => {
       }))
 
       expect(gameMock.placeCardAt).toHaveBeenCalledWith(row, column)
+    })
+
+    it('When poker-grid is clicked, the next card should be displayed ', () => {
+      pokerGrid.dispatchEvent(new CustomEvent('slot-click', {
+        detail: { row, column }
+      }))
+
+      const nextCard = pokerGame.shadowRoot.querySelector('#next-card poker-card[suite="Spades"][rank="10"]')
+
+      expect(nextCard).not.toBeNull()
     })
   })
 })
