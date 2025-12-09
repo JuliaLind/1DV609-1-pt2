@@ -86,13 +86,24 @@ customElements.define('poker-game',
       this.#grid.appendChild(this.#nextCard)
       this.#renderNextCard()
 
-      const result = this.#game.getRowResult(row)
+      this.#updateResult({ direction: 'row', index: row })
+    }
+
+    /**
+     * Updates the content of one resultfield.
+     *
+     * @param {object} fieldId - direction and index position of the resultfield
+     */
+    #updateResult (fieldId) {
+      const { direction, index } = fieldId
+
+      const { points, name } = this.#game.getResult(direction, index)
       const template = document.createElement('template')
 
       template.innerHTML = `
-        <div class="result-field" slot="result-row${row}">
-          <span class="points">${result.points}</span>
-          <span class="name">${result.name}</span>
+        <div class="result-field" slot="result-${direction}${index}">
+          <span class="points">${points}</span>
+          <span class="name">${name}</span>
 
         </div>
         `
