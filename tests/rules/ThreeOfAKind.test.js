@@ -12,4 +12,14 @@ describe('ThreeOfAKind', () => {
 
     expect(sut.sameRankCount).toBe(3)
   })
+
+  it('toObject should return {name: "Three Of A Kind", points: 2 }', () => {
+    const sut = new ThreeOfAKind()
+    const expected = {
+      name: 'Three Of A Kind',
+      points: 10
+    }
+
+    expect(sut.toObject()).toEqual(expected)
+  })
 })
