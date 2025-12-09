@@ -15,8 +15,18 @@ export class SameOfAKind {
       throw new Error('SameOfAKind is an abstract class')
     }
 
-    this.#validateRankCount(sameRankCount)
-    this.#sameRankCount = sameRankCount
+    this.#setSameRankCount(sameRankCount)
+  }
+
+  /**
+   * Sets the required rank count to fulfill the rule.
+   *
+   * @param {number} rankCount - the exact count of same rank required to fulfill the fule
+   */
+  #setSameRankCount(rankCount) {
+    this.#validateRankCount(rankCount)
+
+    this.#sameRankCount = rankCount
   }
 
   /**
