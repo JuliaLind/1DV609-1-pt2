@@ -66,7 +66,7 @@ customElements.define('poker-game',
     /**
      * Creates an instance of poker-game.
      */
-    constructor() {
+    constructor () {
       super()
       this.attachShadow({ mode: 'open' })
       this.shadowRoot.appendChild(template.content.cloneNode(true))
@@ -80,7 +80,7 @@ customElements.define('poker-game',
     /**
      * Initializes the game component.
      */
-    #init() {
+    #init () {
       this.#createResultFields()
       this.#renderNextCard()
     }
@@ -88,7 +88,7 @@ customElements.define('poker-game',
     /**
      * Renders the next card in the next card slot.
      */
-    #renderNextCard() {
+    #renderNextCard () {
       const nextCard = this.#game.getNextCard()
 
       const card = document.createElement('poker-card')
@@ -102,7 +102,7 @@ customElements.define('poker-game',
     /**
      * Creates 10 result fields in the grid.
      */
-    #createResultFields() {
+    #createResultFields () {
       for (let index = 0; index < 5; index++) {
         this.#createOneResultField('row', index)
         this.#createOneResultField('column', index)
@@ -115,7 +115,7 @@ customElements.define('poker-game',
      * @param {string} direction - row or column
      * @param {number} index - index of the row or column
      */
-    #createOneResultField(direction, index) {
+    #createOneResultField (direction, index) {
       const template = document.createElement('template')
 
       template.innerHTML = `
@@ -139,7 +139,7 @@ customElements.define('poker-game',
      * Called when the component is added to the DOM.
      * Sets up event listeners.
      */
-    connectedCallback() {
+    connectedCallback () {
       this.#grid.addEventListener('slot-click', this.#onSlotClick, { signal: this.#abortController.signal })
     }
 
@@ -164,7 +164,7 @@ customElements.define('poker-game',
      * @param { number } coordinates.row - row index
      * @param { number } coordinates.column - column index
      */
-    #placeCardAt({ row, column }) {
+    #placeCardAt ({ row, column }) {
       this.#game.placeCardAt(row, column)
       this.#nextCard.setAttribute('slot', `r${row}c${column}`)
       this.#grid.appendChild(this.#nextCard)
@@ -178,7 +178,7 @@ customElements.define('poker-game',
      * @param { number } coordinates.row - row index
      * @param { number } coordinates.column - column index
      */
-    #displayResults({ row, column }) {
+    #displayResults ({ row, column }) {
       this.#renderResult({ direction: 'row', index: row })
       this.#renderResult({ direction: 'column', index: column })
       if (this.#game.isGameOver()) {
@@ -191,7 +191,7 @@ customElements.define('poker-game',
      *
      * @param {object} fieldId - direction and index position of the resultfield
      */
-    #renderResult(fieldId) {
+    #renderResult (fieldId) {
       const { direction, index } = fieldId
 
       const { points, name } = this.#game.getResult(direction, index)
@@ -207,7 +207,7 @@ customElements.define('poker-game',
      * @param {string} content.title - title of the message
      * @param {string} content.text - text of the message
      */
-    #displayMessage({ title, text }) {
+    #displayMessage ({ title, text }) {
       const template = document.createElement('template')
       template.innerHTML = `
         <game-message>
@@ -226,7 +226,7 @@ customElements.define('poker-game',
     /**
      * Handles the game over event.
      */
-    #handleGameOver() {
+    #handleGameOver () {
       this.#displayMessage(
         {
           title: 'Congrants, you finished the poker game!',
@@ -240,7 +240,7 @@ customElements.define('poker-game',
      *
      * @param {Error} err - the error message
      */
-    #handleError(err) {
+    #handleError (err) {
       this.#displayMessage(
         {
           title: 'Oh no!',
@@ -253,7 +253,7 @@ customElements.define('poker-game',
      * Called when the component is removed from the DOM.
      * Cleans up event listeners.
      */
-    disconnectedCallback() {
+    disconnectedCallback () {
       this.#abortController.abort()
     }
   })
