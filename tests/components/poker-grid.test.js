@@ -16,5 +16,4 @@ describe('poker-grid', () => {
       expect(actualQtySlots).toBe(expectedQtySlots)
     })
   })
-
 })
