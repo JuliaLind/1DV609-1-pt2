@@ -10,7 +10,7 @@ export class SameOfAKind {
    *
    * @param {number} sameRankCount - the number of same rank cards required to fulfill the rule
    */
-  constructor(sameRankCount) {
+  constructor (sameRankCount) {
     if (new.target === SameOfAKind) {
       throw new Error('SameOfAKind is an abstract class')
     }
@@ -23,7 +23,7 @@ export class SameOfAKind {
    *
    * @param {number} rankCount - the exact count of same rank required to fulfill the fule
    */
-  #setSameRankCount(rankCount) {
+  #setSameRankCount (rankCount) {
     this.#validateRankCount(rankCount)
 
     this.#sameRankCount = rankCount
@@ -34,7 +34,7 @@ export class SameOfAKind {
    *
    * @param {number} rankCount - the required rankCount to fulfill the rule
    */
-  #validateRankCount(rankCount) {
+  #validateRankCount (rankCount) {
     if (!rankCount) {
       throw new Error('rankCount missing')
     }
@@ -46,7 +46,7 @@ export class SameOfAKind {
    * @param {object} line - the line of cards to test for the rule
    * @returns {boolean} - true if the line fulfills the rule, false otherwise
    */
-  test(line) {
+  test (line) {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
