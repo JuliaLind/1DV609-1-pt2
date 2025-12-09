@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from 'vitest'
+import { describe, it, expect, beforeAll, vi, beforeEach, afterEach } from 'vitest'
 import '../../src/js/components/poker-game'
 import { Game } from '../../src/js/logic/Game.js'
 
@@ -15,7 +15,8 @@ describe('poker-game', () => {
   }
 
   const gameMock = {
-    getNextCard: vi.fn()
+    getNextCard: vi.fn(),
+    placeCardAt: vi.fn()
   }
 
   beforeAll(() => {
@@ -41,5 +42,32 @@ describe('poker-game', () => {
     expect(nextCard).not.toBeNull()
 
     pokerGame.remove()
+  })
+
+  describe('When poker-grid is clicked', () => {
+    let pokerGame
+    let pokerGrid
+    const row = 2
+    const column = 3
+
+    beforeEach(() => {
+      pokerGame = document.createElement('poker-game')
+      document.body.appendChild(pokerGame)
+      pokerGrid = pokerGame.shadowRoot.querySelector('poker-grid')
+
+      gameMock.placeCardAt.mockClear()
+    })
+
+    afterEach(() => {
+      pokerGame.remove()
+    })
+
+    it('When poker-grid is clicked, the game.placeCardAt() method should be called with row and column', () => {
+      pokerGrid.dispatchEvent(new CustomEvent('slot-click', {
+        detail: { row, column }
+      }))
+
+      expect(gameMock.placeCardAt).toHaveBeenCalledWith(row, column)
+    })
   })
 })
