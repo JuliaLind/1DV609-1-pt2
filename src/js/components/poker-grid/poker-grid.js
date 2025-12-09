@@ -99,14 +99,16 @@ customElements.define('poker-grid',
      * Called when the element is added to the DOM.
      */
     connectedCallback() {
-      this.shadowRoot.addEventListener('click',
-        (event) => {
-          const cardSlot = event.target
+      this.shadowRoot.addEventListener('click', this.#onClick, { signal: this.#abortController.signal })
+    }
 
-          const row = parseInt(cardSlot.dataset.row)
-          const column = parseInt(cardSlot.dataset.column)
-          this.dispatchEvent(new CustomEvent('slot-click'))
-        }, { signal: this.#abortController.signal })
+    /**
+     * Handles a click event on a card slot.
+     *
+     * @param {event} event - click event on a card slot
+     */
+    #onClick = (event) => {
+      this.dispatchEvent(new CustomEvent('slot-click'))
     }
 
     /**
