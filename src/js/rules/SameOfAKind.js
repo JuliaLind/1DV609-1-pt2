@@ -8,6 +8,8 @@ export class SameOfAKind {
    *
    */
   constructor () {
-    throw new Error('SameOfAKind is an abstract class')
+    if (new.target === SameOfAKind) {
+      throw new Error('SameOfAKind is an abstract class')
+    }
   }
 }
