@@ -85,12 +85,17 @@ customElements.define('poker-card',
       if (['rank', 'suite'].includes(name)) {
         this[name] = newValue
 
-        if (this.#rank && this.#suite) {
-          this.#updateAltAttribute()
-          const imageName = this.#rank + this.#suite.charAt(0)
-          const imagePath = `./img/${imageName}.svg`
-          this.#img.setAttribute('src', new URL(imagePath, import.meta.url).href)
-        }
+        this.#refreshImage()
+      }
+    }
+
+    /**
+     * Refreshes the poker card image based on the current rank and suite.
+     */
+    #refreshImage() {
+      if (this.#rank && this.#suite) {
+        this.#updateAltAttribute()
+        this.#updateSrcAttribute()
       }
     }
 
@@ -99,5 +104,14 @@ customElements.define('poker-card',
      */
     #updateAltAttribute() {
       this.#img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
+    }
+
+    /**
+     * Updates the src attribute of the poker card image.
+     */
+    #updateSrcAttribute() {
+      const imageName = this.#rank + this.#suite.charAt(0)
+      const imagePath = `./img/${imageName}.svg`
+      this.#img.setAttribute('src', new URL(imagePath, import.meta.url).href)
     }
   })
