@@ -84,7 +84,13 @@ customElements.define('poker-card',
 
       if (['rank', 'suite'].includes(name)) {
         this[name] = newValue
-        this.#updateAltAttribute()
+
+        if (this.#rank && this.#suite) {
+          this.#updateAltAttribute()
+          const imageName = this.#rank + this.#suite.charAt(0)
+          const imagePath = `./img/${imageName}.svg`
+          this.#img.setAttribute('src', new URL(imagePath, import.meta.url).href)
+        }
       }
     }
 
