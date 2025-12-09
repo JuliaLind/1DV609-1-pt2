@@ -131,5 +131,13 @@ describe('poker-game', () => {
       expect(resultName.textContent).toBe('ColumnRule')
       expect(resultPoints.textContent).toBe('20')
     })
+
+    it('A resultfield that has not been updated should display empty name and 0 points', () => {
+      const resultName = pokerGame.shadowRoot.querySelector('[slot="result-column1"] .name')
+      const resultPoints = pokerGame.shadowRoot.querySelector('[slot="result-column1"] .points')
+
+      expect(resultName.textContent).toBe('')
+      expect(resultPoints.textContent).toBe('0')
+    })
   })
 })
