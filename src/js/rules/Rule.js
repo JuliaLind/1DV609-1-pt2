@@ -8,6 +8,8 @@ export class Rule {
    * @throws {Error} If instantiated directly.
    */
   constructor () {
-    throw new Error('Rule is an abstract class')
+    if (new.target === Rule) {
+      throw new Error('Rule is an abstract class')
+    }
   }
 }
