@@ -31,12 +31,12 @@ customElements.define('poker-card',
     /**
      * Creates an instance of poker-card.
      */
-    constructor() {
+    constructor () {
       super()
 
       this.attachShadow({ mode: 'open' })
         .append(template.content.cloneNode(true))
-      
+
       this.#img = this.shadowRoot.querySelector('img')
     }
 
@@ -45,7 +45,7 @@ customElements.define('poker-card',
      *
      * @returns {Array} - array of attribute names to observe
      */
-    static get observedAttributes() {
+    static get observedAttributes () {
       return ['rank', 'suite']
     }
 
@@ -57,7 +57,7 @@ customElements.define('poker-card',
      * @param {any} oldValue - old value of the changed attribute
      * @param {any} newValue - new value of the changed attribute
      */
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback (name, oldValue, newValue) {
       switch (name) {
         case 'rank':
           this.#rank = newValue
@@ -75,7 +75,7 @@ customElements.define('poker-card',
     /**
      * Updates the alt attribute of the poker card image.
      */
-    #updateAltAttribute() {
+    #updateAltAttribute () {
       this.#img.setAttribute('alt', `${this.#rank} of ${this.#suite}`)
     }
   })
