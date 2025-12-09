@@ -6,6 +6,48 @@ template.innerHTML = `
   * {
     box-sizing: border-box;
   }
+
+  :host {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--poker-green);
+    border-radius: 1rem;
+    background-color: var(--white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+
+    width: fit-content;
+    height: fit-content;
+
+    font-family: 'Arial', sans-serif;
+    font-size: 1.3rem;
+    color: var(--dark-poker-green);
+  }
+
+  button {
+    background: var(--poker-green);
+    color: var(--white);
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    box-shadow: 0 3px 0 #003300;
+    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  button:hover {
+    background: var(--light-poker-green);
+  }
+
+  button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #003300;
+  }
 </style>
 <div id="text">
   <slot></slot>
