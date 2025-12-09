@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import '../../src/js/components/poker-grid'
 
 describe('poker-grid', () => {
@@ -21,6 +21,33 @@ describe('poker-grid', () => {
       const expectedQtyFields = 10
 
       expect(actualQtyFields).toBe(expectedQtyFields)
+    })
+  })
+
+  describe('poker-grid slot click event', () => {
+    let pokerGrid
+    let cardSlot
+
+    beforeEach(() => {
+      pokerGrid = document.createElement('poker-grid')
+      document.body.appendChild(pokerGrid)
+      const shadowRoot = pokerGrid.shadowRoot
+      cardSlot = shadowRoot.querySelector('.card-slot[data-row="2"][data-column="1"]')
+    })
+
+    afterEach(() => {
+      pokerGrid.remove()
+    })
+
+    it('slot-click event should be dispatched when clicking on a card slot', () => {
+      let eventDispatched = false
+
+      pokerGrid.addEventListener('slot-click', () => {
+        eventDispatched = true
+      })
+      cardSlot.click()
+
+      expect(eventDispatched).toBe(true)
     })
   })
 })
