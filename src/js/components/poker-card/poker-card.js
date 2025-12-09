@@ -67,7 +67,7 @@ customElements.define('poker-card',
         case 'suite':
           this.#suite = newValue
 
-          this.#img.updateAltAttribute()
+          this.#updateAltAttribute()
           break
       }
     }
