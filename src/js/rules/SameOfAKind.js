@@ -11,6 +11,9 @@ export class SameOfAKind extends Rule {
    * Creates an instance of SameOfAKind.
    *
    * @param {number} sameRankCount - the number of same rank cards required to fulfill the rule
+   * @param {string} name - name of the rule
+   * @param {number} value - value is the number of points the rule is worth
+   * @throws {Error} If instantiated directly.
    */
   constructor (sameRankCount, name, value) {
     if (new.target === SameOfAKind) {
@@ -56,7 +59,6 @@ export class SameOfAKind extends Rule {
 
     return frequencies.includes(this.#sameRankCount)
   }
-
 
   /**
    * Gets the number of same rank cards required to fulfill the rule.
