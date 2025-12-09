@@ -17,7 +17,7 @@ customElements.define('poker-grid',
     /**
      * Creates an instance of poker-grid.
      */
-    constructor () {
+    constructor() {
       super()
       this.attachShadow({ mode: 'open' })
       this.shadowRoot.appendChild(template.content.cloneNode(true))
@@ -29,9 +29,21 @@ customElements.define('poker-grid',
      * Initializes the poker grid by creating card slots
      * and result fields.
      */
-    #init () {
+    #init() {
       for (let row = 0; row < 5; row++) {
         this.#createSlotRow(row)
+      }
+
+      for (let column = 0; column < 5; column++) {
+        const template = document.createElement('template')
+        
+        template.innerHTML = `
+        <div class="result-field">
+          <slot name="result-row${column}"></slot>
+        </div>
+        `
+
+        this.shadowRoot.appendChild(template.content.querySelector('.result-field'))
       }
     }
 
@@ -40,10 +52,20 @@ customElements.define('poker-grid',
      *
      * @param {number} row - index of the rpw
      */
-    #createSlotRow (row) {
+    #createSlotRow(row) {
       for (let column = 0; column < 5; column++) {
         this.#createOneSlot({ row, column })
       }
+
+      const template = document.createElement('template')
+      
+      template.innerHTML = `
+        <div class="result-field">
+          <slot name="result-row${row}"></slot>
+        </div>
+        `
+
+      this.shadowRoot.appendChild(template.content.querySelector('.result-field'))
     }
 
     /**
@@ -51,10 +73,9 @@ customElements.define('poker-grid',
      *
      * @param {object} placement - row and column to place the slot in
      */
-    #createOneSlot (placement) {
+    #createOneSlot(placement) {
       const { row, column } = placement
       const template = document.createElement('template')
-
       template.innerHTML = `
         <div class="card-slot" data-row="${row}" data-column="${column}">
           <slot name="r${row}c${column}"></slot>
