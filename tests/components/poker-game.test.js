@@ -146,7 +146,6 @@ describe('poker-game', () => {
       expect(resultPoints.textContent).toBe('0')
     })
 
-
     it('When poker-grid is clicked and the game is over, the game message should be shown', () => {
       gameMock.isGameOver.mockReturnValueOnce(true)
       gameMock.getTotalPoints.mockReturnValueOnce(37)
