@@ -3,6 +3,8 @@
  * for a certain number of cards of the same rank.
  */
 export class SameOfAKind {
+  #sameRankCount
+
   /**
    * Creates an instance of SameOfAKind.
    *
@@ -14,13 +16,14 @@ export class SameOfAKind {
     }
 
     this.#validateRankCount(sameRankCount)
+    this.#sameRankCount = sameRankCount
   }
 
-/**
- * Checks that the rank count has been provided.
- *
- * @param {number} rankCount - the required rankCount to fulfill the rule
- */
+  /**
+   * Checks that the rank count has been provided.
+   *
+   * @param {number} rankCount - the required rankCount to fulfill the rule
+   */
   #validateRankCount(rankCount) {
     if (!rankCount) {
       throw new Error('rankCount missing')
@@ -34,6 +37,13 @@ export class SameOfAKind {
    * @returns {boolean} - true if the line fulfills the rule, false otherwise
    */
   test(line) {
+    const rankFrequencies = line.getRankFrequencies()
+    const frequencies = Object.values(rankFrequencies)
+
+    if (Math.max(...frequencies) < this.#sameRankCount) {
+      return false
+    }
+
     return true
   }
 }
