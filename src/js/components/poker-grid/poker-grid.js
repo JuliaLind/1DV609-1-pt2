@@ -14,4 +14,26 @@ customElements.define('poker-grid',
    * Class representing a poker grid component.
    */
   class extends HTMLElement {
+    /**
+     * Creates an instance of poker-grid.
+     */
+    constructor() {
+      super()
+      this.attachShadow({ mode: 'open' })
+      this.shadowRoot.appendChild(template.content.cloneNode(true))
+
+      for (let row = 0; row < 5; row++) {
+        for (let column = 0; column < 5; column++) {
+          const template = document.createElement('template')
+
+          template.innerHTML = `
+            <div class="card-slot" data-row="${row}" data-column="${column}">
+              <slot name="r${row}c${column}"></slot>
+            </div>
+          `
+
+          this.shadowRoot.appendChild(template.content.querySelector('.card-slot'))
+        }
+      }
+    }
   })
