@@ -9,7 +9,9 @@ export class OnePair extends SameOfAKind {
    */
   constructor () {
     const sameRankCount = 2
+    const name = 'One Pair'
+    const value = 2
 
-    super(sameRankCount)
+    super(sameRankCount, name, value)
   }
 }

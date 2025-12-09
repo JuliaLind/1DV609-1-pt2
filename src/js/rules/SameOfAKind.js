@@ -1,8 +1,10 @@
+import { Rule } from './Rule.js'
+
 /**
  * Abstract class representing a rule that checks
  * for a certain number of cards of the same rank.
  */
-export class SameOfAKind {
+export class SameOfAKind extends Rule {
   #sameRankCount
 
   /**
@@ -10,10 +12,12 @@ export class SameOfAKind {
    *
    * @param {number} sameRankCount - the number of same rank cards required to fulfill the rule
    */
-  constructor (sameRankCount) {
+  constructor (sameRankCount, name, value) {
     if (new.target === SameOfAKind) {
       throw new Error('SameOfAKind is an abstract class')
     }
+
+    super(name, value)
 
     this.#setSameRankCount(sameRankCount)
   }
