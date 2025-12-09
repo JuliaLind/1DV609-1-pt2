@@ -22,13 +22,19 @@ describe('poker-game', () => {
   const gameMock = {
     getNextCard: vi.fn(),
     placeCardAt: vi.fn(),
-    getResult: vi.fn()
+    getResult: vi.fn(),
+    isGameOver: vi.fn(),
+    getTotalPoints: vi.fn()
   }
 
   beforeAll(() => {
     Game.mockImplementation(function () {
       return gameMock
     })
+  })
+
+  beforeEach(() => {
+    gameMock.isGameOver.mockReset().mockReturnValue(false)
   })
 
   it('poker-game should be defined as a custom element', () => {
@@ -138,6 +144,19 @@ describe('poker-game', () => {
 
       expect(resultName.textContent).toBe('')
       expect(resultPoints.textContent).toBe('0')
+    })
+
+
+    it('When poker-grid is clicked and the game is over, the game message should be shown', () => {
+      gameMock.isGameOver.mockReturnValueOnce(true)
+      gameMock.getTotalPoints.mockReturnValueOnce(37)
+      pokerGrid.dispatchEvent(new CustomEvent('slot-click', {
+        detail: { row, column }
+      }))
+      const gameMessage = pokerGame.shadowRoot.querySelector('game-message')
+      const messageText = gameMessage.textContent
+      expect(messageText).toContain('37')
+      gameMessage.remove()
     })
   })
 })
