@@ -50,10 +50,6 @@ export class SameOfAKind {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
-    if (Math.max(...frequencies) < this.#sameRankCount) {
-      return false
-    }
-
-    return true
+    return frequencies.includes(this.#sameRankCount)
   }
 }
