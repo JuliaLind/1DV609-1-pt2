@@ -26,4 +26,14 @@ export class SameOfAKind {
       throw new Error('rankCount missing')
     }
   }
+
+  /**
+   * Tests if the given line of cards fulfills the rule.
+   *
+   * @param {object} line - the line of cards to test for the rule
+   * @returns {boolean} - true if the line fulfills the rule, false otherwise
+   */
+  test(line) {
+    return true
+  }
 }
