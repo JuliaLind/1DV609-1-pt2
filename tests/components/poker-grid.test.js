@@ -62,5 +62,14 @@ describe('poker-grid', () => {
 
       expect(eventDispatched).toBe(false)
     })
+
+    it('slot-click event detail should contain correct row and column', () => {
+      let eventDetail = null
+      pokerGrid.addEventListener('slot-click', (event) => {
+        eventDetail = event.detail
+      })
+      cardSlot.click()
+      expect(eventDetail).toEqual({ row: 2, column: 1 })
+    })
   })
 })
