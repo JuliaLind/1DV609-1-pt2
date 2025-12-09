@@ -85,6 +85,20 @@ customElements.define('poker-game',
       this.#nextCard.setAttribute('slot', `r${row}c${column}`)
       this.#grid.appendChild(this.#nextCard)
       this.#renderNextCard()
+
+      const result = this.#game.getRowResult(row)
+      const template = document.createElement('template')
+
+      template.innerHTML = `
+        <div class="result-field" slot="result-row${row}">
+          <span class="points">${result.points}</span>
+          <span class="name">${result.name}</span>
+
+        </div>
+        `
+      const field = template.content.querySelector('.result-field')
+
+      this.#grid.appendChild(field)
     }
 
     /**
