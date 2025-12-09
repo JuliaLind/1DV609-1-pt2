@@ -6,4 +6,10 @@ describe('FourOfAKind', () => {
   it('FourOfAKind should inherit test method from SameOfAKind', () => {
     expect(FourOfAKind.prototype.test).toBe(SameOfAKind.prototype.test)
   })
+
+  it('FourOfAKind sameRankRount getter should return 4', () => {
+    const sut = new FourOfAKind()
+
+    expect(sut.sameRankCount).toBe(4)
+  })
 })
