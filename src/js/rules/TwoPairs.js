@@ -21,6 +21,21 @@ export class TwoPairs extends Rule {
  * @returns {boolean} - true if the line contains two pairs, false otherwise
  */
   test(line) {
-    return true
+    const rankFrequencies = line.getRankFrequencies()
+    const frequencies = Object.values(rankFrequencies)
+
+    let pairsCount = 0
+
+    for (const count of frequencies) {
+      if (count === 2) {
+        pairsCount += 1
+      }
+
+      if (pairsCount === 2) {
+        return true
+      }
+    }
+
+    return false
   }
 }
