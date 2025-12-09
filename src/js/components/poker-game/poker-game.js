@@ -87,6 +87,7 @@ customElements.define('poker-game',
       this.#renderNextCard()
 
       this.#updateResult({ direction: 'row', index: row })
+      this.#updateResult({ direction: 'column', index: column })
     }
 
     /**
