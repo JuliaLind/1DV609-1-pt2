@@ -19,7 +19,7 @@ customElements.define('poker-grid',
     /**
      * Creates an instance of poker-grid.
      */
-    constructor() {
+    constructor () {
       super()
       this.attachShadow({ mode: 'open' })
       this.shadowRoot.appendChild(template.content.cloneNode(true))
@@ -31,7 +31,7 @@ customElements.define('poker-grid',
      * Initializes the poker grid by creating card slots
      * and result fields.
      */
-    #init() {
+    #init () {
       for (let row = 0; row < 5; row++) {
         this.#createSlotRow(row)
         this.#createResultField({ direction: 'row', index: row })
@@ -45,7 +45,7 @@ customElements.define('poker-grid',
      *
      * @param {number} row - index of the rpw
      */
-    #createSlotRow(row) {
+    #createSlotRow (row) {
       for (let column = 0; column < 5; column++) {
         this.#createOneSlot({ row, column })
       }
@@ -56,7 +56,7 @@ customElements.define('poker-grid',
      *
      * @param {object} placement - row and column to place the slot in
      */
-    #createOneSlot(placement) {
+    #createOneSlot (placement) {
       const { row, column } = placement
       const template = document.createElement('template')
       template.innerHTML = `
@@ -71,7 +71,7 @@ customElements.define('poker-grid',
     /**
      * Creates a row of result fields.
      */
-    #createResultRow() {
+    #createResultRow () {
       for (let column = 0; column < 5; column++) {
         this.#createResultField({ direction: 'column', index: column })
       }
@@ -82,7 +82,7 @@ customElements.define('poker-grid',
      *
      * @param {object} placement - direction and index to place the result field in
      */
-    #createResultField(placement) {
+    #createResultField (placement) {
       const { direction, index } = placement
       const template = document.createElement('template')
 
@@ -98,7 +98,7 @@ customElements.define('poker-grid',
     /**
      * Called when the element is added to the DOM.
      */
-    connectedCallback() {
+    connectedCallback () {
       this.shadowRoot.addEventListener('click', this.#onClick, { signal: this.#abortController.signal })
     }
 
@@ -108,13 +108,19 @@ customElements.define('poker-grid',
      * @param {event} event - click event on a card slot
      */
     #onClick = (event) => {
+      const cardSlot = event.target
+
+      if (!cardSlot.classList.contains('card-slot')) {
+        return
+      }
+
       this.dispatchEvent(new CustomEvent('slot-click'))
     }
 
     /**
      * Cleans up when the element is removed from the DOM.
      */
-    disconnectedCallback() {
+    disconnectedCallback () {
       this.#abortController.abort()
     }
   })
