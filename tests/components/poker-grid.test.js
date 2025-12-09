@@ -15,5 +15,12 @@ describe('poker-grid', () => {
 
       expect(actualQtySlots).toBe(expectedQtySlots)
     })
+
+    it('poker-grid should contain 10 fields for results', () => {
+      const actualQtyFields = pokerGrid.shadowRoot.querySelectorAll('.result-field').length
+      const expectedQtyFields = 10
+
+      expect(actualQtyFields).toBe(expectedQtyFields)
+    })
   })
 })
