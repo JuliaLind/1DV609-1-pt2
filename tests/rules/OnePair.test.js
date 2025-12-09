@@ -6,4 +6,10 @@ describe('OnePair', () => {
   it('OnePair should inherit test method from SameOfAKind', () => {
     expect(OnePair.prototype.test).toBe(SameOfAKind.prototype.test)
   })
+
+  it('OnePair sameRankRount getter should return 2', () => {
+    const sut = new OnePair()
+
+    expect(sut.sameRankCount).toBe(2)
+  })
 })
