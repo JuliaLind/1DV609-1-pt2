@@ -44,31 +44,31 @@ describe('RuleSet', () => {
 
   describe('', () => {
     const royalFlushMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Royal Flush', points: 100 })
-      })
+      toObject: vi.fn().mockReturnValue({ name: 'Royal Flush', points: 100 })
+    })
     const straightFlushMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Straight Flush', points: 75 })
-      })
+      toObject: vi.fn().mockReturnValue({ name: 'Straight Flush', points: 75 })
+    })
     const fourOfAKindMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Four of a Kind', points: 50 })
+      toObject: vi.fn().mockReturnValue({ name: 'Four of a Kind', points: 50 })
     })
     const fullHouseMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Full House', points: 25 })
+      toObject: vi.fn().mockReturnValue({ name: 'Full House', points: 25 })
     })
     const flushMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Flush', points: 20 })
+      toObject: vi.fn().mockReturnValue({ name: 'Flush', points: 20 })
     })
     const straightMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Straight', points: 15 })
+      toObject: vi.fn().mockReturnValue({ name: 'Straight', points: 15 })
     })
     const threeOfAKindMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Three of a Kind', points: 10 })
+      toObject: vi.fn().mockReturnValue({ name: 'Three of a Kind', points: 10 })
     })
     const twoPairsMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'Two Pairs', points: 5 })
+      toObject: vi.fn().mockReturnValue({ name: 'Two Pairs', points: 5 })
     })
     const onePairMock = vi.fn({
-        toObject: vi.fn().mockReturnValue({ name: 'One Pair', points: 2 })
+      toObject: vi.fn().mockReturnValue({ name: 'One Pair', points: 2 })
     })
 
     let sut
@@ -133,7 +133,6 @@ describe('RuleSet', () => {
       })
     })
 
-        
     it('RuleSet.evaluate should return the highest ranking rule that matches', () => {
       for (const ruleMock of [
         straightFlushMock,
