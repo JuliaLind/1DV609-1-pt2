@@ -23,17 +23,8 @@ export class Flush extends Rule {
   test(line) {
     const suiteFrequencies = line.getSuiteFrequencies()
     const frequencies = Object.values(suiteFrequencies)
+    const requiredFrequency = 5
 
-    if (frequencies.length >= 2) {
-      return false
-    }
-
-    const cardCount = frequencies.reduce((acc, val) => acc + val, 0)
-
-    if (cardCount < 5) {
-      return false
-    }
-
-    return true
+    return frequencies.includes(requiredFrequency)
   }
 }
