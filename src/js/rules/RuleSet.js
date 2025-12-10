@@ -51,7 +51,9 @@ export class RuleSet {
    */
   evaluate (line) {
     for (const rule of this.#rules) {
-      rule.test(line)
+      if (rule.test(line)) {
+        return rule.toObject()
+      }
     }
 
     return Rule.toObject()
