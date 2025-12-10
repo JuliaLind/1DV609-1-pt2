@@ -12,7 +12,7 @@ export class Card {
    * @param {string} suite - the suite of the card
    */
   constructor (rank, suite) {
-    if (!rank) {
+    if (!rank || !['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].includes(rank)) {
       throw new Error('Rank is missing!')
     }
     if(!suite) {
