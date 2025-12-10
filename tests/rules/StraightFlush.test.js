@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { StraightFlush } from '../../src/js/rules/StraightFlush.js'
 
 describe('StraightFlush', () => {
@@ -13,64 +13,45 @@ describe('StraightFlush', () => {
   })
 
   it('StraightFlush.test() should return true if both Straight.test and Flush.test return true', () => {
-    const straightMock = {
-      /**
-       * Mock method for test.
-       *
-       * @returns {boolean} - always returns true
-       */
-      test: () => true
-    }
+    const straightStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
 
-    const flushMock = {
-      /**
-       * Mock method for test.
-       *
-       * @returns {boolean} - always returns true
-       */
-      test: () => true
-    }
+    const flushStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
 
-    const sut = new StraightFlush(straightMock, flushMock)
+    const sut = new StraightFlush(straightStub, flushStub)
 
     expect(sut.test()).toBe(true)
   })
 
   it('StraightFlush.test() should return false if Straight.test returns false', () => {
-    const straightMock = {
-      /**
-       * Mock method for test.
-       *
-       * @returns {boolean} - always returns false
-       */
-      test: () => false
-    }
+    const straightStub = vi.fn({
+      test: vi.fn().mockReturnValue(false)
+    })
 
-    const sut = new StraightFlush(straightMock)
+    const flushStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
+
+    const sut = new StraightFlush(straightStub, flushStub)
+
 
     expect(sut.test()).toBe(false)
   })
 
   it('StraightFlush.test() should return false if Flush.test returns false', () => {
-    const straightMock = {
-      /**
-       * Mock method for test.
-       *
-       * @returns {boolean} - always returns true
-       */
-      test: () => true
-    }
+    const straightStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
 
-    const flushMock = {
-      /**
-       * Mock method for test.
-       *
-       * @returns {boolean} - always returns false
-       */
-      test: () => false
-    }
+    const flushStub = vi.fn({
+      test: vi.fn().mockReturnValue(false)
+    })
 
-    const sut = new StraightFlush(straightMock, flushMock)
+    const sut = new StraightFlush(straightStub, flushStub)
+
 
     expect(sut.test()).toBe(false)
   })

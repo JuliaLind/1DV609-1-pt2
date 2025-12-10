@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { FullHouse } from '../../src/js/rules/FullHouse.js'
 
 describe('FullHouse', () => {
@@ -13,71 +13,50 @@ describe('FullHouse', () => {
   })
 
   it('FullHouse.test() should return true if both ThreeOfAKind.test and OnePair.test return true', () => {
-    const onePairStub = {
-      /**
-       * Stub method for test.
-       *
-       * @returns {boolean} - always returns true
-       */
-      test: () => true
-    }
+    const onePairStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
 
-    const threeOfAKindStub = {
-      /**
-       * Stub method for test.
-       *
-       * @returns {boolean} - always returns true
-       */
-      test: () => true
-    }
+    const threeOfAKindStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
 
     const sut = new FullHouse(onePairStub, threeOfAKindStub)
 
-    const lineStub = {}
+    const lineDummy = {}
 
-    expect(sut.test(lineStub)).toBe(true)
+    expect(sut.test(lineDummy)).toBe(true)
   })
 
   it('FullHouse.test() should return false if OnePair.test returns false', () => {
-    const onePairStub = {
-      /**
-       * Stub method for test.
-       *
-       * @returns {boolean} - always returns false
-       */
-      test: () => false
-    }
+    const onePairStub = vi.fn({
+      test: vi.fn().mockReturnValue(false)
+    })
 
-    const sut = new FullHouse(onePairStub)
-
-    const lineStub = {}
-
-    expect(sut.test(lineStub)).toBe(false)
-  })
-
-  it('FullHouse.test() should return false if ThreeOfAKind.test returns false', () => {
-    const onePairStub = {
-      /**
-       * Stub method for test.
-       *
-       * @returns {boolean} - always returns true
-       */
-      test: () => true
-    }
-
-    const threeOfAKindStub = {
-      /**
-       * Stub method for test.
-       *
-       * @returns {boolean} - always returns false
-       */
-      test: () => false
-    }
+    const threeOfAKindStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
 
     const sut = new FullHouse(onePairStub, threeOfAKindStub)
 
-    const lineStub = {}
+    const lineDummy = {}
 
-    expect(sut.test(lineStub)).toBe(false)
+    expect(sut.test(lineDummy)).toBe(false)
+  })
+
+  it('FullHouse.test() should return false if ThreeOfAKind.test returns false', () => {
+    const onePairStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
+
+    const threeOfAKindStub = vi.fn({
+      test: vi.fn().mockReturnValue(false)
+    })
+
+    const sut = new FullHouse(onePairStub, threeOfAKindStub)
+
+    const lineDummy = {}
+
+    expect(sut.test(lineDummy)).toBe(false)
   })
 })
