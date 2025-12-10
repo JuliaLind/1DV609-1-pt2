@@ -17,7 +17,6 @@ describe('RoyalFlush', () => {
       test: vi.fn().mockReturnValue(true)
     })
 
-    // eslint-disable-next-line
     const lineStub = vi.fn({
       hasRank: vi.fn().mockReturnValue(true)
     })
@@ -32,7 +31,6 @@ describe('RoyalFlush', () => {
       test: vi.fn().mockReturnValue(true)
     })
 
-    // eslint-disable-next-line
     const lineMock = vi.fn({
       hasRank: vi.fn().mockReturnValue(true)
     })
@@ -41,5 +39,19 @@ describe('RoyalFlush', () => {
     sut.test(lineMock)
 
     expect(lineMock.hasRank).toHaveBeenCalledWith(14)
+  })
+
+  it('RoyalFlush.test should return false if StraightFlush.test returns true but line does not contain an Ace', () => {
+    const straightFlushStub = vi.fn({
+      test: vi.fn().mockReturnValue(true)
+    })
+
+    const lineStub = vi.fn({
+      hasRank: vi.fn().mockReturnValue(false)
+    })
+
+    const sut = new RoyalFlush(straightFlushStub)
+
+    expect(sut.test(lineStub)).toBe(false)
   })
 })
