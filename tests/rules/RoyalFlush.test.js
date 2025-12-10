@@ -66,7 +66,6 @@ describe('RoyalFlush', () => {
 
     const sut = new RoyalFlush(straightFlushStub)
 
-
     expect(sut.test(lineStub)).toBe(false)
   })
 })
