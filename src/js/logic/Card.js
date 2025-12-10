@@ -3,14 +3,17 @@
  */
 export class Card {
   #rank
+  #suite
 
   /**
    * Creates an instance of Card.
    *
    * @param {string} rank - the rank of the card
+   * @param {string} suite - the suite of the card
    */
-  constructor (rank) {
+  constructor (rank, suite) {
     this.#rank = rank
+    this.#suite = suite
   }
 
   /**
@@ -20,5 +23,14 @@ export class Card {
    */
   get rank () {
     return this.#rank
+  }
+
+  /**
+   * Getter for the suite attribute.
+   *
+   * @returns {string} - the suite of the card
+   */
+  get suite () {
+    return this.#suite
   }
 }
