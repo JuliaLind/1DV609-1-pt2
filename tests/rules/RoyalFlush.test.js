@@ -54,4 +54,19 @@ describe('RoyalFlush', () => {
 
     expect(sut.test(lineStub)).toBe(false)
   })
+
+  it('RoyalFlush.test should return false if StraightFlush.test returns false', () => {
+    const straightFlushStub = vi.fn({
+      test: vi.fn().mockReturnValue(false)
+    })
+
+    const lineStub = vi.fn({
+      hasRank: vi.fn().mockReturnValue(true)
+    })
+
+    const sut = new RoyalFlush(straightFlushStub)
+
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
 })
