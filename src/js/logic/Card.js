@@ -12,6 +12,9 @@ export class Card {
    * @param {string} suite - the suite of the card
    */
   constructor (rank, suite) {
+    if (!rank) {
+      throw new Error('Rank is missing!')
+    }
     this.#rank = rank
     this.#suite = suite
   }
