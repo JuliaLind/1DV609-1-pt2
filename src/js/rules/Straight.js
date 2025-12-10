@@ -24,7 +24,7 @@ export class Straight extends Rule {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.keys(rankFrequencies)
 
-    return this.#hasFiveUniqueRanks(frequencies)
+    return this.#hasFiveUniqueRanks(frequencies) && this.#isConsecutive(frequencies)
   }
 
   /**
@@ -36,4 +36,18 @@ export class Straight extends Rule {
   #hasFiveUniqueRanks (uniqueRankFrequencies) {
     return uniqueRankFrequencies.length === 5
   }
+
+  /**
+   * Checks if the given ranks are consecutive.
+   *
+   * @param {number[]} ranks - the array of ranks
+   * @returns {boolean} - true if the ranks are consecutive, false otherwise
+   */
+  #isConsecutive (ranks) {
+    const highestRank = Math.max(...ranks)
+    const lowestRank = Math.min(...ranks)
+
+    return highestRank - lowestRank === ranks.length - 1
+  }
+ 
 }
