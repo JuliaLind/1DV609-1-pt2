@@ -22,11 +22,18 @@ export class Straight extends Rule {
    */
   test(line) {
     const rankFrequencies = line.getRankFrequencies()
-    const uniqueRanks = Object.keys(rankFrequencies)
+    const frequencies = Object.keys(rankFrequencies)
 
-    if (uniqueRanks.length !== 5) {
-      return false
-    }
-    return true
+    return this.#hasFiveUniqueRanks(frequencies)
+  }
+
+  /**
+   * Returns true if the array contains five unique ranks.
+   *
+   * @param {number[]} uniqueRankFrequencies - checks it the array contains 5 items
+   * @returns {boolean} - true if the array contains 5 items, false otherwise
+   */
+  #hasFiveUniqueRanks (uniqueRankFrequencies) {
+    return uniqueRankFrequencies.length === 5
   }
 }
