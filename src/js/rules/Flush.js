@@ -28,6 +28,12 @@ export class Flush extends Rule {
       return false
     }
 
+    const cardCount = frequencies.reduce((acc, val) => acc + val, 0)
+
+    if (cardCount < 5) {
+      return false
+    }
+
     return true
   }
 }
