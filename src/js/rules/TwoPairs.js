@@ -24,18 +24,8 @@ export class TwoPairs extends Rule {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
-    let pairsCount = 0
+    const pairsOnly = frequencies.filter(count => count === 2)
 
-    for (const count of frequencies) {
-      if (count === 2) {
-        pairsCount += 1
-      }
-
-      if (pairsCount === 2) {
-        return true
-      }
-    }
-
-    return false
+    return pairsOnly.length === 2
   }
 }
