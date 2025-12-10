@@ -54,4 +54,30 @@ describe('FullHouse', () => {
 
     expect(sut.test(lineStub)).toBe(false)
   })
+
+  it('FullHouse.test() should return false if ThreeOfAKind.test returns false', () => {
+    const onePairStub = {
+      /**
+       * Stub method for test.
+       *
+       * @returns {boolean} - always returns true
+       */
+      test: () => true
+    }
+
+    const threeOfAKindStub = {
+      /**
+       * Stub method for test.
+       *
+       * @returns {boolean} - always returns false
+       */
+      test: () => false
+    }
+
+    const sut = new FullHouse(onePairStub, threeOfAKindStub)
+
+    const lineStub = {}
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
 })
