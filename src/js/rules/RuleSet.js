@@ -50,12 +50,8 @@ export class RuleSet {
    * @returns {object} - name and points of the highest ranking rule that matches the line.
    */
   evaluate (line) {
-    for (const rule of this.#rules) {
-      if (rule.test(line)) {
-        return rule.toObject()
-      }
-    }
+    const rule = this.#rules.find((rule) => rule.test(line))
 
-    return Rule.toObject()
+    return rule ? rule.toObject() : Rule.toObject()
   }
 }
