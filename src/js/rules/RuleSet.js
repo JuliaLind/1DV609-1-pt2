@@ -7,6 +7,7 @@ import { FullHouse } from './FullHouse.js'
 import { FourOfAKind } from './FourOfAKind.js'
 import { StraightFlush } from './StraightFlush.js'
 import { RoyalFlush } from './RoyalFlush.js'
+import { Rule } from './Rule.js'
 
 /**
  * Class representing a set of poker rules.
@@ -52,5 +53,7 @@ export class RuleSet {
     for (const rule of this.#rules) {
       rule.test(line)
     }
+
+    return Rule.toObject()
   }
 }
