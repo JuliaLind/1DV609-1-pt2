@@ -74,5 +74,4 @@ describe('StraightFlush', () => {
 
     expect(sut.test()).toBe(false)
   })
-
 })

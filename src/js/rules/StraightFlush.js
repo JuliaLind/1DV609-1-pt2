@@ -31,7 +31,7 @@ export class StraightFlush extends Rule {
    * @param {object} line - the line of cards to test for StraightFlush rule
    * @returns { boolean } - true if both Straight and Flush rules are satisfied, false otherwise
    */
-  test(line) {
+  test (line) {
     return this.#straightRule.test(line) && this.#flushRule.test(line)
   }
 }
