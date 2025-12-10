@@ -7,7 +7,7 @@ export class Straight extends Rule {
   /**
    * Creates an instance of Straight rule.
    */
-  constructor() {
+  constructor () {
     const name = 'Straight'
     const value = 15
 
@@ -20,7 +20,7 @@ export class Straight extends Rule {
    * @param {object} line - the line of cards to test
    * @returns { boolean } - true if the line contains five cards of consecutive ranks, false otherwise
    */
-  test(line) {
+  test (line) {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.keys(rankFrequencies)
 
@@ -49,5 +49,4 @@ export class Straight extends Rule {
 
     return highestRank - lowestRank === ranks.length - 1
   }
- 
 }

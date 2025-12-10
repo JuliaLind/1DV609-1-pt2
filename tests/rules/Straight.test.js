@@ -61,7 +61,7 @@ describe('Straight', () => {
       /**
        * Stub method for getRankFrequencies.
        *
-       * @returns {object} - a stubbed rank frequencies object that has two of same rank
+       * @returns {object} - a stubbed rank frequencies object that has non-consecutive ranks
        */
       getRankFrequencies: () => {
         return {
