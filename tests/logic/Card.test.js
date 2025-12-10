@@ -17,4 +17,8 @@ describe('Card', () => {
   it(`constructor should throw if rank is missing`, () => {
     expect(() => new Card(undefined, 'Hearts')).toThrow()
   })
+
+  it(`constructor should throw if suite is missing`, () => {
+    expect(() => new Card('A')).toThrow()
+  })
 })
