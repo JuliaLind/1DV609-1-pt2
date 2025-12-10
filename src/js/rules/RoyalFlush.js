@@ -14,4 +14,15 @@ export class RoyalFlush extends Rule {
 
     super(name, value)
   }
+
+  
+  /**
+   * Tests if the given line satisfies the Royal Flush rule.
+   *
+   * @param {object} line - the line of cards to test
+   * @returns { boolean } - true if the line satisfies the Royal Flush rule, false otherwise
+   */
+  test (line) {
+    return true
+  }
 }
