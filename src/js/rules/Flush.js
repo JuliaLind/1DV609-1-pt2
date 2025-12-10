@@ -21,6 +21,13 @@ export class Flush extends Rule {
    * @returns { boolean} - true if the line has five cards of the same suit, false otherwise
    */
   test(line) {
+    const suiteFrequencies = line.getSuiteFrequencies()
+    const frequencies = Object.values(suiteFrequencies)
+
+    if (frequencies.length >= 2) {
+      return false
+    }
+
     return true
   }
 }
