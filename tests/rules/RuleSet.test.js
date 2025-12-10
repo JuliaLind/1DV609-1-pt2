@@ -64,10 +64,32 @@ describe('RuleSet', () => {
       onePairMock.test.mock.invocationCallOrder[0]
     ]
 
-    console.log(onePairMock.test.mock)
-
     const expectedOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     expect(actualOrder).toEqual(expectedOrder)
+  })
+
+  it('RuleSet.evaluate should pass the GridLine into the test() method of the rules', () => {
+    const anyRuleMock = vi.fn({
+      test: vi.fn()
+    })
+  
+    const sut = new RuleSet({
+      onePair: anyRuleMock,
+      twoPairs: anyRuleMock,
+      threeOfAKind: anyRuleMock,
+      royalFlush: anyRuleMock,
+      straightFlush: anyRuleMock,
+      fourOfAKind: anyRuleMock,
+      fullHouse: anyRuleMock,
+      straight: anyRuleMock,
+      flush: anyRuleMock
+    })
+
+    const lineDummy = {}
+
+    sut.evaluate(lineDummy)
+
+    expect(anyRuleMock.test).toHaveBeenCalledWith(lineDummy)
   })
 })
