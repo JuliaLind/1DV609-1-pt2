@@ -15,6 +15,9 @@ export class Card {
     if (!rank) {
       throw new Error('Rank is missing!')
     }
+    if(!suite) {
+      throw new Error('Suite is missing!')
+    }
     this.#rank = rank
     this.#suite = suite
   }
