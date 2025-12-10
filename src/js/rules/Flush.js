@@ -7,7 +7,7 @@ export class Flush extends Rule {
   /**
    * Creates an instance of Flush rule.
    */
-  constructor() {
+  constructor () {
     const name = 'Flush'
     const value = 20
 
@@ -20,7 +20,7 @@ export class Flush extends Rule {
    * @param {object} line - the line of cards to test for the rule
    * @returns { boolean} - true if the line has five cards of the same suit, false otherwise
    */
-  test(line) {
+  test (line) {
     const suiteFrequencies = line.getSuiteFrequencies()
     const frequencies = Object.values(suiteFrequencies)
     const requiredFrequency = 5
