@@ -26,4 +26,20 @@ describe('RoyalFlush', () => {
 
     expect(sut.test(lineStub)).toBe(true)
   })
+
+    it('RoyalFlush.test should test that gridLine contains an Ace (hasRank(14)', () => {
+      const straightFlushStub = vi.fn({
+        test: vi.fn().mockReturnValue(true)
+      })
+
+      // eslint-disable-next-line
+      const lineMock= vi.fn({
+        hasRank: vi.fn().mockReturnValue(true)
+      })
+
+      const sut = new RoyalFlush(straightFlushStub)
+      sut.test(lineMock)
+
+      expect(lineMock.hasRank).toHaveBeenCalledWith(14)
+    })
 })
