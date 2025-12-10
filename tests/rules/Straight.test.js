@@ -33,4 +33,25 @@ describe('Straight', () => {
 
     expect(sut.test(lineStub)).toBe(true)
   })
+
+  it('Straight.test() should return false for line with more than two cards of same rank', () => {
+    const sut = new Straight()
+    const lineStub = {
+      /**
+       * Stub method for getRankFrequencies.
+       *
+       * @returns {object} - a stubbed rank frequencies object that has two of same rank
+       */
+      getRankFrequencies: () => {
+        return {
+          10: 2,
+          8: 1,
+          9: 1,
+          12: 1
+        }
+      }
+    }
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
 })
