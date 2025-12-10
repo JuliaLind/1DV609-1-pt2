@@ -15,7 +15,6 @@ export class RoyalFlush extends Rule {
     super(name, value)
   }
 
-  
   /**
    * Tests if the given line satisfies the Royal Flush rule.
    *
