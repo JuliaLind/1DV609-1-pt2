@@ -13,4 +13,8 @@ describe('Card', () => {
 
     expect(sut.suite).toBe('Diamonds')
   })
+
+  it(`constructor should throw if rank is missing`, () => {
+    expect(() => new Card(undefined, 'Hearts')).toThrow()
+  })
 })
