@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { TwoPairs } from '../../src/js/rules/TwoPairs.js'
 
 describe('TwoPairs', () => {
@@ -12,36 +12,26 @@ describe('TwoPairs', () => {
     expect(sut.toObject()).toEqual(expected)
   })
 
-  it('TwoPairs.test() should return true for line that has two twos and two threes', () => {
+  it('TwoPairs.test() should return true for line that has two pairs', () => {
     const sut = new TwoPairs()
-    const lineStub = {
-      /**
-       * Stub method for getRankFrequencies.
-       *
-       * @returns {object} - a stubbed rank frequencies object that says there are two pairs
-       */
-      getRankFrequencies: () => ({
+    const lineStub = vi.fn({
+      getRankFrequencies: vi.fn().mockReturnValue({
         2: 2,
         3: 2
       })
-    }
+    })
 
     expect(sut.test(lineStub)).toBe(true)
   })
 
-  it('TwoPairs.test() should return false for line that has one pair', () => {
+  it('TwoPairs.test() should return false for line that has one pair and three-of-a-kind of another rank', () => {
     const sut = new TwoPairs()
-    const lineStub = {
-      /**
-       * Stub method for getRankFrequencies.
-       *
-       * @returns {object} - a stubbed rank frequencies object that says there are two pairs
-       */
-      getRankFrequencies: () => ({
-        2: 3,
-        3: 2
+    const lineStub = vi.fn({
+      getRankFrequencies: vi.fn().mockReturnValue({
+        2: 2,
+        3: 3
       })
-    }
+    })
 
     expect(sut.test(lineStub)).toBe(false)
   })

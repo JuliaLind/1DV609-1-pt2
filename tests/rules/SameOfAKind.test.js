@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { SameOfAKind } from '../../src/js/rules/SameOfAKind.js'
 
 describe('SameOfAKind', () => {
@@ -40,16 +40,11 @@ describe('SameOfAKind', () => {
 
       const sut = new ConcreteRule(sameRankCount)
 
-      const lineStub = {
-        /**
-         * Stub method for getRankFrequencies.
-         *
-         * @returns {object} - a stubbed rank frequencies object that says there are three cards of rank 2
-         */
-        getRankFrequencies: () => ({
+      const lineStub = vi.fn({
+        getRankFrequencies: vi.fn().mockReturnValue({
           2: 3
         })
-      }
+      })
 
       expect(sut.test(lineStub)).toBe(expected)
     })

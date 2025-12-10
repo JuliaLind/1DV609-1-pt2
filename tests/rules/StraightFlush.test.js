@@ -37,7 +37,6 @@ describe('StraightFlush', () => {
 
     const sut = new StraightFlush(straightStub, flushStub)
 
-
     expect(sut.test()).toBe(false)
   })
 
@@ -51,7 +50,6 @@ describe('StraightFlush', () => {
     })
 
     const sut = new StraightFlush(straightStub, flushStub)
-
 
     expect(sut.test()).toBe(false)
   })
