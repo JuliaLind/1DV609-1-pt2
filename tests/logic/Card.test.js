@@ -25,4 +25,8 @@ describe('Card', () => {
   it(`constructor should throw if rank is not valid, valid ranks are 2-10, J, Q, K, A`, () => {
     expect(() => new Card('1', 'Hearts')).toThrow()
   })
+
+  it(`constructor should throw if suite is not valid, valid ranks are Hearts, Spades, Diamonds, Clubs`, () => {
+    expect(() => new Card('2', 'earts')).toThrow()
+  })
 })
