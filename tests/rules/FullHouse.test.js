@@ -37,4 +37,21 @@ describe('FullHouse', () => {
 
     expect(sut.test(lineStub)).toBe(true)
   })
+
+  it('FullHouse.test() should return false if OnePair.test returns false', () => {
+    const onePairStub = {
+      /**
+       * Stub method for test.
+       *
+       * @returns {boolean} - always returns false
+       */
+      test: () => false
+    }
+
+    const sut = new FullHouse(onePairStub)
+
+    const lineStub = {}
+
+    expect(sut.test(lineStub)).toBe(false)
+  })
 })
