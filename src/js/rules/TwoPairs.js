@@ -7,7 +7,7 @@ export class TwoPairs extends Rule {
   /**
    * Creates an instance of TwoPairs class.
    */
-  constructor() {
+  constructor () {
     const name = 'Two Pairs'
     const value = 5
 
@@ -15,12 +15,12 @@ export class TwoPairs extends Rule {
   }
 
   /**
- * Tests whether the line contains two pairs.
- *
- * @param {object} line - the line of cards to test for the rule
- * @returns {boolean} - true if the line contains two pairs, false otherwise
- */
-  test(line) {
+   * Tests whether the line contains two pairs.
+   *
+   * @param {object} line - the line of cards to test for the rule
+   * @returns {boolean} - true if the line contains two pairs, false otherwise
+   */
+  test (line) {
     const rankFrequencies = line.getRankFrequencies()
     const frequencies = Object.values(rankFrequencies)
 
