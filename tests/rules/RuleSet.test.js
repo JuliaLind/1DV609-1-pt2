@@ -19,7 +19,8 @@ vi.mock('../../src/js/rules/Rule.js', () => {
 describe('RuleSet', () => {
   it('RuleSet.evaluate should pass the GridLine into the test() method of the rules', () => {
     const anyRuleMock = vi.fn({
-      test: vi.fn()
+      test: vi.fn(),
+      toObject: vi.fn()
     })
 
     const sut = new RuleSet({
@@ -42,20 +43,33 @@ describe('RuleSet', () => {
   })
 
   describe('', () => {
-    const royalFlushMock = vi.fn()
-    const straightFlushMock = vi.fn()
-    const fourOfAKindMock = vi.fn()
-
-    const fullHouseMock = vi.fn()
-    const flushMock = vi.fn()
-
-    const straightMock = vi.fn()
-
-    const threeOfAKindMock = vi.fn()
-
-    const twoPairsMock = vi.fn()
-
-    const onePairMock = vi.fn()
+    const royalFlushMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Royal Flush', points: 100 })
+      })
+    const straightFlushMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Straight Flush', points: 75 })
+      })
+    const fourOfAKindMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Four of a Kind', points: 50 })
+    })
+    const fullHouseMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Full House', points: 25 })
+    })
+    const flushMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Flush', points: 20 })
+    })
+    const straightMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Straight', points: 15 })
+    })
+    const threeOfAKindMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Three of a Kind', points: 10 })
+    })
+    const twoPairsMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'Two Pairs', points: 5 })
+    })
+    const onePairMock = vi.fn({
+        toObject: vi.fn().mockReturnValue({ name: 'One Pair', points: 2 })
+    })
 
     let sut
     beforeEach(() => {
@@ -110,13 +124,36 @@ describe('RuleSet', () => {
     })
 
     it('RuleSet.evaluate should return default rule name and points when no rules match', () => {
-      const lineStub = {}
-      const result = sut.evaluate(lineStub)
+      const lineDummy = {}
+      const result = sut.evaluate(lineDummy)
 
       expect(result).toEqual({
         name: '',
         points: 0
       })
+    })
+
+        
+    it('RuleSet.evaluate should return the highest ranking rule that matches', () => {
+      for (const ruleMock of [
+        straightFlushMock,
+        flushMock,
+        straightMock
+      ]) {
+        ruleMock.test
+          .mockReset()
+          .mockReturnValue(true)
+      }
+
+      const lineDummy = {}
+
+      const expected = {
+        name: 'Straight Flush',
+        points: 75
+      }
+      const actual = sut.evaluate(lineDummy)
+
+      expect(actual).toEqual(expected)
     })
   })
 })
