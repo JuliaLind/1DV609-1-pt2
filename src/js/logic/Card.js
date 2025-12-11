@@ -3,7 +3,21 @@
  */
 export class Card {
   static SUITES = Object.freeze(['Hearts', 'Diamonds', 'Clubs', 'Spades'])
-  static RANKS = Object.freeze(['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'])
+  static RANKS = Object.freeze({
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+    10: 10,
+    J: 11,
+    Q: 12,
+    K: 13,
+    A: 14
+  })
 
   #rank
   #suite
@@ -36,7 +50,7 @@ export class Card {
    * @throws {Error} - if the rank is invalid
    */
   #validateRank(rank) {
-    if (!Card.RANKS.includes(rank)) {
+    if (!Object.keys(Card.RANKS).includes(rank)) {
       throw new Error(`Invalid rank: '${rank}'`)
     }
   }
@@ -80,4 +94,14 @@ export class Card {
   get suite() {
     return this.#suite
   }
+
+  /**
+   * Returns the numeric value of the card's rank, e.g. K = 13.
+   *
+   * @returns {number} the numeric value of the card's rank.
+   */
+  valueOf() {
+    return Card.RANKS[this.#rank]
+  }
+
 }
