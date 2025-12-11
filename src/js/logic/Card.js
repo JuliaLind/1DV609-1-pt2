@@ -28,7 +28,7 @@ export class Card {
    * @param {string} rank - the rank of the card
    * @param {string} suite - the suite of the card
    */
-  constructor(rank, suite) {
+  constructor (rank, suite) {
     this.#setRank(rank)
     this.#setSuite(suite)
   }
@@ -38,7 +38,7 @@ export class Card {
    *
    * @param {string} rank - the rank of the card
    */
-  #setRank(rank) {
+  #setRank (rank) {
     this.#validateRank(rank)
     this.#rank = rank
   }
@@ -49,7 +49,7 @@ export class Card {
    * @param {string} rank - the rank of the card
    * @throws {Error} - if the rank is invalid
    */
-  #validateRank(rank) {
+  #validateRank (rank) {
     if (!Object.keys(Card.RANKS).includes(rank)) {
       throw new Error(`Invalid rank: '${rank}'`)
     }
@@ -60,7 +60,7 @@ export class Card {
    *
    * @param {string} suite - the suite of the card
    */
-  #setSuite(suite) {
+  #setSuite (suite) {
     this.#validateSuite(suite)
     this.#suite = suite
   }
@@ -71,7 +71,7 @@ export class Card {
    * @param {string} suite - the suite of the card
    * @throws {Error} - if the suite is invalid
    */
-  #validateSuite(suite) {
+  #validateSuite (suite) {
     if (!Card.SUITES.includes(suite)) {
       throw new Error(`Invalid suite: '${suite}'`)
     }
@@ -82,7 +82,7 @@ export class Card {
    *
    * @returns {string} - the rank of the card
    */
-  get rank() {
+  get rank () {
     return this.#rank
   }
 
@@ -91,7 +91,7 @@ export class Card {
    *
    * @returns {string} - the suite of the card
    */
-  get suite() {
+  get suite () {
     return this.#suite
   }
 
@@ -100,8 +100,7 @@ export class Card {
    *
    * @returns {number} the numeric value of the card's rank.
    */
-  valueOf() {
+  valueOf () {
     return Card.RANKS[this.#rank]
   }
-
 }

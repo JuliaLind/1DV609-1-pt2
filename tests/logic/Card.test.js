@@ -14,19 +14,19 @@ describe('Card', () => {
     expect(sut.suite).toBe('Diamonds')
   })
 
-  it(`constructor should throw if rank is missing`, () => {
+  it('constructor should throw if rank is missing', () => {
     expect(() => new Card(undefined, 'Hearts')).toThrow()
   })
 
-  it(`constructor should throw if suite is missing`, () => {
+  it('constructor should throw if suite is missing', () => {
     expect(() => new Card('A')).toThrow()
   })
 
-  it(`constructor should throw if rank is not valid, valid ranks are 2-10, J, Q, K, A`, () => {
+  it('constructor should throw if rank is not valid, valid ranks are 2-10, J, Q, K, A', () => {
     expect(() => new Card('1', 'Hearts')).toThrow()
   })
 
-  it(`constructor should throw if suite is not valid, valid ranks are Hearts, Spades, Diamonds, Clubs`, () => {
+  it('constructor should throw if suite is not valid, valid ranks are Hearts, Spades, Diamonds, Clubs', () => {
     expect(() => new Card('2', 'earts')).toThrow()
   })
 
