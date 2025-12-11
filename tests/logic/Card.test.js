@@ -29,4 +29,10 @@ describe('Card', () => {
   it(`constructor should throw if suite is not valid, valid ranks are Hearts, Spades, Diamonds, Clubs`, () => {
     expect(() => new Card('2', 'earts')).toThrow()
   })
+
+  it('valueOf should return correct numeric value for rank, e.g. "2" = 2, "K" = 13', () => {
+    const sut = new Card('K', 'Hearts')
+
+    expect(Number(sut)).toBe(13)
+  })
 })
