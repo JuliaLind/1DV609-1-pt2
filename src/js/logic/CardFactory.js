@@ -10,13 +10,18 @@ export class CardFactory {
    * @returns {Card[]} - array of created cards
    */
   createCards () {
-    const cards = []
-    for (const suite of Card.SUITES) {
-      for (const rank of Object.keys(Card.RANKS)) {
-        cards.push(new Card(rank, suite))
-      }
-    }
+    return Card.SUITES.flatMap((suite) => this.#createCardsOfSuite(suite))
+  }
 
-    return cards
+  /**
+   * Creates a set 2-A of cards for a given suite.
+   *
+   * @param {string} suite - the suite of the cards to create.
+   * @returns {Card[]} - array of created cards for the given suite
+   */
+  #createCardsOfSuite (suite) {
+    const ranks = Object.keys(Card.RANKS)
+
+    return ranks.map((rank) => new Card(rank, suite))
   }
 }
