@@ -8,6 +8,7 @@ import { Grid } from './Grid.js'
 export class Game {
     #nextCard
     #grid
+    #cardDeck
 
     /**
      * Creates a new instance of Game.
@@ -18,6 +19,7 @@ export class Game {
     constructor(cardDeck = new CardDeck(), grid = new Grid()) {
         this.#nextCard = cardDeck.drawCard()
         this.#grid = grid
+        this.#cardDeck = cardDeck
     }
 
     /**
@@ -27,6 +29,16 @@ export class Game {
      */
     getNextCard() {
         return this.#nextCard
+    }
+
+    /**
+     * Places next card at specified position on the grid.
+     *
+     * @param {number} rowIndex - the row to place the card in
+     * @param {number} columnIndex - the column to place the card in
+     */
+    placeCardAt(rowIndex, columnIndex) {
+        this.#nextCard = this.#cardDeck.drawCard()
     }
 
     /**
