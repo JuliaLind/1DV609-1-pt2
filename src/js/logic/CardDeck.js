@@ -13,15 +13,23 @@ export class CardDeck {
    */
   constructor(cardFactory = new CardFactory()) {
     this.#cards = [...cardFactory.createCards()]
+
+    for (let index = this.#cards.length - 1; index > 0; index--) {
+      const randomIndex = Math.floor(Math.random() * (index + 1))
+
+      const temp = this.#cards[index]
+      this.#cards[index] = this.#cards[randomIndex]
+      this.#cards[randomIndex] = temp
+    }
   }
 
-
   /**
-   * Picks the top card from the deck.
+   * Gets the cards in the deck.
+   * Keep for testing purposes.
    *
-   * @returns {Card} - the top card from the deck
+   * @returns {Card[]} - array of cards in the deck
    */
-  drawCard () {
-    return this.#cards.pop()
+  get cards() {
+    return [...this.#cards]
   }
 }
