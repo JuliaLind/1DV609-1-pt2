@@ -38,6 +38,8 @@ export class Game {
      * @param {number} columnIndex - the column to place the card in
      */
     placeCardAt(rowIndex, columnIndex) {
+        this.#grid.placeCard(rowIndex, columnIndex, this.#nextCard)
+
         this.#nextCard = this.#cardDeck.drawCard()
     }
 
