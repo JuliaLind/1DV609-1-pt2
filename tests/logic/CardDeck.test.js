@@ -11,7 +11,7 @@ describe('CardDeck', () => {
     cardFactoryStub = {
       createCards: vi.fn().mockReturnValue([card1, card2])
     }
-  
+
     vi.spyOn(Math, 'random').mockReturnValue(0.9)
   })
 
@@ -20,8 +20,6 @@ describe('CardDeck', () => {
   })
 
   it('CardDeck should use the cards created by CardFactory', () => {
-    cardFactoryStub.createCards.mockReturnValue([card1, card2])
-
     const sut = new CardDeck(cardFactoryStub)
 
     expect(sut.cards).toEqual([card1, card2])
@@ -40,8 +38,6 @@ describe('CardDeck', () => {
   })
 
   it('drawCard should return the top card from the deck', () => {
-    cardFactoryStub.createCards.mockReturnValue([card1, card2])
-
     const sut = new CardDeck(cardFactoryStub)
     const drawnCard = sut.drawCard()
 
@@ -49,13 +45,16 @@ describe('CardDeck', () => {
   })
 
   it('drawCard should remove the top card from the deck', () => {
-    const cards = [card1, card2]
-
-    cardFactoryStub.createCards.mockClear().mockReturnValue(cards)
     const sut = new CardDeck(cardFactoryStub)
     expect(sut.cards).toEqual([card1, card2])
     sut.drawCard()
 
     expect(sut.cards).toEqual([card1])
+  })
+
+  it('drawing a card from an empty deck should throw an error', () => {
+    cardFactoryStub.createCards.mockClear().mockReturnValue([])
+    const sut = new CardDeck(cardFactoryStub)
+    expect(() => sut.drawCard()).toThrowError()
   })
 })
