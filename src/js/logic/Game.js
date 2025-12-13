@@ -5,6 +5,7 @@ import { CardDeck } from './CardDeck.js'
  */
 export class Game {
   #cardDeck
+  #nextCard
 
   /**
    * Creates a new instance of Game.
@@ -13,6 +14,7 @@ export class Game {
    */
   constructor (cardDeck = new CardDeck()) {
     this.#cardDeck = cardDeck
+    this.#nextCard = cardDeck.drawCard()
   }
 
   /**
@@ -21,6 +23,6 @@ export class Game {
    * @returns {Card} - the next card to be placed
    */
   getNextCard () {
-    return this.#cardDeck.drawCard()
+    return this.#nextCard
   }
 }
