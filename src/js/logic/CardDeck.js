@@ -11,7 +11,7 @@ export class CardDeck {
    *
    * @param {CardFactory} cardFactory - the factory for creating cards for the deck
    */
-  constructor (cardFactory = new CardFactory()) {
+  constructor(cardFactory = new CardFactory()) {
     this.#cards = [...cardFactory.createCards()]
     this.#shuffleInPlace()
   }
@@ -19,7 +19,7 @@ export class CardDeck {
   /**
    * Shuffles the cards in the deck in place using the Fisher-Yates algorithm.
    */
-  #shuffleInPlace () {
+  #shuffleInPlace() {
     for (let index = this.#cards.length - 1; index > 0; index--) {
       const randomIndex = this.#selectRandomIndex(index + 1)
 
@@ -33,7 +33,7 @@ export class CardDeck {
    * @param {number} upperLimit - the upper limit (exclusive) for the random index
    * @returns {number} - the selected random index
    */
-  #selectRandomIndex (upperLimit) {
+  #selectRandomIndex(upperLimit) {
     return Math.floor(Math.random() * upperLimit)
   }
 
@@ -43,8 +43,17 @@ export class CardDeck {
    * @param {number} index1 - index position of first card
    * @param {number} index2 - index position of second card
    */
-  #swapCards (index1, index2) {
+  #swapCards(index1, index2) {
     [this.#cards[index1], this.#cards[index2]] = [this.#cards[index2], this.#cards[index1]]
+  }
+
+  /**
+   * Picks the top card from the deck.
+   *
+   * @returns {Card} - the top card from the deck
+   */
+  drawCard() {
+    return this.#cards[this.#cards.length - 1]
   }
 
   /**
