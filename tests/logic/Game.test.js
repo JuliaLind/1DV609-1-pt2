@@ -56,4 +56,14 @@ describe('Game', () => {
 
     expect(actual).toBe(true)
   })
+
+  it(`Game.isOver() should return false if the grid isFull() returns false`, () => {
+    gridMock.isFull.mockReturnValue(false)
+
+    const sut = new Game(cardDeckMock, gridMock)
+
+    const actual = sut.isOver()
+
+    expect(actual).toBe(false)
+  })
 })
