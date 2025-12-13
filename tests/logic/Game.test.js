@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { Game } from '../../src/js/logic/Game.js'
 
 describe('Game', () => {
@@ -6,8 +6,14 @@ describe('Game', () => {
     drawCard: vi.fn()
   })
 
-  const card1 = {}
-  const card2 = {}
+  const card1 = {
+    suite: 'Hearts',
+    rank: 'A'
+  }
+  const card2 = {
+    suite: 'Spades',
+    rank: 'K'
+  }
 
   const gridMock = vi.fn({
     isFull: vi.fn(),
@@ -16,11 +22,19 @@ describe('Game', () => {
     placeCard: vi.fn()
   })
 
-  it('Game.getNextCard() should retrieve the next card from the deck', () => {
+  beforeEach(() => {
     cardDeckMock.drawCard
       .mockClear()
       .mockReturnValueOnce(card1)
+      .mockReturnValueOnce(card2)
+  })
 
+  afterEach(() => {
+    vi.clearAllMocks() // clears call history
+    vi.resetAllMocks() // removes mocked return values
+  })
+
+  it('Game.getNextCard() should retrieve the next card from the deck', () => {
     const sut = new Game(cardDeckMock)
     const actualCard = sut.getNextCard()
 
@@ -28,15 +42,20 @@ describe('Game', () => {
   })
 
   it('Game.getNextCard() should not pick a new card from the deck on each call', () => {
-    cardDeckMock.drawCard
-      .mockClear()
-      .mockReturnValueOnce(card1)
-      .mockReturnValueOnce(card2)
-
     const sut = new Game(cardDeckMock)
     const firstCard = sut.getNextCard()
     const secondCard = sut.getNextCard()
     expect(secondCard).toBe(firstCard)
+  })
+
+  it('After placeCardAt() has been called the next card should be picked from the deck', () => {
+    const sut = new Game(cardDeckMock, gridMock)
+
+    const rowIndex = 1
+    const columnIndex = 3
+
+    sut.placeCardAt(rowIndex, columnIndex)
+    expect(sut.getNextCard()).toBe(card2)
   })
 
   it('Game.getResult() should return { name: "", points: 0 } as default value', () => {
