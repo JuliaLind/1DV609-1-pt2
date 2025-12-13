@@ -12,7 +12,8 @@ export class Game {
     #cardDeck
     #rules
     #results = {
-        row: []
+        row: [],
+        column: []
     }
 
     /**
@@ -46,6 +47,7 @@ export class Game {
     placeCardAt(rowIndex, columnIndex) {
         this.#grid.placeCard(rowIndex, columnIndex, this.#nextCard)
         this.#results['row'][rowIndex] = this.#rules.evaluate(this.#grid.getRow(rowIndex))
+        this.#results['column'][columnIndex] = this.#rules.evaluate(this.#grid.getColumn(columnIndex))
 
         this.#nextCard = this.#cardDeck.drawCard()
     }
