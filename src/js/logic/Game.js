@@ -1,19 +1,23 @@
 import { CardDeck } from './CardDeck.js'
 import { Rule } from '../rules/Rule.js'
+import { Grid } from './Grid.js'
 
 /**
  * Represents the main game logic.
  */
 export class Game {
     #nextCard
+    #grid
 
     /**
      * Creates a new instance of Game.
      *
      * @param {CardDeck} cardDeck - a deck of cards
+     * @param {Grid} grid - the game grid
      */
-    constructor(cardDeck = new CardDeck()) {
+    constructor(cardDeck = new CardDeck(), grid = new Grid()) {
         this.#nextCard = cardDeck.drawCard()
+        this.#grid = grid
     }
 
     /**
@@ -42,6 +46,6 @@ export class Game {
      * @returns {boolean} - true if the game is over, otherwise false
      */
     isOver() {
-        return true
+        return this.#grid.isFull()
     }
 }
