@@ -53,6 +53,9 @@ export class CardDeck {
    * @returns {Card} - the top card from the deck
    */
   drawCard() {
+    if (this.#cards.length === 0) {
+      throw new Error('No cards left')
+    }
     return this.#cards.pop()
   }
 
