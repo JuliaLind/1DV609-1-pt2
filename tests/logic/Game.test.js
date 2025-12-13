@@ -9,6 +9,13 @@ describe('Game', () => {
   const card1 = {}
   const card2 = {}
 
+  const gridMock = vi.fn({
+    isFull: vi.fn(),
+    getRow: vi.fn(),
+    getColumn: vi.fn(),
+    placeCard: vi.fn()
+  })
+
   it('Game.getNextCard() should retrieve the next card from the deck', () => {
     cardDeckMock.drawCard
       .mockClear()
@@ -38,5 +45,15 @@ describe('Game', () => {
     const actual = sut.getResult('row', 2)
 
     expect(actual).toEqual(expected)
+  })
+
+  it(`Game.isOver() should return true if the grid isFull() returns true`, () => {
+    gridMock.isFull.mockReturnValue(true)
+
+    const sut = new Game(cardDeckMock, gridMock)
+
+    const actual = sut.isOver()
+
+    expect(actual).toBe(true)
   })
 })
