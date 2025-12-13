@@ -1,4 +1,5 @@
 import { CardDeck } from './CardDeck.js'
+import { Rule } from '../rules/Rule.js'
 
 /**
  * Represents the main game logic.
@@ -34,6 +35,6 @@ export class Game {
      * @returns {object} - result object for the specified row
      */
     getResult(direction, index) {
-        return { name: '', points: 0 }
+        return Rule.toObject()
     }
 }
