@@ -58,6 +58,17 @@ describe('Game', () => {
     expect(sut.getNextCard()).toBe(card2)
   })
 
+  it('Game.placeCardAt() should place the current card on the grid at specified position', () => {
+    const sut = new Game(cardDeckMock, gridMock)
+
+    const rowIndex = 1
+    const columnIndex = 3
+
+    sut.placeCardAt(rowIndex, columnIndex)
+    expect(gridMock.placeCard).toHaveBeenCalledWith(rowIndex, columnIndex, card1)
+  })
+
+
   it('Game.getResult() should return { name: "", points: 0 } as default value', () => {
     const sut = new Game(cardDeckMock)
     const expected = { name: '', points: 0 }
