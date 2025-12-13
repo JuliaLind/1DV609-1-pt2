@@ -54,6 +54,14 @@ describe('Game', () => {
     expect(secondCard).toBe(firstCard)
   })
 
+  it('Game.getResult() should return { name: "", points: 0 } as default value', () => {
+    const sut = new Game(cardDeckStub, gridMock, ruleSetMock)
+    const expected = { name: '', points: 0 }
+    const actual = sut.getResult('row', 2)
+
+    expect(actual).toEqual(expected)
+  })
+
   it('After placeCardAt() has been called the next card should be picked from the deck', () => {
     const sut = new Game(cardDeckStub, gridMock, ruleSetMock)
 
@@ -72,15 +80,6 @@ describe('Game', () => {
 
     sut.placeCardAt(rowIndex, columnIndex)
     expect(gridMock.placeCard).toHaveBeenCalledWith(rowIndex, columnIndex, card1)
-  })
-
-
-  it('Game.getResult() should return { name: "", points: 0 } as default value', () => {
-    const sut = new Game(cardDeckStub, gridMock, ruleSetMock)
-    const expected = { name: '', points: 0 }
-    const actual = sut.getResult('row', 2)
-
-    expect(actual).toEqual(expected)
   })
 
   const firstRowResult = { rule: 'First row rule', points: 10 }
