@@ -53,10 +53,20 @@ export class CardDeck {
    * @returns {Card} - the top card from the deck
    */
   drawCard() {
+    this.#validateCardsLeft()
+
+    return this.#cards.pop()
+  }
+
+  /**
+   * Validates that there are cards left in the deck.
+   *
+   * @throws {Error} - if there are no cards left in the deck
+   */
+  #validateCardsLeft() {
     if (this.#cards.length === 0) {
       throw new Error('No cards left')
     }
-    return this.#cards.pop()
   }
 
   /**
