@@ -5,7 +5,6 @@ import { Rule } from '../rules/Rule.js'
  * Represents the main game logic.
  */
 export class Game {
-    #cardDeck
     #nextCard
 
     /**
@@ -14,7 +13,6 @@ export class Game {
      * @param {CardDeck} cardDeck - a deck of cards
      */
     constructor(cardDeck = new CardDeck()) {
-        this.#cardDeck = cardDeck
         this.#nextCard = cardDeck.drawCard()
     }
 
@@ -36,5 +34,14 @@ export class Game {
      */
     getResult(direction, index) {
         return Rule.toObject()
+    }
+
+    /**
+     * Checks if the game is over.
+     *
+     * @returns {boolean} - true if the game is over, otherwise false
+     */
+    isOver() {
+        return true
     }
 }
