@@ -129,4 +129,23 @@ describe('Game', () => {
 
     expect(actual).toBe(false)
   })
+
+  it('Game.getTotalPoints() Should return the sum of all row and column points', () => {
+    ruleSetMock.evaluate
+      .mockClear()
+      .mockReturnValueOnce({ rule: 'Rule1', points: 10 })
+      .mockReturnValueOnce({ rule: 'Rule2', points: 5 })
+      .mockReturnValueOnce({ rule: 'Rule3', points: 15 })
+      .mockReturnValueOnce({ rule: '', points: 0 })
+
+    const sut = new Game(cardDeckStub, gridMock, ruleSetMock)
+
+    sut.placeCardAt(0, 0)
+    sut.placeCardAt(1, 1)
+
+    const actual = sut.getTotalPoints()
+    const expected = 10 + 5 + 15 + 0
+
+    expect(actual).toBe(expected)
+  })
 })
