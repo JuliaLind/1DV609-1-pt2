@@ -1,6 +1,7 @@
 import { CardDeck } from './CardDeck.js'
 import { Rule } from '../rules/Rule.js'
 import { Grid } from './Grid.js'
+import { RuleSet } from '../rules/RuleSet.js'
 
 /**
  * Represents the main game logic.
@@ -9,6 +10,10 @@ export class Game {
     #nextCard
     #grid
     #cardDeck
+    #rules
+    #results = {
+        row: []
+    }
 
     /**
      * Creates a new instance of Game.
@@ -16,10 +21,11 @@ export class Game {
      * @param {CardDeck} cardDeck - a deck of cards
      * @param {Grid} grid - the game grid
      */
-    constructor(cardDeck = new CardDeck(), grid = new Grid()) {
+    constructor(cardDeck = new CardDeck(), grid = new Grid(), ruleSet = new RuleSet()) {
         this.#nextCard = cardDeck.drawCard()
         this.#grid = grid
         this.#cardDeck = cardDeck
+        this.#rules = ruleSet
     }
 
     /**
@@ -39,6 +45,7 @@ export class Game {
      */
     placeCardAt(rowIndex, columnIndex) {
         this.#grid.placeCard(rowIndex, columnIndex, this.#nextCard)
+        this.#results['row'][rowIndex] = this.#rules.evaluate(this.#grid.getRow(rowIndex))
 
         this.#nextCard = this.#cardDeck.drawCard()
     }
@@ -51,7 +58,8 @@ export class Game {
      * @returns {object} - result object for the specified row
      */
     getResult(direction, index) {
-        return Rule.toObject()
+        const result = this.#results[direction][index]
+        return result || Rule.toObject()
     }
 
     /**
