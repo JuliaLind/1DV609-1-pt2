@@ -8,6 +8,8 @@ export class Grid {
    * @param {GridLine[]} rows - the rows of the grid
    */
   constructor(rows) {
-    throw new Error('Grid must have 5 rows')
+    if (rows.length < 5) {
+      throw new Error('Grid must have 5 rows')
+    }
   }
 }
