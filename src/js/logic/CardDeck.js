@@ -1,4 +1,5 @@
 import { CardFactory } from './CardFactory.js'
+import { Card } from './Card.js'
 
 /**
  * Represents a deck of cards.
@@ -11,7 +12,7 @@ export class CardDeck {
    *
    * @param {CardFactory} cardFactory - the factory for creating cards for the deck
    */
-  constructor(cardFactory = new CardFactory()) {
+  constructor (cardFactory = new CardFactory()) {
     this.#cards = [...cardFactory.createCards()]
     this.#shuffleInPlace()
   }
@@ -19,7 +20,7 @@ export class CardDeck {
   /**
    * Shuffles the cards in the deck in place using the Fisher-Yates algorithm.
    */
-  #shuffleInPlace() {
+  #shuffleInPlace () {
     for (let index = this.#cards.length - 1; index > 0; index--) {
       const randomIndex = this.#selectRandomIndex(index + 1)
 
@@ -33,7 +34,7 @@ export class CardDeck {
    * @param {number} upperLimit - the upper limit (exclusive) for the random index
    * @returns {number} - the selected random index
    */
-  #selectRandomIndex(upperLimit) {
+  #selectRandomIndex (upperLimit) {
     return Math.floor(Math.random() * upperLimit)
   }
 
@@ -43,7 +44,7 @@ export class CardDeck {
    * @param {number} index1 - index position of first card
    * @param {number} index2 - index position of second card
    */
-  #swapCards(index1, index2) {
+  #swapCards (index1, index2) {
     [this.#cards[index1], this.#cards[index2]] = [this.#cards[index2], this.#cards[index1]]
   }
 
@@ -52,7 +53,7 @@ export class CardDeck {
    *
    * @returns {Card} - the top card from the deck
    */
-  drawCard() {
+  drawCard () {
     this.#validateCardsLeft()
 
     return this.#cards.pop()
@@ -63,7 +64,7 @@ export class CardDeck {
    *
    * @throws {Error} - if there are no cards left in the deck
    */
-  #validateCardsLeft() {
+  #validateCardsLeft () {
     if (this.#cards.length === 0) {
       throw new Error('No cards left')
     }
@@ -75,7 +76,7 @@ export class CardDeck {
    *
    * @returns {Card[]} - array of cards in the deck
    */
-  get cards() {
+  get cards () {
     return [...this.#cards]
   }
 }
