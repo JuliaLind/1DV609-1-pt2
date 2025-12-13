@@ -6,23 +6,21 @@ describe('CardDeck', () => {
   const card2 = { rank: 'K', suite: 'Spades' }
   const card3 = { rank: '10', suite: 'Diamonds' }
   let cardFactoryStub
-  
+
   beforeEach(() => {
     cardFactoryStub = {
       createCards: vi.fn().mockReturnValue([card1, card2])
     }
+  
+    vi.spyOn(Math, 'random').mockReturnValue(0.9)
   })
 
   afterEach(() => {
     vi.restoreAllMocks()
   })
 
-
   it('CardDeck should use the cards created by CardFactory', () => {
     cardFactoryStub.createCards.mockReturnValue([card1, card2])
-
-    vi.spyOn(Math, 'random')
-      .mockReturnValue(0.9)
 
     const sut = new CardDeck(cardFactoryStub)
 
@@ -33,8 +31,7 @@ describe('CardDeck', () => {
     const originalOrder = [card1, card2, card3]
     cardFactoryStub.createCards.mockReturnValue(originalOrder)
 
-    vi.spyOn(Math, 'random')
-      .mockReturnValue(0.1) // each index will be swapped with card at index 0
+    Math.random.mockClear().mockReturnValue(0.1) // each index will be swapped with card at index 0
 
     const sut = new CardDeck(cardFactoryStub)
     const expectedOrder = [card2, card3, card1]
@@ -49,5 +46,16 @@ describe('CardDeck', () => {
     const drawnCard = sut.drawCard()
 
     expect(drawnCard).toEqual(card2)
+  })
+
+  it('drawCard should remove the top card from the deck', () => {
+    const cards = [card1, card2]
+
+    cardFactoryStub.createCards.mockClear().mockReturnValue(cards)
+    const sut = new CardDeck(cardFactoryStub)
+    expect(sut.cards).toEqual([card1, card2])
+    sut.drawCard()
+
+    expect(sut.cards).toEqual([card1])
   })
 })
