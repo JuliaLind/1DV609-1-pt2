@@ -181,7 +181,7 @@ customElements.define('poker-game',
     #displayResults ({ row, column }) {
       this.#renderResult({ direction: 'row', index: row })
       this.#renderResult({ direction: 'column', index: column })
-      if (this.#game.isGameOver()) {
+      if (this.#game.isOver()) {
         this.#handleGameOver()
       }
     }

@@ -23,7 +23,7 @@ describe('poker-game', () => {
     getNextCard: vi.fn(),
     placeCardAt: vi.fn(),
     getResult: vi.fn(),
-    isGameOver: vi.fn(),
+    isOver: vi.fn(),
     getTotalPoints: vi.fn()
   }
 
@@ -34,7 +34,7 @@ describe('poker-game', () => {
   })
 
   beforeEach(() => {
-    gameMock.isGameOver.mockReset().mockReturnValue(false)
+    gameMock.isOver.mockReset().mockReturnValue(false)
   })
 
   it('poker-game should be defined as a custom element', () => {
@@ -147,7 +147,7 @@ describe('poker-game', () => {
     })
 
     it('When poker-grid is clicked and the game is over, the game message should be shown', () => {
-      gameMock.isGameOver.mockReturnValueOnce(true)
+      gameMock.isOver.mockReturnValueOnce(true)
       gameMock.getTotalPoints.mockReturnValueOnce(37)
       pokerGrid.dispatchEvent(new CustomEvent('slot-click', {
         detail: { row, column }
