@@ -27,6 +27,13 @@ describe('Grid', () => {
     expect(() => new Grid(fourRows)).toThrowError()
   })
 
+  it('constructor should throw error if more than 5 rows are passed into constructor', () => {
+    const fourRows = [{}, {}, {}, {}, {}, {}]
+
+    expect(() => new Grid(fourRows)).toThrowError()
+  })
+
+
   it('constructor should throw error if exactly 5 rows are passed into constructor', () => {
     const fourRows = [{}, {}, {}, {}, {}]
 
