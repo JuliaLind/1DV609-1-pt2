@@ -79,6 +79,8 @@ export class Game {
      * @returns {number} - the total points
      */
     getTotalPoints() {
-        return 10 + 5 + 15 + 0
+        const rowAndColumnResults = [...this.#results.row, ...this.#results.column]
+        
+        return rowAndColumnResults.reduce((total, result) => total + result.points, 0)
     }
 }
