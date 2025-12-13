@@ -83,15 +83,32 @@ describe('Game', () => {
     expect(actual).toEqual(expected)
   })
 
+  const firstRowResult = { rule: 'First row rule', points: 10 }
+  const firstColumnResult = { rule: 'First column rule', points: 5 }
+
+
   it('Game.placeCardAt() should evaluate and store the result for the affected row', () => {
     const sut = new Game(cardDeckStub, gridMock, ruleSetMock)
-    const expectedRowResult = { rule: 'SomeRule', points: 10 }
+    const expectedRowResult = firstRowResult
     ruleSetMock.evaluate
-        .mockReset()
-        .mockReturnValueOnce(expectedRowResult)
+      .mockReset()
+      .mockReturnValueOnce(expectedRowResult)
+
 
     sut.placeCardAt(1, 3)
     expect(sut.getResult('row', 1)).toEqual(expectedRowResult)
+  })
+
+  it('Game.placeCardAt() should evaluate and store the result for the affected column', () => {
+    const sut = new Game(cardDeckStub, gridMock, ruleSetMock)
+
+    ruleSetMock.evaluate
+      .mockReset()
+      .mockReturnValueOnce(firstRowResult)
+      .mockReturnValueOnce(firstColumnResult)
+
+    sut.placeCardAt(1, 3)
+    expect(sut.getResult('column', 3)).toEqual(firstColumnResult)
   })
 
   it(`Game.isOver() should return true if the grid isFull() returns true`, () => {
