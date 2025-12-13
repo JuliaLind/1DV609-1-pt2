@@ -31,4 +31,12 @@ describe('Game', () => {
     const secondCard = sut.getNextCard()
     expect(secondCard).toBe(firstCard)
   })
+
+  it('Game.getResult() should return { name: "", points: 0 } as default value', () => {
+    const sut = new Game(cardDeckMock)
+    const expected = { name: '', points: 0 }
+    const actual = sut.getResult('row', 2)
+
+    expect(actual).toEqual(expected)
+  })
 })
