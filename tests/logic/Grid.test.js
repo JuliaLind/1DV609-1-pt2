@@ -28,15 +28,19 @@ describe('Grid', () => {
   })
 
   it('constructor should throw error if more than 5 rows are passed into constructor', () => {
-    const fourRows = [{}, {}, {}, {}, {}, {}]
+    const sixRows = [{}, {}, {}, {}, {}, {}]
 
-    expect(() => new Grid(fourRows)).toThrowError()
+    expect(() => new Grid(sixRows)).toThrowError()
   })
 
 
-  it('constructor should throw error if exactly 5 rows are passed into constructor', () => {
-    const fourRows = [{}, {}, {}, {}, {}]
+  it('constructor should not throw error if exactly 5 rows are passed into constructor', () => {
+    const fiveRows = [{}, {}, {}, {}, {}]
 
-    expect(() => new Grid(fourRows)).not.toThrowError()
+    expect(() => new Grid(fiveRows)).not.toThrowError()
+  })
+
+  it('constructor should not throw error if now rows are passed into constructor', () => {
+    expect(() => new Grid()).not.toThrowError()
   })
 })
