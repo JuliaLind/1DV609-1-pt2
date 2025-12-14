@@ -21,7 +21,7 @@ export class GridLine {
    * @throws {Error} - if the length of slots is not exactly 5
    */
   #validateLength(slots) {
-    if (slots.length < GridLine.SLOT_COUNT) {
+    if (slots.length !== GridLine.SLOT_COUNT) {
       throw new Error('GridLine must have exactly 5 slots')
     }
   }
