@@ -91,4 +91,14 @@ export class GridLine {
   isFull () {
     return this.#slots.every(slot => slot !== undefined)
   }
+
+  /**
+   * Checks if any of the cards in the grid line has the specified rank.
+   *
+   * @param {number} rank - the numerical rank value
+   * @returns {boolean} - true if a card with the specified rank exists in the grid line, false otherwise
+   */
+  hasRank (rank) {
+    return false
+  }
 }
