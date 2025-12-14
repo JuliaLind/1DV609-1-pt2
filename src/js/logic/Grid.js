@@ -53,12 +53,8 @@ export class Grid {
    * @returns {GridLine} - the grid line representing the column at the specified index
    */
   getColumn(index) {
-    return new GridLine([
-      this.#rows[0].slots[index],
-      this.#rows[1].slots[index],
-      this.#rows[2].slots[index],
-      this.#rows[3].slots[index],
-      this.#rows[4].slots[index]
-    ])
+    const columnSlots = this.#rows.map(row => row.slots[index])
+
+    return new GridLine(columnSlots)
   }
 }
