@@ -11,7 +11,7 @@ export class GridLine {
    *
    * @param {Card[]} slots - array of cards to initialize the grid line with
    */
-  constructor (slots = new Array(GridLine.SLOT_COUNT)) {
+  constructor(slots = new Array(GridLine.SLOT_COUNT)) {
     this.#validateLength(slots)
     this.#slots = [...slots]
   }
@@ -22,7 +22,7 @@ export class GridLine {
    * @param {Card[]} slots - array with slots that may contain cards
    * @throws {Error} - if the length of slots is not exactly 5
    */
-  #validateLength (slots) {
+  #validateLength(slots) {
     if (slots.length !== GridLine.SLOT_COUNT) {
       throw new Error('GridLine must have exactly 5 slots')
     }
@@ -33,7 +33,7 @@ export class GridLine {
    *
    * @returns {number} - the number of slots
    */
-  static get SLOT_COUNT () {
+  static get SLOT_COUNT() {
     return 5
   }
 
@@ -42,7 +42,17 @@ export class GridLine {
    *
    * @returns {Array} - array of slots in the grid line
    */
-  get slots () {
+  get slots() {
     return [...this.#slots]
+  }
+
+  /**
+   * Places a card in the specified slot.
+   *
+   * @param {number} index - index of the slot to place the card in
+   * @param {Card} card - the card to place in the slot
+   */
+  placeCard(index, card) {
+    this.#slots[index] = card
   }
 }
