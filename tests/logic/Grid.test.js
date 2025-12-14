@@ -1,12 +1,14 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
+import { Grid } from '../../src/js/logic/Grid.js'
+
 /**
  * Creates a GridLine stub.
  *
- * @param {array} slotArray - slots of the GridLine
+ * @param {Array} slotArray - slots of the GridLine
  * @returns {object} - the grid line stub
  */
-function createGridLineStub(slotArray) {
+function createGridLineStub (slotArray) {
   const slots = slotArray || new Array(5)
   return { slots }
 }
@@ -14,14 +16,19 @@ function createGridLineStub(slotArray) {
 vi.mock('../../src/js/logic/GridLine.js', () => {
   // must be a regular function, arrow function will not work wig "new"
   // and give error message "bla bla is not a constructor"
-  function GridLine(slotArray) {
+  /**
+   * Constructor function that is sclled when new GridLine() is called and
+   * returns a GridLine stub.
+   *
+   * @param {Array} slotArray - a array with card slots
+   * @returns { object } - a GridLine stub
+   */
+  function GridLine (slotArray) {
     return createGridLineStub(slotArray)
   }
 
   return { GridLine }
 })
-
-import { Grid } from '../../src/js/logic/Grid.js'
 
 describe('Grid', () => {
   const card1 = { rank: 'A', suite: 'Hearts' }
@@ -42,7 +49,6 @@ describe('Grid', () => {
     slots4 = [undefined, undefined, undefined, undefined, undefined]
   })
 
-
   it('constructor should throw error if less than 5 rows are passed into constructor', () => {
     const fourRows = [{}, {}, {}, {}]
 
@@ -54,7 +60,6 @@ describe('Grid', () => {
 
     expect(() => new Grid(sixRows)).toThrowError()
   })
-
 
   it('constructor should not throw error if exactly 5 rows are passed into constructor', () => {
     const fiveRows = [{}, {}, {}, {}, {}]

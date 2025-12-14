@@ -11,7 +11,7 @@ export class Grid {
    *
    * @param {GridLine[]} rows - the rows of the grid
    */
-  constructor(rows = [
+  constructor (rows = [
     new GridLine(),
     new GridLine(),
     new GridLine(),
@@ -27,9 +27,9 @@ export class Grid {
    * Throws error ig the number of rows in the grid is not
    * exactly 5.
    *
-   * @param {array} rows - the rows of grid 
+   * @param {Array} rows - the rows of grid
    */
-  #validateRows(rows) {
+  #validateRows (rows) {
     if (rows.length !== 5) {
       throw new Error('Grid must have 5 rows')
     }
@@ -41,7 +41,7 @@ export class Grid {
    * @param {number} index - the index of the row to retrieve
    * @returns {GridLine} - the grid line at the specified index
    */
-  getRow(index) {
+  getRow (index) {
     return new GridLine(this.#rows[index].slots)
   }
 }
