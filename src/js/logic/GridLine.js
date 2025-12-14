@@ -53,10 +53,19 @@ export class GridLine {
    * @param {Card} card - the card to place in the slot
    */
   placeCard(index, card) {
+    this.#validateIndex(index)
+    this.#slots[index] = card
+  }
+
+  /**
+   * Checks if the given index is valid.
+   *
+   * @param {number} index - the index to check
+   * @throws {Error} - if the index is out of bounds
+   */
+  #validateIndex(index) {
     if (!(index in this.#slots)) {
       throw new Error('Index out of bounds')
     }
-
-    this.#slots[index] = card
   }
 }
