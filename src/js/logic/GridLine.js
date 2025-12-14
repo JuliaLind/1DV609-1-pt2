@@ -10,6 +10,10 @@ export class GridLine {
    * @param {Card[]} slots - array of cards to initialize the grid line with
    */
   constructor (slots = new Array(5)) {
+    if (slots.length < 5) {
+      throw new Error('GridLine must have exactly 5 slots')
+    }
+  
     this.#slots = [...slots]
   }
 
