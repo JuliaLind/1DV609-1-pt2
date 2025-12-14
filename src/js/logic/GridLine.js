@@ -53,8 +53,10 @@ export class GridLine {
    * @param {Card} card - the card to place in the slot
    */
   placeCard(index, card) {
-    if (index in this.#slots) {
-      this.#slots[index] = card
+    if (!(index in this.#slots)) {
+      throw new Error('Index out of bounds')
     }
+
+    this.#slots[index] = card
   }
 }
