@@ -31,9 +31,16 @@ export class Grid {
    * @param {Array} rows - the rows of grid
    */
   #validateRows (rows) {
-    if (rows.length !== 5) {
-      throw new Error('Grid must have 5 rows')
+    if (rows.length !== Grid.ROW_COUNT) {
+      throw new Error(`Grid must have ${Grid.ROW_COUNT} rows`)
     }
+  }
+
+  /**
+   * Gets the number of rows required for the Grid
+   */
+  static get ROW_COUNT () {
+    return 5
   }
 
   /**
