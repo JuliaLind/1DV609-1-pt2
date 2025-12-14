@@ -1,4 +1,5 @@
 import { GridLine } from './GridLine.js'
+import { Card } from './Card.js'
 
 /**
  * Placeholder for Grid class
@@ -11,7 +12,7 @@ export class Grid {
    *
    * @param {GridLine[]} rows - the rows of the grid
    */
-  constructor(rows = [
+  constructor (rows = [
     new GridLine(),
     new GridLine(),
     new GridLine(),
@@ -29,7 +30,7 @@ export class Grid {
    *
    * @param {Array} rows - the rows of grid
    */
-  #validateRows(rows) {
+  #validateRows (rows) {
     if (rows.length !== 5) {
       throw new Error('Grid must have 5 rows')
     }
@@ -41,7 +42,7 @@ export class Grid {
    * @param {number} index - the index of the row to retrieve
    * @returns {GridLine} - the grid line at the specified index
    */
-  getRow(index) {
+  getRow (index) {
     return new GridLine(this.#rows[index].slots)
   }
 
@@ -51,7 +52,7 @@ export class Grid {
    * @param {number} index - the index of the column to retrieve
    * @returns {GridLine} - the grid line representing the column at the specified index
    */
-  getColumn(index) {
+  getColumn (index) {
     const columnSlots = this.#rows.map(row => row.slots[index])
 
     return new GridLine(columnSlots)
@@ -62,7 +63,7 @@ export class Grid {
    *
    * @returns {boolean} - true if the grid has no empty slots otherwise false
    */
-  isFull() {
+  isFull () {
     return this.#rows.every(row => row.isFull())
   }
 
@@ -73,7 +74,7 @@ export class Grid {
    * @param {number} columnIndex - the column to place the card in
    * @param {Card} card - the card to place
    */
-  placeCard(rowIndex, columnIndex, card) {
+  placeCard (rowIndex, columnIndex, card) {
     this.#rows[rowIndex].placeCard(columnIndex, card)
   }
 }
