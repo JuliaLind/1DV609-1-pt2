@@ -42,5 +42,17 @@ describe('GridLine', () => {
 
       expect(sut.slots).toEqual(expectedSlots)
     })
+
+    const invalidIndexes = [-1, 5]
+    invalidIndexes.forEach((invalidIndex) => {
+      it(`Placing a card at invalid index: ${invalidIndex}, should not increase the number of slots`, () => {
+        const sut = new GridLine()
+        const card = {}
+
+        sut.placeCard(invalidIndex, card)
+        expect(sut.slots.length).toBe(5)
+      })
+    })
+
   })
 })
