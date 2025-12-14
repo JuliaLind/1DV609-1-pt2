@@ -1,4 +1,26 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+
+/**
+ * Creates a GridLine stub.
+ *
+ * @param {array} slotArray - slots of the GridLine
+ * @returns {object} - the grid line stub
+ */
+function createGridLineStub(slotArray) {
+  const slots = slotArray || new Array(5)
+  return { slots }
+}
+
+vi.mock('../../src/js/logic/GridLine.js', () => {
+  // must be a regular function, arrow function will not work wig "new"
+  // and give error message "bla bla is not a constructor"
+  function GridLine(slotArray) {
+    return createGridLineStub(slotArray)
+  }
+
+  return { GridLine }
+})
+
 import { Grid } from '../../src/js/logic/Grid.js'
 
 describe('Grid', () => {
@@ -6,18 +28,18 @@ describe('Grid', () => {
   const card2 = { rank: 'K', suite: 'Spades' }
   const card3 = { rank: '10', suite: 'Diamonds' }
 
+  let slots0
   let slots1
   let slots2
   let slots3
   let slots4
-  let slots5
 
   beforeEach(() => {
-    slots1 = [undefined, card1, undefined, undefined, undefined]
-    slots2 = [undefined, undefined, undefined, undefined, undefined]
-    slots3 = [undefined, undefined, card2, undefined, undefined]
-    slots4 = [card3, undefined, undefined, undefined, undefined]
-    slots5 = [undefined, undefined, undefined, undefined, undefined]
+    slots0 = [undefined, card1, undefined, undefined, undefined]
+    slots1 = [undefined, undefined, undefined, undefined, undefined]
+    slots2 = [undefined, undefined, card2, undefined, undefined]
+    slots3 = [card3, undefined, undefined, undefined, undefined]
+    slots4 = [undefined, undefined, undefined, undefined, undefined]
   })
 
 
@@ -42,5 +64,18 @@ describe('Grid', () => {
 
   it('constructor should not throw error if now rows are passed into constructor', () => {
     expect(() => new Grid()).not.toThrowError()
+  })
+
+  it('getRow(index) should return the row on the specified index', () => {
+    const sut = new Grid([
+      { slots: slots0 },
+      { slots: slots1 },
+      { slots: slots2 },
+      { slots: slots3 },
+      { slots: slots4 }
+    ])
+    const actual = sut.getRow(2).slots
+
+    expect(actual).toEqual(slots2)
   })
 })
