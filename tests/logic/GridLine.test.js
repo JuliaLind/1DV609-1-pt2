@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { GridLine } from '../../src/js/logic/GridLine.js'
 
 describe('GridLine', () => {
@@ -95,6 +95,24 @@ describe('GridLine', () => {
       const slots = [{}, {}, {}, undefined, {}]
       const sut = new GridLine(slots)
       expect(sut.isFull()).toBe(false)
+    })
+  })
+
+  describe('GridLine.hasRank', () => {
+    const ace = vi.fn({
+      valueOf: vi.fn().mockReturnValue(14)
+    })
+    const king = vi.fn({
+      valueOf: vi.fn().mockReturnValue(13)
+    })
+    const ten = vi.fn({
+      valueOf: vi.fn().mockReturnValue(10)
+    })
+    const slots = [ace, king, undefined, ten, undefined]
+    const sut = new GridLine(slots)
+
+    it('should return false if no card with the numerical rank value exists in the grid line', () => {
+      expect(sut.hasRank(12)).toBe(false)
     })
   })
 })
