@@ -7,10 +7,10 @@ export class GridLine {
   /**
    * Creates a new line for the grid with 5 empty slots.
    *
+   * @param {Card[]} slots - array of cards to initialize the grid line with
    */
-  constructor() {
-
-    this.#slots = new Array(5)
+  constructor (slots = new Array(5)) {
+    this.#slots = [...slots]
   }
 
   /**
