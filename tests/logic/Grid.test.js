@@ -8,7 +8,7 @@ import { Grid } from '../../src/js/logic/Grid.js'
  * @param {Array} slotArray - slots of the GridLine
  * @returns {object} - the grid line stub
  */
-function createGridLineStub (slotArray) {
+function createGridLineStub(slotArray) {
   const slots = slotArray || new Array(5)
   return { slots }
 }
@@ -23,7 +23,7 @@ vi.mock('../../src/js/logic/GridLine.js', () => {
    * @param {Array} slotArray - a array with card slots
    * @returns { object } - a GridLine stub
    */
-  function GridLine (slotArray) {
+  function GridLine(slotArray) {
     return createGridLineStub(slotArray)
   }
 
@@ -96,5 +96,35 @@ describe('Grid', () => {
     const expected = [slots0[2], slots1[2], slots2[2], slots3[2], slots4[2]]
     const actual = sut.getColumn(2).slots
     expect(actual).toEqual(expected)
+  })
+
+  describe('isFull()', () => {
+    const row1Stub = {
+      hasEmptySlots: vi.fn().mockReturnValue(false)
+    }
+
+    const row2Stub = {
+      hasEmptySlots: vi.fn().mockReturnValue(false)
+    }
+
+    const row3Stub = {
+      hasEmptySlots: vi.fn().mockReturnValue(false)
+    }
+
+    const row4Stub = {
+      hasEmptySlots: vi.fn()
+    }
+
+    const row5Stub = {
+      hasEmptySlots: vi.fn().mockReturnValue(false)
+    }
+
+    it('should return true when all slots are filled', () => {
+      row4Stub.hasEmptySlots.mockReturnValueOnce(false)
+
+      const sut = new Grid([row1Stub, row2Stub, row3Stub, row4Stub, row5Stub])
+
+      expect(sut.isFull()).toBe(true)
+    })
   })
 })
