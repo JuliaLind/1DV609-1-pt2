@@ -69,10 +69,18 @@ describe('GridLine', () => {
       const slots = [undefined, undefined, card1, undefined, undefined]
       const sut = new GridLine(slots)
 
-      sut.placeCard(2, card2)
+      try {
+        sut.placeCard(2, card2)
+      } catch {
+      } finally {
+        expect(sut.slots[2]).toEqual(card1)
+      }
+    })
 
-      expect(sut.slots[2]).toEqual(card1)
-
+    it('Placing card at occupied position should throw an error', () => {
+      const slots = [undefined, undefined, card1, undefined, undefined]
+      const sut = new GridLine(slots)
+      expect(() => sut.placeCard(2, card2)).toThrowError()
     })
   })
 })
