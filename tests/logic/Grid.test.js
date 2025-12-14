@@ -100,31 +100,39 @@ describe('Grid', () => {
 
   describe('isFull()', () => {
     const row1Stub = {
-      hasEmptySlots: vi.fn().mockReturnValue(false)
+      isFull: vi.fn().mockReturnValue(true)
     }
 
     const row2Stub = {
-      hasEmptySlots: vi.fn().mockReturnValue(false)
+      isFull: vi.fn().mockReturnValue(true)
     }
 
     const row3Stub = {
-      hasEmptySlots: vi.fn().mockReturnValue(false)
+      isFull: vi.fn().mockReturnValue(true)
     }
 
     const row4Stub = {
-      hasEmptySlots: vi.fn()
+      isFull: vi.fn()
     }
 
     const row5Stub = {
-      hasEmptySlots: vi.fn().mockReturnValue(false)
+      isFull: vi.fn().mockReturnValue(true)
     }
 
     it('should return true when all slots are filled', () => {
-      row4Stub.hasEmptySlots.mockReturnValueOnce(false)
+      row4Stub.isFull.mockReturnValueOnce(true)
 
       const sut = new Grid([row1Stub, row2Stub, row3Stub, row4Stub, row5Stub])
 
       expect(sut.isFull()).toBe(true)
+    })
+
+    it('should return false when not all slots are filled', () => {
+      row4Stub.isFull.mockReturnValueOnce(false)
+
+      const sut = new Grid([row1Stub, row2Stub, row3Stub, row4Stub, row5Stub])
+
+      expect(sut.isFull()).toBe(false)
     })
   })
 })
