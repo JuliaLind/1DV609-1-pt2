@@ -89,6 +89,11 @@ export class GridLine {
    * @returns {boolean} - true if there are no empty slots, false otherwise
    */
   isFull() {
+    for (const slot of this.#slots) {
+      if (slot === undefined) {
+        return false
+      }
+    }
     return true
   }
 }
