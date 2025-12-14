@@ -19,5 +19,10 @@ describe('GridLine', () => {
 
       expect(sut.slots).toEqual(slots)
     })
+
+    it('Passing an array with less than 5 slots should throw an error', () => {
+      expect(() => new GridLine(new Array(4))).toThrowError()
+    })
+
   })
 })
