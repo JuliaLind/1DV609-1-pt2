@@ -24,5 +24,8 @@ describe('GridLine', () => {
       expect(() => new GridLine(new Array(4))).toThrowError()
     })
 
+    it('Passing an array with more than 5 slots should throw an error', () => {
+      expect(() => new GridLine(new Array(6))).toThrowError()
+    })
   })
 })
