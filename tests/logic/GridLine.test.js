@@ -90,5 +90,11 @@ describe('GridLine', () => {
       const sut = new GridLine(slots)
       expect(sut.isFull()).toBe(true)
     })
+
+    it('Should return false if there is at least one empty slot', () => {
+      const slots = [{}, {}, {}, undefined, {}]
+      const sut = new GridLine(slots)
+      expect(sut.isFull()).toBe(false)
+    })
   })
 })
