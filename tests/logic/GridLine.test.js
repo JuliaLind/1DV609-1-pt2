@@ -28,4 +28,19 @@ describe('GridLine', () => {
       expect(() => new GridLine(new Array(6))).toThrowError()
     })
   })
+
+  describe('GridLine.placeCard()', () => {
+    it('should place a card in the specified slot', () => {
+      const slots = [undefined, undefined, card1, card2, card3]
+      const sut = new GridLine(slots)
+
+      const card = { rank: 'J', suite: 'Hearts' }
+      const index = 1
+      sut.placeCard(index, card)
+
+      const expectedSlots = [undefined, card, card1, card2, card3]
+
+      expect(sut.slots).toEqual(expectedSlots)
+    })
+  })
 })
