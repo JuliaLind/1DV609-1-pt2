@@ -8,7 +8,7 @@ import { Grid } from '../../src/js/logic/Grid.js'
  * @param {Array} slotArray - slots of the GridLine
  * @returns {object} - the grid line stub
  */
-function createGridLineStub(slotArray) {
+function createGridLineStub (slotArray) {
   const slots = slotArray || new Array(5)
   return { slots }
 }
@@ -23,7 +23,7 @@ vi.mock('../../src/js/logic/GridLine.js', () => {
    * @param {Array} slotArray - a array with card slots
    * @returns { object } - a GridLine stub
    */
-  function GridLine(slotArray) {
+  function GridLine (slotArray) {
     return createGridLineStub(slotArray)
   }
 
