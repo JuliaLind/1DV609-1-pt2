@@ -54,10 +54,7 @@ export class GridLine {
    */
   placeCard(index, card) {
     this.#validateIndex(index)
-
-    if (this.#slots[index] !== undefined) {
-      throw new Error('Slot is occupied')
-    }
+    this.#validateEmptySlot(index)
 
     this.#slots[index] = card
   }
@@ -71,6 +68,18 @@ export class GridLine {
   #validateIndex(index) {
     if (!(index in this.#slots)) {
       throw new Error('Index out of bounds')
+    }
+  }
+
+  /**
+   * Checks if the specified slot is empty.
+   *
+   * @param {number} index - the index of slot to check
+   * @throws {Error} - if the slot is already occupied
+   */
+  #validateEmptySlot(index) {
+    if (this.#slots[index] !== undefined) {
+      throw new Error('Slot is occupied')
     }
   }
 }
