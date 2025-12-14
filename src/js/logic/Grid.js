@@ -18,11 +18,21 @@ export class Grid {
     new GridLine(),
     new GridLine()
   ]) {
+    this.#validateRows(rows)
+
+    this.#rows = [...rows]
+  }
+
+  /**
+   * Throws error ig the number of rows in the grid is not
+   * exactly 5.
+   *
+   * @param {array} rows - the rows of grid 
+   */
+  #validateRows(rows) {
     if (rows.length !== 5) {
       throw new Error('Grid must have 5 rows')
     }
-
-    this.#rows = [...rows]
   }
 
   /**
