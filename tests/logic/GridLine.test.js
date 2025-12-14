@@ -49,10 +49,20 @@ describe('GridLine', () => {
         const sut = new GridLine()
         const card = {}
 
-        sut.placeCard(invalidIndex, card)
-        expect(sut.slots.length).toBe(5)
+        try {
+          sut.placeCard(invalidIndex, card)
+        } catch {
+        } finally {
+          expect(sut.slots.length).toBe(5)
+        }
+      })
+
+      it(`should throw an error when placing a card at invalid index: ${invalidIndex}`, () => {
+        const sut = new GridLine()
+        const card = {}
+
+        expect(() => sut.placeCard(invalidIndex, card)).toThrowError()
       })
     })
-
   })
 })
