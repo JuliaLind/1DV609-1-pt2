@@ -54,7 +54,10 @@ export class GridLine {
    */
   placeCard(index, card) {
     this.#validateIndex(index)
-    this.#slots[index] = card
+
+    if (this.#slots[index] === undefined) {
+      this.#slots[index] = card
+    }
   }
 
   /**
