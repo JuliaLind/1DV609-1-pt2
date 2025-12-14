@@ -8,7 +8,7 @@ import { Grid } from '../../src/js/logic/Grid.js'
  * @param {Array} slotArray - slots of the GridLine
  * @returns {object} - the grid line stub
  */
-function createGridLineStub (slotArray) {
+function createGridLineStub(slotArray) {
   const slots = slotArray || new Array(5)
   return { slots }
 }
@@ -23,7 +23,7 @@ vi.mock('../../src/js/logic/GridLine.js', () => {
    * @param {Array} slotArray - a array with card slots
    * @returns { object } - a GridLine stub
    */
-  function GridLine (slotArray) {
+  function GridLine(slotArray) {
     return createGridLineStub(slotArray)
   }
 
@@ -133,6 +133,23 @@ describe('Grid', () => {
       const sut = new Grid([row1Stub, row2Stub, row3Stub, row4Stub, row5Stub])
 
       expect(sut.isFull()).toBe(false)
+    })
+
+    it('Grid.placeCard should call placeCard on the correct row with the card and column', () => {
+      const row0Stub = {}
+      const row1Stub = {}
+      const row2Mock = {
+        placeCard: vi.fn()
+      }
+      const row3Stub = {}
+      const row4Stub = {}
+
+      const sut = new Grid([row0Stub, row1Stub, row2Mock, row3Stub, row4Stub])
+      const rowIndex = 2
+      const columnIndex = 4
+      sut.placeCard(rowIndex, columnIndex, card1)
+
+      expect(row2Mock.placeCard).toHaveBeenCalledWith(columnIndex, card1)
     })
   })
 })
