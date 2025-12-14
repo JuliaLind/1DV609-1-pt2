@@ -63,6 +63,11 @@ export class Grid {
    * @returns {boolean} - true if the grid has no empty slots otherwise false
    */
   isFull() {
+    for (const row of this.#rows) {
+      if (!row.isFull()) {
+        return false
+      }
+    }
     return true
   }
 
