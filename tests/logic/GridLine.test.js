@@ -83,4 +83,12 @@ describe('GridLine', () => {
       expect(() => sut.placeCard(2, card2)).toThrowError()
     })
   })
+
+  describe('GridLine.isFull()', () => {
+    it('Should return true if there are no empty slots', () => {
+      const slots = [{}, {}, {}, {}, {}]
+      const sut = new GridLine(slots)
+      expect(sut.isFull()).toBe(true)
+    })
+  })
 })
