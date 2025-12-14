@@ -55,9 +55,11 @@ export class GridLine {
   placeCard(index, card) {
     this.#validateIndex(index)
 
-    if (this.#slots[index] === undefined) {
-      this.#slots[index] = card
+    if (this.#slots[index] !== undefined) {
+      throw new Error('Slot is occupied')
     }
+
+    this.#slots[index] = card
   }
 
   /**
