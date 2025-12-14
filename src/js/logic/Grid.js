@@ -37,7 +37,9 @@ export class Grid {
   }
 
   /**
-   * Gets the number of rows required for the Grid
+   * Gets the number of rows required for the Grid.
+   *
+   * @returns {number} - the required number of rows.
    */
   static get ROW_COUNT () {
     return 5
