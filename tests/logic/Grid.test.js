@@ -8,7 +8,7 @@ import { Grid } from '../../src/js/logic/Grid.js'
  * @param {Array} slotArray - slots of the GridLine
  * @returns {object} - the grid line stub
  */
-function createGridLineStub (slotArray) {
+function createGridLineStub(slotArray) {
   const slots = slotArray || new Array(5)
   return { slots }
 }
@@ -23,7 +23,7 @@ vi.mock('../../src/js/logic/GridLine.js', () => {
    * @param {Array} slotArray - a array with card slots
    * @returns { object } - a GridLine stub
    */
-  function GridLine (slotArray) {
+  function GridLine(slotArray) {
     return createGridLineStub(slotArray)
   }
 
@@ -82,5 +82,19 @@ describe('Grid', () => {
     const actual = sut.getRow(2).slots
 
     expect(actual).toEqual(slots2)
+  })
+
+  it('getColumn(index) should return the column on the specified index', () => {
+    const sut = new Grid([
+      { slots: slots0 },
+      { slots: slots1 },
+      { slots: slots2 },
+      { slots: slots3 },
+      { slots: slots4 }
+    ])
+
+    const expected = [slots0[2], slots1[2], slots2[2], slots3[2], slots4[2]]
+    const actual = sut.getColumn(2).slots
+    expect(actual).toEqual(expected)
   })
 })
