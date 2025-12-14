@@ -64,5 +64,15 @@ describe('GridLine', () => {
         expect(() => sut.placeCard(invalidIndex, card)).toThrowError()
       })
     })
+
+    it('Placing card at occupied position should not replace the card in the slot', () => {
+      const slots = [undefined, undefined, card1, undefined, undefined]
+      const sut = new GridLine(slots)
+
+      sut.placeCard(2, card2)
+
+      expect(sut.slots[2]).toEqual(card1)
+
+    })
   })
 })
