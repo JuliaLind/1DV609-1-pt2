@@ -121,5 +121,21 @@ describe('GridLine', () => {
       const expected = {}
       expect(sut.getRankFrequencies()).toEqual(expected)
     })
+
+    it('Should return correct rank frequencies', () => {
+      const slots = [
+        { valueOf: vi.fn().mockReturnValue(13) },
+        { valueOf: vi.fn().mockReturnValue(2) },
+        undefined,
+        { valueOf: vi.fn().mockReturnValue(13) },
+        undefined
+      ]
+      const sut = new GridLine(slots)
+      const expected = {
+        13: 2,
+        2: 1
+      }
+      expect(sut.getRankFrequencies()).toEqual(expected)
+    })
   })
 })
