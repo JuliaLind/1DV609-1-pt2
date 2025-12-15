@@ -29,17 +29,19 @@ export class RuleSet {
    * @param {TwoPairs} rules.twoPairs -  an instance of the TwoPairs rule
    * @param {OnePair} rules.onePair - an instance of the OnePair rule
    */
-  constructor ({
-    royalFlush = new RoyalFlush(),
-    straightFlush = new StraightFlush(),
-    fourOfAKind = new FourOfAKind(),
-    fullHouse = new FullHouse(),
-    flush = new Flush(),
-    straight = new Straight(),
-    threeOfAKind = new ThreeOfAKind(),
-    twoPairs = new TwoPairs(),
-    onePair = new OnePair()
+  constructor (rules = {
+    royalFlush: new RoyalFlush(),
+    straightFlush: new StraightFlush(),
+    fourOfAKind: new FourOfAKind(),
+    fullHouse: new FullHouse(),
+    flush: new Flush(),
+    straight: new Straight(),
+    threeOfAKind: new ThreeOfAKind(),
+    twoPairs: new TwoPairs(),
+    onePair: new OnePair()
   }) {
+    const { royalFlush, straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair } = rules
+
     this.#rules.push(royalFlush, straightFlush, fourOfAKind, fullHouse, flush, straight, threeOfAKind, twoPairs, onePair)
   }
 
