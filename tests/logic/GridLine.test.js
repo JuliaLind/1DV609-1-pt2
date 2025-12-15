@@ -145,5 +145,21 @@ describe('GridLine', () => {
       const expected = {}
       expect(sut.getSuiteFrequencies()).toEqual(expected)
     })
+
+    it('Should return correct suite frequencies', () => {
+      const slots = [
+        { suite: 'Hearts' },
+        { suite: 'Spades' },
+        undefined,
+        { suite: 'Hearts' },
+        undefined
+      ]
+      const sut = new GridLine(slots)
+      const expected = {
+        Hearts: 2,
+        Spades: 1
+      }
+      expect(sut.getSuiteFrequencies()).toEqual(expected)
+    })
   })
 })
