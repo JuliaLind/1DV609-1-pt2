@@ -5,6 +5,7 @@ import { Card } from './Card.js'
  */
 export class GridLine {
   #slots
+  #rankFrequencies
 
   /**
    * Creates a new line for the grid with 5 empty slots.
@@ -109,15 +110,24 @@ export class GridLine {
    * @returns {object} - an object mapping ranks to their frequencies
    */
   getRankFrequencies () {
-    const rankFrequencies = {}
+    this.#rankFrequencies = {}
 
     for (const card of this.#slots) {
-      if (card) {
-        const rank = Number(card)
-        rankFrequencies[rank] = (rankFrequencies[rank] || 0) + 1
-      }
+      this.#addToRankFrequencies(card)
     }
 
-    return rankFrequencies
+    return this.#rankFrequencies
+  }
+
+  /**
+   * Adds a card to the rank frequency summery.
+   *
+   * @param { Card } card - the card to add
+   */
+  #addToRankFrequencies (card) {
+    if (card) {
+      const rank = Number(card)
+      this.#rankFrequencies[rank] = (this.#rankFrequencies[rank] || 0) + 1
+    }
   }
 }
