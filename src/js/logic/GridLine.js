@@ -131,7 +131,7 @@ export class GridLine {
     let frequencies = {}
 
     for (const card of this.#slots) {
-      frequencies = this.#addToFrequencies(fn(card))
+      frequencies = this.#addToFrequencies(fn(card), frequencies)
     }
 
     return frequencies
