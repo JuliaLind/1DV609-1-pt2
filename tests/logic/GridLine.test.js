@@ -99,15 +99,10 @@ describe('GridLine', () => {
   })
 
   describe('GridLine.hasRank', () => {
-    const ace = vi.fn({
-      valueOf: vi.fn().mockReturnValue(14)
-    })
-    const king = vi.fn({
-      valueOf: vi.fn().mockReturnValue(13)
-    })
-    const ten = vi.fn({
-      valueOf: vi.fn().mockReturnValue(10)
-    })
+    const ace = { valueOf: vi.fn().mockReturnValue(14) }
+    const king = { valueOf: vi.fn().mockReturnValue(13) }
+    const ten = { valueOf: vi.fn().mockReturnValue(10) }
+
     const slots = [ace, king, undefined, ten, undefined]
     const sut = new GridLine(slots)
 
