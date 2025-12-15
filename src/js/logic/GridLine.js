@@ -101,4 +101,14 @@ export class GridLine {
   hasRank (rank) {
     return this.#slots.some(card => Number(card) === rank)
   }
+
+  /**
+   * Gets the frequencies of each rank in the grid line.
+   * The ranks are represented by their numeric values 2-14.
+   *
+   * @returns {object} - an object mapping ranks to their frequencies
+   */
+  getRankFrequencies () {
+    return {}
+  }
 }
