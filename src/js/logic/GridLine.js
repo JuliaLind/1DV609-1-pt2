@@ -5,14 +5,13 @@ import { Card } from './Card.js'
  */
 export class GridLine {
   #slots
-  #rankFrequencies
 
   /**
    * Creates a new line for the grid with 5 empty slots.
    *
    * @param {Card[]} slots - array of cards to initialize the grid line with
    */
-  constructor(slots = new Array(GridLine.SLOT_COUNT)) {
+  constructor (slots = new Array(GridLine.SLOT_COUNT)) {
     this.#validateLength(slots)
     this.#slots = [...slots]
   }
@@ -23,7 +22,7 @@ export class GridLine {
    * @param {Card[]} slots - array with slots that may contain cards
    * @throws {Error} - if the length of slots is not exactly 5
    */
-  #validateLength(slots) {
+  #validateLength (slots) {
     if (slots.length !== GridLine.SLOT_COUNT) {
       throw new Error('GridLine must have exactly 5 slots')
     }
@@ -34,7 +33,7 @@ export class GridLine {
    *
    * @returns {number} - the number of slots
    */
-  static get SLOT_COUNT() {
+  static get SLOT_COUNT () {
     return 5
   }
 
@@ -43,7 +42,7 @@ export class GridLine {
    *
    * @returns {Array} - array of slots in the grid line
    */
-  get slots() {
+  get slots () {
     return [...this.#slots]
   }
 
@@ -53,7 +52,7 @@ export class GridLine {
    * @param {number} index - index of the slot to place the card in
    * @param {Card} card - the card to place in the slot
    */
-  placeCard(index, card) {
+  placeCard (index, card) {
     this.#validateSlotExists(index)
     this.#validateEmptySlot(index)
 
@@ -66,7 +65,7 @@ export class GridLine {
    * @param {number} index - the index to check
    * @throws {Error} - if the index is out of bounds
    */
-  #validateSlotExists(index) {
+  #validateSlotExists (index) {
     if (!(index in this.#slots)) {
       throw new Error('Index out of bounds')
     }
@@ -78,7 +77,7 @@ export class GridLine {
    * @param {number} index - the index of slot to check
    * @throws {Error} - if the slot is already occupied
    */
-  #validateEmptySlot(index) {
+  #validateEmptySlot (index) {
     if (this.#slots[index] !== undefined) {
       throw new Error('Slot is occupied')
     }
@@ -89,7 +88,7 @@ export class GridLine {
    *
    * @returns {boolean} - true if there are no empty slots, false otherwise
    */
-  isFull() {
+  isFull () {
     return this.#slots.every(slot => slot !== undefined)
   }
 
@@ -99,7 +98,7 @@ export class GridLine {
    * @param {number} rank - the numerical rank value
    * @returns {boolean} - true if a card with the specified rank exists in the grid line, false otherwise
    */
-  hasRank(rank) {
+  hasRank (rank) {
     return this.#slots.some(card => Number(card) === rank)
   }
 
@@ -109,26 +108,8 @@ export class GridLine {
    *
    * @returns {object} - an object mapping ranks to their frequencies
    */
-  getRankFrequencies() {
-    this.#rankFrequencies = {}
-
-    for (const card of this.#slots) {
-      this.#addToRankFrequencies(card)
-    }
-
-    return this.#rankFrequencies
-  }
-
-  /**
-   * Adds a card to the rank frequency summery.
-   *
-   * @param { Card } card - the card to add
-   */
-  #addToRankFrequencies(card) {
-    if (card) {
-      const rank = Number(card)
-      this.#rankFrequencies[rank] = (this.#rankFrequencies[rank] || 0) + 1
-    }
+  getRankFrequencies () {
+    return this.#getFrequencies(card => card?.valueOf())
   }
 
   /**
@@ -136,15 +117,40 @@ export class GridLine {
    *
    * @returns {object} - an object mapping suites to their frequencies
    */
-  getSuiteFrequencies() {
-    const suiteFrequencies = {}
+  getSuiteFrequencies () {
+    return this.#getFrequencies(card => card?.suite)
+  }
+
+  /**
+   * Gets a summary of the frequency of each key (suite or rank).
+   *
+   * @param {Function} fn - the function for extracting the key from the card
+   * @returns { object } frequencies - associative array with frequencies of the keys as values
+   */
+  #getFrequencies (fn) {
+    let frequencies = {}
 
     for (const card of this.#slots) {
-      if (card) {
-        suiteFrequencies[card.suite] = (suiteFrequencies[card.suite] || 0) + 1
-      }
+      frequencies = this.#addToFrequencies(fn(card))
     }
 
-    return suiteFrequencies
+    return frequencies
+  }
+
+  /**
+   * Increments the counter of the key by +1 in the frequency summery.
+   *
+   * @param { number | string } key - the key
+   * @param { object } frequencies - associative array with frequencies of the keys as values
+   * @returns { object }  - frequencies object where the key counter has been incremented by +1
+   */
+  #addToFrequencies (key, frequencies) {
+    const updatedFrequencies = { ...frequencies }
+
+    if (key) {
+      updatedFrequencies[key] = (updatedFrequencies[key] || 0) + 1
+    }
+
+    return updatedFrequencies
   }
 }
