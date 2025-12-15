@@ -139,6 +139,12 @@ export class GridLine {
   getSuiteFrequencies() {
     const suiteFrequencies = {}
 
+    for (const card of this.#slots) {
+      if (card) {
+        suiteFrequencies[card.suite] = (suiteFrequencies[card.suite] || 0) + 1
+      }
+    }
+
     return suiteFrequencies
   }
 }
