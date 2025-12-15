@@ -99,11 +99,6 @@ export class GridLine {
    * @returns {boolean} - true if a card with the specified rank exists in the grid line, false otherwise
    */
   hasRank (rank) {
-    for (const card of this.#slots) {
-      if (card && Number(card) === rank) {
-        return true
-      }
-    }
-    return false
+    return this.#slots.some(card => Number(card) === rank)
   }
 }

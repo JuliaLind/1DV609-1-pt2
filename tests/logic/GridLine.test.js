@@ -103,7 +103,7 @@ describe('GridLine', () => {
     const king = { valueOf: vi.fn().mockReturnValue(13) }
     const ten = { valueOf: vi.fn().mockReturnValue(10) }
 
-    const slots = [ace, king, undefined, ten, undefined]
+    const slots = [undefined, ace, king, ten, undefined]
     const sut = new GridLine(slots)
 
     it('should return false if no card with the numerical rank value exists in the grid line', () => {
