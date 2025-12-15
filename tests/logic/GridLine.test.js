@@ -114,4 +114,12 @@ describe('GridLine', () => {
       expect(sut.hasRank(13)).toBe(true)
     })
   })
+
+  describe('GridLine.getRankFrequencies()', () => {
+    it('Empty GridLine should return empty rank frequencies object', () => {
+      const sut = new GridLine()
+      const expected = {}
+      expect(sut.getRankFrequencies()).toEqual(expected)
+    })
+  })
 })
