@@ -109,6 +109,15 @@ export class GridLine {
    * @returns {object} - an object mapping ranks to their frequencies
    */
   getRankFrequencies () {
-    return {}
+    const rankFrequencies = {}
+
+    for (const card of this.#slots) {
+      if (card) {
+        const rank = Number(card)
+        rankFrequencies[rank] = (rankFrequencies[rank] || 0) + 1
+      }
+    }
+
+    return rankFrequencies
   }
 }
