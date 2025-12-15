@@ -109,5 +109,9 @@ describe('GridLine', () => {
     it('should return false if no card with the numerical rank value exists in the grid line', () => {
       expect(sut.hasRank(12)).toBe(false)
     })
+
+    it('should return true if a card with the numerical rank value exists in the grid line', () => {
+      expect(sut.hasRank(13)).toBe(true)
+    })
   })
 })
