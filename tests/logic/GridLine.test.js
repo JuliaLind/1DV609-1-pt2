@@ -138,4 +138,12 @@ describe('GridLine', () => {
       expect(sut.getRankFrequencies()).toEqual(expected)
     })
   })
+
+  describe('GridLine.getSuiteFrequencies()', () => {
+    it('Empty GridLine should return empty suite frequencies object', () => {
+      const sut = new GridLine()
+      const expected = {}
+      expect(sut.getSuiteFrequencies()).toEqual(expected)
+    })
+  })
 })
